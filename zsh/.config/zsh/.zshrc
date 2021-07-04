@@ -58,6 +58,7 @@ export PATH=$PATH:$HOME/elixir-ls
 export PATH=$PATH:$HOME/go/bin
 export PATH=$PATH:$HOME/Projects/picotool
 export PATH=$PATH/usr/local/sbin
+export STOW_DIR=dotfiles
 export TWEEGO_PATH=$HOME/.local/share/twine/story-formats
 
 HISTFILE=$XDG_DATA_HOME/zsh/.zsh_history
