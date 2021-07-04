@@ -42,7 +42,7 @@ local function init()
   paq "kyazdani42/nvim-web-devicons"
   paq "lewis6991/gitsigns.nvim"
   paq "liuchengxu/vista.vim"
-  paq {"lukas-reineke/indent-blankline.nvim", branch = "lua"}
+  paq "lukas-reineke/indent-blankline.nvim"
   paq "mhinz/vim-startify"
   paq "norcalli/nvim-colorizer.lua"
   paq "nvim-lua/lsp-status.nvim"
