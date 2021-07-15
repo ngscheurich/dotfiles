@@ -1,15 +1,37 @@
 {
-  "Module Definition": {
+  "Define Module": {
     "prefix": ["defmodule"],
-    "body": ["defmodule ${1:name} do", "  ${0}", "end"]
+    "body": [
+      "defmodule ${1:name} do",
+      "  ${0}",
+      "end"
+    ]
   },
 
-  "Module Documentation": {
+  "Define Function": {
+    "prefix": ["def"],
+    "body": [
+      "def ${1:name}(${2:params}) do",
+      "  ${0}",
+      "end"
+    ]
+  },
+
+  "Define Private Function": {
+    "prefix": ["defp"],
+    "body": [
+      "defp ${1:name}(${2:params}) do",
+      "  ${0}",
+      "end"
+    ]
+  },
+
+  "Document Module": {
     "prefix": ["@moduledoc"],
     "body": ["@moduledoc \"\"\"", "  ${1}", "\"\"\"", "${0}"]
   },
 
-  "Function Documentation": {
+  "Document Function": {
     "prefix": ["@doc"],
     "body": ["@doc \"\"\"", "  ${1}", "\"\"\"", "  ${0}"]
   },
@@ -23,7 +45,7 @@
     "prefix": ["pry"],
     "body": ["require IEx", "IEx.pry"]
   },
-  
+
   "LiveView Module": {
     "prefix": ["lvmod"],
     "body": [
