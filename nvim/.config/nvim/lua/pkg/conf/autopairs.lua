@@ -1,8 +1,10 @@
-local pairs = require('nvim-autopairs')
+local autopairs = require('nvim-autopairs')
 local endwise = require("nvim-autopairs.ts-rule").endwise
 
-pairs.setup()
+autopairs.setup()
 
-pairs.add_rules({
+autopairs.add_rules({
   endwise("then$", "end", "lua", "if_statement"),
 })
+
+
