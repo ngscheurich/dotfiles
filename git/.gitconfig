@@ -69,3 +69,5 @@
   whitespace = red reverse
 [init]
   defaultBranch = main
+[pull]
+	ff = only
