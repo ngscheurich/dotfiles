@@ -12,18 +12,18 @@
 -- Author: N. G. Scheurich <nick@scheurich.me>
 -- Repo: https://github.com/ngscheurich/dotfiles
 
--- Disable some integrations
-vim.g.loaded_python_provider  = 0
-vim.g.loaded_python3_provider = 0
-vim.g.loaded_ruby_provider    = 0
-vim.g.loaded_node_provider    = 0
-vim.g.loaded_perl_provider    = 0
+_G.ngs = { vim = {}, util = {} }
+require("ngs.vim")
+require("ngs.util")
 
--- Enable 24-bit color
-vim.o.termguicolors = true
+vim.g.tokyonight_style = "night"
+vim.cmd [[colorscheme tokyonight]]
 
--- Map <Leader> to <Space>
-vim.g.mapleader = " "
-
--- Load package configs
-require("pkg.conf")
+require("ngs.completion")
+require("ngs.editing")
+require("ngs.formatting")
+require("ngs.interface")
+require("ngs.lspconfig")
+require("ngs.navigation")
+require("ngs.statusline")
+require("ngs.treesitter")

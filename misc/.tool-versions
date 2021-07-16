@@ -5,3 +5,4 @@ python 3.8.3 2.7.18
 golang 1.14.4
 ruby 2.5.1
 lua 5.2.4
+java adoptopenjdk-8.0.292+10

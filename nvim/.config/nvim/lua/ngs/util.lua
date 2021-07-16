@@ -1,104 +1,52 @@
-local util = {}
-
-local api, cmd = vim.api, vim.cmd
-
-local function apply_default_opts(opts)
-  local defaults = {noremap = true}
-  if opts then
-    return vim.tbl_extend("force", defaults, opts)
-  else
-    return defaults
-  end
-end
-
-function util.map(mode, lhs, rhs, opts)
-  local options = apply_default_opts(opts)
-  api.nvim_set_keymap(mode, lhs, rhs, options)
-end
-
-function util.bufmap(buffer, mode, lhs, rhs, opts)
-  local options = apply_default_opts(opts)
-  api.nvim_buf_set_keymap(buffer, mode, lhs, rhs, options)
-end
-
-function util.paq_get()
-  local url = "https://github.com/savq/paq-nvim"
-  local dest = vim.fn.stdpath("data") .. "/site/pack/paqs/opt/paq-nvim"
-
-  if vim.fn.input("Download Paq? (y/N) ") == "y" then
-    cmd("silent execute '!git clone " .. url .. " " .. dest .. "'")
-    print("✔ Paq downloaded successfully")
-  end
-end
-
-function util.set(opt, val, scopes)
-  for _, scope in ipairs(scopes) do vim[scope][opt] = val end
-end
-
-function util.get_highlight_attr(group, attr)
-  local hl_id = vim.fn.hlID(group)
-  local syntax_id = vim.fn.synIDtrans(hl_id)
-  return vim.fn.synIDattr(syntax_id, attr)
-end
-
-function util.split(str, char)
-  local tokens = {}
-  char = char or "%s"
-
-  for token in string.gmatch(str, "[^" .. char .. "]+") do
-    table.insert(tokens, token)
-  end
-
-  return tokens
-end
-
-function util.inspect(obj, opts)
+---Prints the `vim.inspect` value of `obj`.
+---@param obj any
+---@param opts table
+function _G.ngs.inspect(obj, opts)
   if opts == nil then opts = {} end
   print(vim.inspect(obj, opts))
 end
 
-function util.augroup(name, defs)
-  cmd("augroup " .. name)
-  cmd("autocmd!")
-  for _, def in ipairs(defs) do vim.api.nvim_exec("autocmd " .. def, "") end
-  cmd("augroup END")
+---Joins paths with a `"/"`.
+---@return string
+function _G.ngs.util.join_paths(...)
+  return table.concat({...}, "/")
 end
 
-function util.globally_exists(name)
-  if _G[name] then
-    return true
-  else
-    return false
+---Set tab spacing related local options.
+---@param width number
+function _G.ngs.util.set_tab_width(width)
+  vim.opt_local.shiftwidth = width
+  vim.opt_local.softtabstop = width
+  vim.opt_local.tabstop = width
+end
+
+---Executes an `autocmd` to set the filetype for a list of patterns.
+---@param ft string
+---@param pats table
+function _G.ngs.util.set_filetype(ft, pats)
+  local pat = table.concat(pats, ",")
+  vim.cmd(string.format("autocmd BufNewFile,BufRead %s set filetype=%s", pat, ft))
+end
+
+---Clone packer.nvim as an optional package.
+function _G.ngs.util.get_packer()
+  local url = "https://github.com/wbthomason/packer.nvim"
+  local dest = vim.fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
+
+  if vim.fn.input("Download packer? (y/N) ") == "y" then
+    vim.cmd("silent execute '!git clone " .. url .. " " .. dest .. "'")
+    print("✔ packer downloaded successfully")
   end
 end
 
-function util.join_paths(...) return table.concat({...}, "/") end
-
-function util.highlight(group, opts)
-  local fg = opts.fg or "NONE"
-  local bg = opts.bg or "NONE"
-  local attrs = opts.attrs or "NONE"
-  local command = string.format("highlight %s gui=%s guifg=%s guibg=%s",
-                                group, attrs, fg, bg)
-  cmd(command)
-end
-
-function util.toggle_qflist()
-  for _, winnr in ipairs(vim.api.nvim_list_wins()) do
-    if vim.fn.getwininfo(winnr)[1].quickfix then
-      cmd("cclose")
-      return
-    end
-  end
-  cmd("copen")
-end
-
-function util.toggle_line_numbers()
+---Toggles line numbers for the current window.
+function _G.ngs.util.toggle_line_numbers()
   vim.wo.number = not vim.wo.number
   vim.wo.relativenumber = not vim.wo.relativenumber
 end
 
-function util.toggle_sign_column()
+---Toggles the sign column for the current window.
+function _G.ngs.util.toggle_sign_column()
   if vim.wo.signcolumn == "yes" then
     vim.wo.signcolumn = "no"
   else
@@ -106,4 +54,58 @@ function util.toggle_sign_column()
   end
 end
 
-return util
+---Returns information about the syntax item at line/col. Defaults to cursor position.
+---@param line number
+---@param col number
+---@return table
+function _G.ngs.util.get_syntax_item(line, col)
+  line = line or vim.fn.line(".")
+  col = col or vim.fn.col(".")
+
+  local synid = vim.fn.synID(line, col, false)
+
+  return {
+    id            = synid,
+    name          = vim.fn.synIDattr(synid, "name"),
+    link          = vim.fn.synIDattr(vim.fn.synIDtrans(synid), "name"),
+    fg            = vim.fn.synIDattr(synid, "fg"),
+    bg            = vim.fn.synIDattr(synid, "bg"),
+    guifg         = vim.fn.synIDattr(synid, "fg#"),
+    guibg         = vim.fn.synIDattr(synid, "bg#"),
+    font          = vim.fn.synIDattr(synid, "font"),
+    sp            = vim.fn.synIDattr(synid, "sp"),
+    bold          = vim.fn.synIDattr(synid, "bold"),
+    italic        = vim.fn.synIDattr(synid, "italic"),
+    reverse       = vim.fn.synIDattr(synid, "reverse"),
+    inverse       = vim.fn.synIDattr(synid, "inverse"),
+    standout      = vim.fn.synIDattr(synid, "standout"),
+    underline     = vim.fn.synIDattr(synid, "underline"),
+    undercurl     = vim.fn.synIDattr(synid, "undercurl"),
+    strikethrough = vim.fn.synIDattr(synid, "strikethrough"),
+  }
+end
+
+---Returns the name of the syntax item at line/col. Defaults to cursor position.
+---@param line number
+---@param col number
+---@return string
+function _G.ngs.util.identify_syntax_item(line, col)
+  local item = _G.ngs.util.get_syntax_item(line, col)
+
+  if item.name == "" then return nil end
+
+  local out = item.name
+  if item.link == "" then return out end
+
+  return out .. " -> " .. item.link
+end
+
+---Returns the value of a highlight group's attribute.
+---@param group string
+---@param attr string
+---@return string
+function _G.ngs.util.get_highlight_attr(group, attr)
+  local hlid = vim.fn.hlID(group)
+  local synid = vim.fn.synIDtrans(hlid)
+  return vim.fn.synIDattr(synid, attr)
+end
