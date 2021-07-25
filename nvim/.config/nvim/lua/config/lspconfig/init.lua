@@ -28,7 +28,6 @@ local config = {
 }
 
 local servers = {
-  "efm",
   "elixirls",
   "gdscript",
   "haxe_language_server",
@@ -45,7 +44,7 @@ for _, server in ipairs(servers) do
 end
 
 servers = {
-  "efm",
+  -- "efm",
   "elixirls",
   "haxe_language_server",
   "omnisharp",

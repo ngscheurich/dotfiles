@@ -44,8 +44,13 @@ function ngs.abbrev(mode, abbrs)
   end
 end
 
-function ngs.lua_command(name, mod, fn)
-  cmd(string.format("command! %s lua require('%s').%s()", name, mod, fn))
+function ngs.fncommand(lhs, mod, fn)
+  cmd(string.format("command! %s lua require('%s').%s()", lhs, mod, fn))
+end
+
+function ngs.fnmap(lhs, mod, fn, mapfn, opts)
+  local rhs = string.format("<Cmd>lua require('%s').%s()<CR>", mod, fn)
+  mapfn(lhs, rhs, opts or {})
 end
 
 function ngs.set_tab_width(width)

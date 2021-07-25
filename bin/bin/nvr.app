@@ -1,0 +1,5 @@
+#! /bin/sh
+
+# nvr
+
+echo $@

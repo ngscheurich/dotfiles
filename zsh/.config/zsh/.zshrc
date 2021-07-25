@@ -26,6 +26,12 @@ setopt SHARE_HISTORY          # All sessions share the history file
 # Environment Variables
 # ---------------------------------------------------------
 export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
+
 export AWS_VAULT_KEYCHAIN_NAME=login
 export BROWSER=open
 export EDITOR='nvim'
@@ -143,7 +149,7 @@ autoload -Uz compinit
 compinit
 
 # ---------------------------------------------------------
-# Keys 
+# Keys
 # ---------------------------------------------------------
 bindkey '^?' backward-delete-char
 bindkey '^A' vi-beginning-of-line
@@ -252,7 +258,7 @@ fi
 eval "$(thefuck --alias)"
 eval "$(direnv hook zsh)"
 eval "$(fasd --init auto)"
-# eval "$(docker-machine env default)"
+eval $(docker-machine env)
 
 source "$(brew --prefix asdf)/asdf.sh"
 

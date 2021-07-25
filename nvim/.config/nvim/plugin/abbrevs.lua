@@ -2,13 +2,15 @@
 -- Abbreviations
 -- =========================================================
 
+local abbrev = ngs.abbrev
+
 -- Insert mode
-ngs.abbrev("i", {
+abbrev("i", {
   {"facilty", "facility"}
 })
 
 -- Command-line mode
-ngs.abbrev("c", {
+abbrev("c", {
   {"Xa", "xa"},
   {"Qa", "qa"},
 })

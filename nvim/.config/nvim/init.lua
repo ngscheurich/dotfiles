@@ -27,7 +27,8 @@ vim.g.loaded_perl_provider    = 0
 vim.o.termguicolors = true
 
 -- Set colorscheme
-vim.cmd [[colorscheme moonfly]]
+vim.g.tokyonight_style = "night"
+vim.cmd [[colorscheme tokyonight]]
 
 -- Highlight yanked text
 ngs.augroup("yank", {"TextYankPost * lua vim.highlight.on_yank()"})
