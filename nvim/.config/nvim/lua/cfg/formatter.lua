@@ -56,6 +56,15 @@ local formatters = {
       }
     end
   },
+  black = {
+    function ()
+      return {
+        exe = "black",
+        args = {"-"},
+        stdin = true,
+      }
+    end
+  },
 }
 
 require("formatter").setup({
@@ -75,13 +84,15 @@ require("formatter").setup({
     c               = formatters.astyle,
     cs              = formatters.astyle,
     cpp             = formatters.astyle,
+    python          = formatters.black,
   },
 })
 
 local pat = table.concat({
   "*.ex", "*.exs", "*.ts", "*.tsx", "*.js", "*.html", "*.md", "*.markdown",
   "*.css", "*.lua", "*.graphql", "*.gql", "*.yaml", "*.c", "*.cs", "*.cpp",
+  "*.py",
 }, ",")
-ngs.augroup("autoformat", {
+_G.ngs.augroup("autoformat", {
   string.format("BufWritePost %s FormatWrite", pat),
 })

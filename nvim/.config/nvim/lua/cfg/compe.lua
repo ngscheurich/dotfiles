@@ -48,10 +48,10 @@ local function s_tab()
   end
 end
 
-ngs.imap("<Tab>",   [[luaeval('require("config.compe").tab()')]],   {expr = true})
-ngs.smap("<Tab>",   [[luaeval('require("config.compe").tab()')]],   {expr = true})
-ngs.imap("<S-Tab>", [[luaeval('require("config.compe").s_tab()')]], {expr = true})
-ngs.smap("<S-Tab>", [[luaeval('require("config.compe").s_tab()')]], {expr = true})
+ngs.imap("<Tab>",   [[luaeval('require("cfg.compe").tab()')]],   {expr = true})
+ngs.smap("<Tab>",   [[luaeval('require("cfg.compe").tab()')]],   {expr = true})
+ngs.imap("<S-Tab>", [[luaeval('require("cfg.compe").s_tab()')]], {expr = true})
+ngs.smap("<S-Tab>", [[luaeval('require("cfg.compe").s_tab()')]], {expr = true})
 
 ngs.imap("<CR>", "compe#confirm('<cr>')", {expr = true})
 ngs.imap("<C-Space>", "compe#complete()", {expr = true})

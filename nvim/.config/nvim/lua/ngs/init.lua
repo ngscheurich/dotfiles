@@ -44,6 +44,11 @@ function ngs.abbrev(mode, abbrs)
   end
 end
 
+function ngs.command(lhs, rhs, nargs)
+  if nargs == nil then nargs = "0" end
+  cmd(string.format("command! -nargs=%s %s %s", nargs, lhs, rhs))
+end
+
 function ngs.fncommand(lhs, mod, fn)
   cmd(string.format("command! %s lua require('%s').%s()", lhs, mod, fn))
 end

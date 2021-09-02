@@ -8,7 +8,8 @@ end
 return {
   {
     GitIcon = {
-      provider = function() return "  " end,
+      provider = function () return "   " end,
+      condition = condition.check_git_workspace,
       highlight = {"NONE", colors("line_base")},
     }
   },
@@ -21,7 +22,7 @@ return {
         local head = vim.fn["fugitive#Head"]()
         if head then
           local o = ch_shorten(head) or head
-          return o.." "
+          return o .. " "
         end
       end,
       condition = condition.check_git_workspace,

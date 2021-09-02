@@ -5,7 +5,7 @@ local colors = require("iris.palette").get_color_fn
 return {
   {
     FileInfoSeparator = {
-      provider = function() return " " end,
+      provider = function () return " " end,
       highlight = {"NONE", colors("line_lite")},
     },
   },
@@ -14,6 +14,8 @@ return {
       provider = "FileIcon",
       condition = condition.buffer_not_empty,
       highlight = {fileinfo.get_file_icon_color, colors("line_lite")},
+      separator = " ",
+      separator_highlight = {"NONE", colors("line_lite")},
     },
   },
   {

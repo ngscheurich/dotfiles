@@ -2,7 +2,7 @@ local galaxyline = require("galaxyline")
 local section = galaxyline.section
 
 local function add_components(location, name)
-  local components = require("config.galaxyline." .. name)
+  local components = require("cfg.galaxyline." .. name)
   for _, component in ipairs(components) do
     table.insert(section[location], component)
   end
@@ -16,6 +16,8 @@ add_components("left", "diagnostics")
 
 add_components("right", "diff")
 add_components("right", "git")
+add_components("right", "lspstatus")
+add_components("right", "filetype")
 add_components("right", "position")
 
 add_components("short_line_left", "short_left")

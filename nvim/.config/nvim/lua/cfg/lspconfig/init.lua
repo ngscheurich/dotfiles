@@ -8,7 +8,7 @@ local function on_attach(_, bufnr)
   map("<C-]>", "<Cmd>lua vim.lsp.buf.definition()<CR>")
   map("K", "<Cmd>lua vim.lsp.buf.hover()<CR>")
   map("[d", "<Cmd>lua vim.lsp.diagnostic.goto_prev()<CR>")
-  map("d]", "<Cmd>lua vim.lsp.diagnostic.goto_next()<CR>")
+  map("]d", "<Cmd>lua vim.lsp.diagnostic.goto_next()<CR>")
 
   map("<Leader>la", "<Cmd>lua vim.lsp.buf.code_action()<CR>")
   map("<Leader>ld", "<Cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>")
@@ -31,7 +31,9 @@ local servers = {
   "elixirls",
   "gdscript",
   "haxe_language_server",
+  "metals",
   "omnisharp",
+  "pyright",
   "rls",
   "sumneko_lua",
   "terraformls",
@@ -53,5 +55,5 @@ servers = {
 }
 
 for _, server in ipairs(servers) do
-  require("config.lspconfig." .. server)(config)
+  require("cfg.lspconfig." .. server)(config)
 end

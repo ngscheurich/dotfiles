@@ -4,7 +4,10 @@ local s, t, i = ls.s, ls.t, ls.i
 
 ls.snippets = {
   elixir = {
-    parse({trig = "pry"}, "require IEx\nIEx.pry()")
+    parse({trig = "pry"},  "require IEx\nIEx.pry()"),
+    parse({trig = "~L"},   '~L"""\n$0\n"""'),
+    parse({trig = "inspect"}, [[IO.inspect($1, label: "$1")$0]]),
+    parse({trig = "iexheader"}, [[IO.puts("\n  #{DateTime.utc_now()} --------------------------------------------------\n")]]),
   },
 
   lua = {

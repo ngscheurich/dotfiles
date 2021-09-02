@@ -8,7 +8,7 @@ local colors = module.setup()
 
 return {
   fg         = colors.fg,
-  bg         = colors.bg,
+  -- bg         = colors.bg,
   base00     = colors.bg,
   base01     = colors.bg_dark,
   base02     = colors.bg_highlight,
