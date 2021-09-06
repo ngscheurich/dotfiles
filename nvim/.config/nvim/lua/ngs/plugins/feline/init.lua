@@ -6,6 +6,10 @@ local components = {
   left =  {
     active = {
       comps.file.info,
+      comps.git.branch,
+      comps.git.added,
+      comps.git.changed,
+      comps.git.removed,
     },
     inactive = {},
   },
@@ -19,7 +23,7 @@ local components = {
       comps.diagnostics.warnings,
       comps.diagnostics.hints,
       comps.diagnostics.info,
-      comps.git.branch,
+      comps.file.type,
       comps.position.cursor,
       comps.position.byte,
     },

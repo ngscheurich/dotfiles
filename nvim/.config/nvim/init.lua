@@ -15,5 +15,4 @@
 require("ngs")
 
 -- Set colorscheme
--- vim.cmd("colorscheme photon")
-require("lush").export_to_buffer(require("theme"))
+vim.cmd("colorscheme photon")

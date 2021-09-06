@@ -13,17 +13,17 @@ providers.ngs_cursor_position = function ()
 end
 
 providers.ngs_byte_percent = function ()
-  local byte = fn.line2byte(fn.line( "." )) + fn.col( "." )
+  local byte = fn.line2byte(fn.line( "." )) + fn.col( "." ) - 1
   local size = fn.line2byte(fn.line( "$" ))
   return math.abs(math.floor(byte * 100 / size)) .. "％"
 end
 
 providers.ngs_file_type = function ()
   local lsp_status = ""
-  if next(vim.lsp.buf_get_clients(0)) ~= nil then
-    lsp_status = "  "
+  if next(vim.lsp.buf_get_clients()) ~= nil then
+    lsp_status = "  "
   end
-  return vim.bo.filetype .. lsp_status
+  return lsp_status .. vim.bo.filetype
 end
 
 providers.ngs_git_branch = function ()

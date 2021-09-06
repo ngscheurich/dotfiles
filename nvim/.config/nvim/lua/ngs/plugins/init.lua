@@ -1,5 +1,5 @@
 local function config(name)
-  return "require('config." .. name .. "')"
+  return "require('ngs.plugins." .. name .. "')"
 end
 
 local function init()

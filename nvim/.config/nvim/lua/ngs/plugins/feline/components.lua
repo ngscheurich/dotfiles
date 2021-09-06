@@ -38,8 +38,8 @@ M.file = {
 }
 
 M.position = {
-  cursor = {provider = "ngs_cursor_position", right_sep = "  "},
-  byte   = {provider = "ngs_byte_percent", right_sep = "☰ "},
+  cursor = {provider = "ngs_cursor_position", icon = " ", right_sep = " "},
+  byte   = {provider = "ngs_byte_percent", icon = "☰ "},
 }
 
 M.diagnostics = {
@@ -85,6 +85,21 @@ M.git = {
   branch = {
     provider = "ngs_git_branch",
     icon = {str = "  "},
+    right_sep = " ",
+  },
+  added = {
+    provider = "git_diff_added",
+    icon = "+",
+    right_sep = " ",
+  },
+  changed = {
+    provider = "git_diff_changed",
+    icon = "~",
+    right_sep = " ",
+  },
+  removed = {
+    provider = "git_diff_removed",
+    icon = "-",
     right_sep = " ",
   },
 }
