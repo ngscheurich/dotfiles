@@ -5,24 +5,24 @@ local formatters = {
   mix_format = {
     function()
       return {
-        exe   = "mix",
-        args  = {"format"},
+        exe = "mix",
+        args = {"format"},
         stdin = false,
         tempfile_dir = tempfile_dir,
       }
-    end
+    end,
   },
   prettier = {
-    function ()
+    function()
       return {
-        exe   = "npx",
-        args  = {"prettier", "--stdin-filepath", bufname()},
-        stdin = true
+        exe = "npx",
+        args = {"prettier", "--stdin-filepath", bufname()},
+        stdin = true,
       }
-    end
+    end,
   },
   lua_formatter = {
-    function ()
+    function()
       if string.match(bufname(), ".*/.config/nvim/.*.lua$") then
         return {
           exe = "cat",
@@ -31,40 +31,28 @@ local formatters = {
         }
       end
       return {
-        exe   = "lua-format",
-        args  = {"-i"},
+        exe = "lua-format",
+        args = {"-i"},
         stdin = false,
         tempfile_dir = tempfile_dir,
       }
-    end
+    end,
   },
   rustfmt = {
-    function ()
-      return {
-        exe = "rustfmt",
-        args = {"--emit=stdout"},
-        stdin = true,
-      }
-    end
+    function()
+      return {exe = "rustfmt", args = {"--emit=stdout"}, stdin = true}
+    end,
   },
   astyle = {
-    function ()
+    function()
       return {
         exe = "astyle",
         args = {"--style=kr", "--indent-namespaces"},
         stdin = true,
       }
-    end
+    end,
   },
-  black = {
-    function ()
-      return {
-        exe = "black",
-        args = {"-"},
-        stdin = true,
-      }
-    end
-  },
+  black = {function() return {exe = "black", args = {"-"}, stdin = true} end},
 }
 
 require("formatter").setup({
@@ -93,6 +81,4 @@ local pat = table.concat({
   "*.css", "*.lua", "*.graphql", "*.gql", "*.yaml", "*.c", "*.cs", "*.cpp",
   "*.py",
 }, ",")
-_G.ngs.augroup("autoformat", {
-  string.format("BufWritePost %s FormatWrite", pat),
-})
+_G.ngs.augroup("autoformat", {string.format("BufWritePost %s FormatWrite", pat)})

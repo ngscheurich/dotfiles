@@ -1,5 +1,5 @@
-local function setup(name)
-  return "require('cfg." .. name .. "')"
+local function config(name)
+  return "require('config." .. name .. "')"
 end
 
 local function init()
@@ -14,58 +14,57 @@ local function init()
 
   -- Editing
   use {
-    {"junegunn/vim-easy-align", config = setup("easy_align")},
-    {"justinmk/vim-sneak"},
-    {"tpope/vim-abolish"},
-    {"tpope/vim-commentary"},
-    {"tpope/vim-repeat"},
-    {"tpope/vim-sleuth"},
-    {"tpope/vim-speeddating"},
-    {"tpope/vim-surround"},
-    {"tpope/vim-unimpaired"},
-    {"windwp/nvim-autopairs", config = setup("autopairs")},
+    "justinmk/vim-sneak",
+    "tpope/vim-abolish",
+    "tpope/vim-commentary",
+    "tpope/vim-repeat",
+    "tpope/vim-sleuth",
+    "tpope/vim-speeddating",
+    "tpope/vim-surround",
+    "tpope/vim-unimpaired",
+    {"junegunn/vim-easy-align", config = config("easy_align")},
+    {"windwp/nvim-autopairs", config = config("autopairs")},
   }
 
   -- Language support
   use {
-    {"HerringtonDarkholme/yats.vim"},
-    {"MaxMEllon/vim-jsx-pretty"},
-    {"calviken/vim-gdscript3"},
-    {"cespare/vim-toml"},
-    {"elixir-editors/vim-elixir"},
-    {"ericpruitt/tmux.vim"},
-    {"euclidianAce/BetterLua.vim"},
-    {"hashivim/vim-terraform"},
-    {"jparise/vim-graphql"},
-    {"othree/html5.vim"},
-    {"pangloss/vim-javascript"},
-    {"plasticboy/vim-markdown"},
-    {"rust-lang/rust.vim"},
+    "calviken/vim-gdscript3",
+    "cespare/vim-toml",
+    "elixir-editors/vim-elixir",
+    "ericpruitt/tmux.vim",
+    "euclidianAce/BetterLua.vim",
+    "hashivim/vim-terraform",
+    "HerringtonDarkholme/yats.vim",
+    "jparise/vim-graphql",
+    "MaxMEllon/vim-jsx-pretty",
+    "othree/html5.vim",
+    "pangloss/vim-javascript",
+    "plasticboy/vim-markdown",
+    "rust-lang/rust.vim",
   }
 
   --  User interface
   use {
-    {"folke/trouble.nvim", config = setup("trouble")},
-    {"folke/which-key.nvim", config = setup("which_key")},
-    {"glepnir/galaxyline.nvim"},
-    {"kyazdani42/nvim-tree.lua", config = setup("nvim_tree")},
-    {"kyazdani42/nvim-web-devicons", config = setup("devicons")},
-    {"lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim", config = setup("gitsigns")},
+    "romainl/vim-qf",
+    {"folke/trouble.nvim", config = config("trouble")},
+    -- {"glepnir/galaxyline.nvim", config = config("galaxyline")},
+    -- {"kyazdani42/nvim-tree.lua", config = config("nvim_tree")},
+    {"kyazdani42/nvim-web-devicons", config = config("devicons")},
+    {"lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim", config = config("gitsigns")},
     {"liuchengxu/vista.vim", cmd = "Vista"},
-    {"lukas-reineke/indent-blankline.nvim", config = setup("indent_blankline")},
-    {"mhinz/vim-startify", config = setup("startify")},
+    {"lukas-reineke/indent-blankline.nvim", config = config("indent_blankline")},
+    {"mhinz/vim-startify", config = config("startify")},
     { "norcalli/nvim-colorizer.lua", config = function () require("colorizer").setup() end},
     {"nvim-lua/lsp-status.nvim"},
-    {"onsails/lspkind-nvim", config = setup("lspkind")},
-    {"romainl/vim-qf"},
-    {"voldikss/vim-floaterm", config = setup("floaterm")},
+    {"onsails/lspkind-nvim", config = config("lspkind")},
+    {"voldikss/vim-floaterm", config = config("floaterm")},
   }
 
   -- Colorschemes
   use {
-    {"axvr/photon.vim"},
-    {"cocopon/iceberg.vim"},
-    {"folke/tokyonight.nvim"},
+    "axvr/photon.vim",
+    "cocopon/iceberg.vim",
+    "folke/tokyonight.nvim",
   }
 
   -- Notes and prose
@@ -77,13 +76,13 @@ local function init()
 
   -- Navigation
   use {
-    {"andymass/vim-matchup"},
-    {"nvim-lua/popup.nvim"},
-    {"nvim-lua/plenary.nvim"},
+    "andymass/vim-matchup",
+    "justinmk/vim-dirvish",
+    "tpope/vim-projectionist",
     {
       "nvim-telescope/telescope.nvim",
       requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}},
-      config = setup("telescope"),
+      config = config("telescope"),
     },
     {
       "nvim-telescope/telescope-fzy-native.nvim",
@@ -91,31 +90,31 @@ local function init()
       run = "git submodule init && git submodule update",
       config = function () require("telescope").load_extension("fzy_native") end,
     },
-    {"tpope/vim-projectionist"},
-    {"justinmk/vim-dirvish"},
   }
 
   -- Code intelligence
   use {
-    {"neovim/nvim-lspconfig", config = setup("lspconfig")},
-    {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate", config = setup("treesitter")},
-    {"nvim-treesitter/playground"},
+    "nvim-treesitter/playground",
+    {"neovim/nvim-lspconfig", config = config("lspconfig")},
+    {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate", config = config("treesitter")},
   }
 
   -- Tools
   use {
-    {"L3MON4D3/LuaSnip", config = setup("luasnip")},
-    -- TODO: This overrides filetype-based indent settings. Should be vice-versa.
-    -- "editorconfig/editorconfig-vim",
-    {"hrsh7th/nvim-compe", config = setup("compe")},
-    {"janko/vim-test", config = setup("vim_test")},
-    {"mhartington/formatter.nvim", config = setup("formatter")},
-    {"~/Projects/iris.nvim", config = setup("iris")},
-    {"tpope/vim-fugitive"},
+    "tpope/vim-fugitive",
+    "tpope/vim-eunuch",
+    "tpope/vim-rsi",
+    {"L3MON4D3/LuaSnip", config = config("luasnip")},
+    {"hrsh7th/nvim-compe", config = config("compe")},
+    {"janko/vim-test", config = config("vim_test")},
+    {"mhartington/formatter.nvim", config = config("formatter")},
+    -- {"~/Projects/iris.nvim", config = config("iris")},
     {"dstein64/vim-startuptime", opt = true},
-    {"tpope/vim-eunuch"},
-    {"tpope/vim-rsi"},
   }
+
+  use "rktjmp/lush.nvim"
+
+  use {"famiu/feline.nvim", config = config("feline")}
 
   return packer
 end

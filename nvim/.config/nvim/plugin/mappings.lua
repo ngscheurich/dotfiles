@@ -4,6 +4,9 @@
 
 local nnoremap, fnmap = ngs.nnoremap, ngs.fnmap
 
+-- Map <Leader> to <Space>
+vim.g.mapleader = " "
+
 -- Navigate window splits with the arrow keys
 nnoremap("<Left>",  "<C-w>h")
 nnoremap("<Down>",  "<C-w>j")

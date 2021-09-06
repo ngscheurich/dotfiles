@@ -1,6 +1,6 @@
 require("iris").setup({
   palettes = {
-    iceberg = require("cfg.iris.iceberg"),
+    iceberg = require("config.iris.iceberg"),
     tokyonight = require("cfg.iris.tokyonight"),
   },
 

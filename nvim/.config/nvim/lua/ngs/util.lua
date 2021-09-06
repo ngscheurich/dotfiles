@@ -12,6 +12,16 @@ function util.get_packer()
   end
 end
 
+-- function util.paq_get()
+--   local url = "https://github.com/savq/paq-nvim"
+--   local dest = vim.fn.stdpath("data") .. "/site/pack/paqs/opt/paq-nvim"
+
+--   if vim.fn.input("Download Paq? (y/N) ") == "y" then
+--     cmd("silent execute '!git clone " .. url .. " " .. dest .. "'")
+--     print("✔ Paq downloaded successfully")
+--   end
+-- end
+
 function util.get_highlight_attr(group, attr)
   local hl_id = vim.fn.hlID(group)
   local syntax_id = vim.fn.synIDtrans(hl_id)

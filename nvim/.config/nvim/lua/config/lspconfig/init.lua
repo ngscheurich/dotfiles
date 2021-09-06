@@ -55,5 +55,5 @@ servers = {
 }
 
 for _, server in ipairs(servers) do
-  require("cfg.lspconfig." .. server)(config)
+  require("config.lspconfig." .. server)(config)
 end

@@ -2,7 +2,7 @@ local set = require("iris.util").set_highlight
 
 return function(pal)
   print("nvim iris")
-  require("cfg.galaxyline")
+  require("config.galaxyline")
 
   set("Normal",       {fg = pal.fg, bg = pal.bg})
   set("LineNr",       {fg = pal.base05, bg = pal.gutter})

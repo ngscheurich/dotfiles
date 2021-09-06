@@ -12,5 +12,8 @@ fncommand("PackerClean", "ngs.plugins", "clean")
 fncommand("PackerSync", "ngs.plugins", "sync")
 fncommand("PackerGet", "ngs.util", "get_packer")
 
--- Silent grep
-command("Grep", "Grep", "1")
+-- fncommand("PaqInstall", "ngs.packages", "install")
+-- fncommand("PaqUpdate", "ngs.packages", "update")
+-- fncommand("PaqClean", "ngs.packages", "clean")
+-- fncommand("PaqSync", "ngs.packages", "sync")
+-- fncommand("PaqGet", "ngs.util", "get_paq")
