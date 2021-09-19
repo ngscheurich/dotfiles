@@ -1,7 +1,6 @@
 -- =========================================================
 -- Signs
 -- =========================================================
-
 local define = vim.fn.sign_define
 
 define("LspDiagnosticsSignError", {text = ""})

@@ -11,8 +11,9 @@
 -- ======================================================================
 -- Author: N. G. Scheurich <nick@scheurich.me>
 -- Repo: https://github.com/ngscheurich/dotfiles
-
+-- Load global functions
 require("ngs")
 
--- Set colorscheme
-vim.cmd("colorscheme photon")
+-- Set theme
+local theme = require("themes.base16")
+ngs.util.load_theme(theme)

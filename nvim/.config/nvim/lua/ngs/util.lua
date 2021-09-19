@@ -1,51 +1,39 @@
-local util = {}
+local M = {}
 
-local cmd = vim.cmd
+local fn, cmd = vim.fn, vim.cmd
 
-function util.get_packer()
+function M.get_packer()
   local url = "https://github.com/wbthomason/packer.nvim"
-  local dest = vim.fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
+  local dest = fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
 
-  if vim.fn.input("Download packer? (y/N) ") == "y" then
+  if fn.input("Download packer? (y/N) ") == "y" then
     cmd("silent execute '!git clone " .. url .. " " .. dest .. "'")
     print("✔ packer downloaded successfully")
   end
 end
 
--- function util.paq_get()
---   local url = "https://github.com/savq/paq-nvim"
---   local dest = vim.fn.stdpath("data") .. "/site/pack/paqs/opt/paq-nvim"
-
---   if vim.fn.input("Download Paq? (y/N) ") == "y" then
---     cmd("silent execute '!git clone " .. url .. " " .. dest .. "'")
---     print("✔ Paq downloaded successfully")
---   end
--- end
-
-function util.get_highlight_attr(group, attr)
-  local hl_id = vim.fn.hlID(group)
-  local syntax_id = vim.fn.synIDtrans(hl_id)
-  return vim.fn.synIDattr(syntax_id, attr)
+function M.get_highlight_attr(group, attr)
+  local hlid = fn.hlID(group)
+  local synid = fn.synIDtrans(hlid)
+  return fn.synIDattr(synid, attr)
 end
 
-function util.highlight(group, opts)
+function M.highlight(group, opts)
   local fg = opts.fg or "NONE"
   local bg = opts.bg or "NONE"
   local attrs = opts.attrs or "NONE"
-  local command = string.format(
-    "highlight %s gui=%s guifg=%s guibg=%s", group, attrs, fg, bg
-  )
+  local command = string.format("highlight %s gui=%s guifg=%s guibg=%s", group, attrs, fg, bg)
   cmd(command)
 end
 
-function util.join_paths(...) return table.concat({...}, "/") end
+function M.join_paths(...) return table.concat({...}, "/") end
 
-function util.toggle_line_numbers()
+function M.toggle_line_numbers()
   vim.wo.number = not vim.wo.number
   vim.wo.relativenumber = not vim.wo.relativenumber
 end
 
-function util.toggle_sign_column()
+function M.toggle_sign_column()
   if vim.wo.signcolumn == "yes" then
     vim.wo.signcolumn = "no"
   else
@@ -53,4 +41,10 @@ function util.toggle_sign_column()
   end
 end
 
-return util
+function M.load_theme(theme)
+  _G.ngs.theme = theme
+  require("lush")(theme.spec)
+  require("feline").reset_highlights()
+end
+
+return M

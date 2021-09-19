@@ -1,6 +1,7 @@
 -- =========================================================
 -- Autocommand Groups
 -- =========================================================
+local augroup = ngs.augroup
 
 -- Highlight yanked text
-ngs.augroup("yank", {"TextYankPost * lua vim.highlight.on_yank()"})
+augroup("yank", {"TextYankPost * lua vim.highlight.on_yank()"})
