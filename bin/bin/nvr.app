@@ -2,4 +2,4 @@
 
 # nvr
 
-echo $@
+echo "$@"
