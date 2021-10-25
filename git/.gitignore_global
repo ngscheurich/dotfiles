@@ -73,3 +73,6 @@ Session.vim
 
 # Projectionist configs
 .projections.json
+
+# Elixir project lab modules
+__lab__.ex
