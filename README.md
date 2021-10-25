@@ -2,8 +2,7 @@
 
 <img src="https://media.giphy.com/media/DBfYJqH5AokgM/giphy.gif" width="100%" alt="A GIF of a frustrated Samuel L. Jackson seated at a computer as the Jurassic Park character Ray Arnold. A caption overlaid near the bottom says “I HATE THIS HACKER CRAP” in all caps.">
 
-These are my sytem configuration files. Please don’t copy and paste from them,
-but please do learn and steal from them. I manage these using [GNU Stow].
+These are my sytem configuration files. I manage these using [GNU Stow].
 
 Contained herein are my [Neovim] [runtime files] as well as configurations for
 other tools I use, such as [kitty], [tmux], and [Zsh]. The intrepid explorer
