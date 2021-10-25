@@ -5,7 +5,7 @@
 git-repo || return
 
 local branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
-local chpart="$(echo $branch | sed -E 's/(^.+\/ch[[:digit:]]+).*/\1/')"
+local chpart="$(echo $branch | sed -E 's/(^.+\/sc-[[:digit:]]+).*/\1/')"
 
 if [[ -n "$chpart" ]]; then
   echo "$chpart"
