@@ -36,6 +36,7 @@ nnoremap("<Leader>us",  "<Cmd>lua ngs.util.toggle_sign_column()<CR>")
 nnoremap("<Leader>ugs", "<Cmd>Gitsigns toggle_signs<CR>")
 nnoremap("<Leader>ugb", "<Cmd>Gitsigns toggle_current_line_blame<CR>")
 nnoremap("<Leader>ui",  "<Cmd>IndentBlanklineToggle<CR>")
+nnoremap("<Leader>ut",  "<Cmd>TroubleToggle<CR>")
 
 -- Gitsigns
 local function gsmap(fn)
