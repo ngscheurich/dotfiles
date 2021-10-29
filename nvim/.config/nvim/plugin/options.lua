@@ -1,6 +1,7 @@
 -- ==========================================================
 -- Options
 -- ==========================================================
+
 local opt = vim.opt
 
 opt.cursorline     = true                -- Highlight the screen line of the cursor with CursorLine
