@@ -33,6 +33,8 @@ vim.g.indent_blankline_char = "│"
 
 require("trouble").setup()
 
+require("todo-comments").setup()
+
 vim.g.startify_files_number        = 5
 vim.g.startify_bookmarks           = {}
 vim.g.startify_session_persistence = 1

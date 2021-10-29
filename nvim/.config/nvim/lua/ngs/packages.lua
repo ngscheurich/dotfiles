@@ -42,6 +42,7 @@ local function init()
   --  Interface
   use {
     "EdenEast/nightfox.nvim",
+    {"folke/todo-comments.nvim", requires = "nvim-lua/plenary.nvim"},
     "folke/tokyonight.nvim",
     "folke/trouble.nvim",
     "hoob3rt/lualine.nvim",
