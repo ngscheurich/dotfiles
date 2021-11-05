@@ -1,0 +1,375 @@
+#+TITLE: GNU Emacs Configuration
+#+AUTHOR: N. G. Scheurich
+#+EMAIL: nick@scheurich.haus
+
+* Introduction
+
+This is my primary *GNU Emacs* configuration file. I say /primary/ because two other files, =early-init.el= and =init.el=, round out the whole of my configuration, though their purposes are tightly constrained and explained in more detail in each file.
+
+This file is an [[https://orgmode.org/][Org Mode]] document written in a [[https://en.wikipedia.org/wiki/Literate_programming][literate programming]] style, with text meant for computer interpretation, i.e. /code/, intermingled with plain-language text meant to be parsed by humans. I find that this paradigm lends itself nicely to system configuration, as it allows me to colocate my thoughts about parts of the config along with the Emac Lisp (Elisp) configuration code itself. Hopefully this colocation will make the myriad functions of this file easier to narrow in on and parse by others, my future self included.
+
+From a technical perspective, when Emacs is started each code block in this document is /tangled/ (exported using to a file useing =org-babel-tangle=) and then loaded using =load-file=. Note that /loading/ a file in the context of Emacs typically refers to reading the file and then evaluating its contents as Elisp code, which is the case here.
+
+** TODO What is the location of the tangled file?
+
+* Basic Settings
+
+Tell Emacs a little about myself:
+
+#+begin_src emacs-lisp
+  (setq user-full-name "Nicholas Scheurich"
+        user-mail-address "nick@scheurich.haus")
+#+end_src
+
+I prefer to bypass the Emacs splash screen and boot to the scratch buffer by default. Perhaps I’ll find an Emacs package similar to [[https://github.com/mhinz/vim-startify][Startify]] and switch to that at some point.
+
+#+begin_src emacs-lisp
+  (setq inhibit-startup-message t)
+#+end_src
+
+The audible bell can be quite jarring which was confirmed to be the case by my wife Christine, who was subjected to haunted beeps while I was connected to Bluetooth speakers from another room. I use the visual bell instead.
+
+** TODO Do I even want a bell?
+
+#+begin_src emacs-lisp
+  (setq visible-bell t)
+#+end_src
+
+* Package Management
+
+The [[https://github.com/jwiegley/use-package][use-package]] macro is invaluable for keeping my config tidy  and performant. The following installs it and ensures packages in =use-package= forms are installed automatically using =straight.el=.
+
+#+begin_src emacs-lisp
+  (straight-use-package 'use-package)
+  (setq straight-use-package-by-default t)
+#+end_src
+
+* User Interface
+** Theme
+
+I use the [[https://protesilaos.com/emacs/modus-themes][Modus themes]] by [[https://protesilaos.com/][Protesilaos Stavrou]], which are optimized for maximum color-contrast accessibility. =modus-vivendi=, the light-on-dark Modus theme, is loaded by default. =<f5>= is bound to a function that lets me toggle between the dark and light (=modus-operandi=) Modus themes. Perhaps in the future I will write a function to load one theme or the other depending on time of day.
+
+#+begin_src emacs-lisp
+  (use-package modus-themes
+    :init
+    (setq modus-themes-mode-line '(padded borderless))
+    (modus-themes-load-themes)
+    :config
+    (modus-themes-load-vivendi)
+    :bind
+    ("<f5>" . modus-themes-toggle))
+#+end_src
+
+** Typography
+
+My preferred monospaced programming font is [[https://fsd.it/shop/fonts/pragmatapro/][PragmataPro Mono Liga]] by [[https://fsd.it/][Fabrizio Schiavi]]. For typesetting prose I’m using [[https://github.com/mozilla/Fira][Fira Sans]], an open source sans-serif originally designed for Mozilla’s Firefox OS by [[http://www.carrois.com/][Carrois Apostrophe]].
+
+I slightly increase the leading and enable font ligatures.
+
+*** TODO Do I need to set the default face if I set both fixed- and variable-pitch
+
+#+begin_src emacs-lisp
+  (set-face-attribute 'default nil :font "PragmataPro Mono Liga" :height 140)
+  (set-face-attribute 'fixed-pitch nil :font "PragmataPro Mono Liga" :height 140)
+  (set-face-attribute 'variable-pitch nil :font "Fira Sans" :height 140)
+
+  (setq-default line-spacing 0.1)
+
+  (mac-auto-operator-composition-mode t)
+#+end_src
+
+** Line Numbers
+
+*** TODO Relative line numbers
+
+#+begin_src emacs-lisp
+  (global-display-line-numbers-mode 1)
+  ;; (menu-bar--display-line-numbers-mode-relative 1)
+#+end_src
+
+* Mode Line
+
+I find it useful to see the column number in the mode line, which is enabled by the following code.
+
+If historical precedent is any indication I will likely end up heavily customizing this area of the user interface, but this is a start.
+
+#+begin_src emacs-lisp
+  (setq column-number-mode t)
+#+end_src
+
+* Completion
+
+In Emacs,  a /completion/  system refers to a facility meant to predict what text the user is going to to type and providing selectable candidates based on that prediction.
+
+Emacs’ built-in completion systems are serviceable, but a subjectively better experience can be assembled with some excellent community packages:
+
+- [[https://github.com/minad/vertico][Vertico]]
+- [[https://github.com/minad/marginalia][Marginalia]]
+- [[https://github.com/minad/consult][Consult]]
+- [[https://github.com/oantolin/orderless][Orderless]]
+- Embark (TODO)
+- Company
+  
+The first two packages, both by [[https://github.com/minad][Daniel Mendler]], form the foundation of my completion setup.
+
+*Vertico* enhances the default completion system with an extensible vertical selection UI, sorting configurability affordances, support for annotations, and more. It’s a great upgrade out of the box and maintain full compatibility with the built-in Emacs completion experience, thus reducing the likelihood of seeing unexpected behavior.
+
+#+begin_src emacs-lisp
+  (use-package vertico
+    :init
+    (vertico-mode))
+#+end_src
+
+*Marginalia* adds rich annotations to completion candidates. Some examples:
+
+- Descriptions of commands
+- Filesystem details for files
+- Value and description of variables
+
+  #+begin_src emacs-lisp
+    (use-package marginalia
+      :init
+      (marginalia-mode))
+  #+end_src
+
+*Consult*  adds a set of commands that provide interesting candidate lists which can be narrowed using completion systems based on the Emacs =completing-read= API—Vertico, for instance. There are lots of great commands in here covering buffer-switching, grepping, Org mode navigation, and more.
+
+#+begin_src emacs-lisp
+  ;; TODO: Explore consult configuration options.
+  ;; https://github.com/minad/consult#use-package-example would be a good starting point.
+  (use-package consult
+    :bind (("C-x b" . consult-buffer)
+           ("M-s l" . consult-line)))
+#+end_src
+
+*Orderless* provides an orderless completion style that allows a completion pattern to be divided into chunks on the space character (by default) that can be matched in any order.
+
+#+begin_src emacs-lisp
+  (use-package orderless
+    :init
+    (setq completion-styles '(orderless)))
+#+end_src
+
+* Text Editing
+** Evil
+
+Vim’s modal text editing model was eye-opening for me, and changed the way I think about interacting with a machine via a keyboard. I’m excited to dive into Emacs, but having near-perfect Vim emulation is a top requirement for any platform with which I will be doing heavy text editing. Luckily [[https://github.com/emacs-evil/evil][Evil]], the *extensible vi layer* for Emacs is here to help.
+
+#+begin_src  emacs-lisp
+  (use-package evil
+    :init
+    (setq evil-want-keybinding nil)
+    (setq evil-want-C-u-scroll t)
+    :config
+    (evil-mode 1))
+#+end_src
+
+** Keybindings
+
+There are parts of Emacs, e.g. =help-mode=, =M-x calendar=, Eshell, which are not covered by Evil. [[https://github.com/emacs-evil/evil-collection][Evil Collection]] is a community-sourced collection of Evil bindings that aims to provide a consistent Evil experience throughout Emacs.
+
+#+begin_src emacs-lisp
+  (use-package evil-collection
+    :after evil
+    :config
+    (evil-collection-init))
+#+end_src
+
+* Programming
+
+** Languages
+
+*** Elixir
+
+#+begin_src emacs-lisp
+  (use-package elixir-mode)
+#+end_src
+
+** Projects
+
+#+begin_src emacs-lisp
+#+end_src
+
+** Language Server Client
+
+#+begin_src emacs-lisp
+#+end_src
+
+** Syntax Checking
+
+* Org Mode
+
+Org Mode is one of those parts of Emacs (now an /official/ part) that seems almost universally lauded amongst Emacs users as well as those who have come into contact with it independently. I’m excited to start learning to use it for note taking and task tracking.
+
+** Appearance
+
+Since I am primarily working with prose (rather than code) in Org files, I like to modify the look and feel to better match that frame of mind.
+
+*** Headings
+
+Set a descending font size scale for headings:
+
+#+begin_src emacs-lisp
+  (require 'org-faces)
+  (dolist (face '((org-level-1 . 1.25)
+                  (org-level-2 . 1.2)
+                  (org-level-3 . 1.15)
+                  (org-level-4 . 1.1)
+                  (org-level-5 . 1.1)
+                  (org-level-6 . 1.1)
+                  (org-level-7 . 1.1)
+                  (org-level-8 . 1.1)))
+    (set-face-attribute (car face) nil :font "IBM Plex Sans" :weight 'semibold :height (cdr face)))
+#+end_src
+
+*** Lists
+
+Use the *bullet* glyph (=U+2022=) in place of dashes to indicate list items:
+
+#+begin_src emacs-lisp
+  (font-lock-add-keywords 'org-mode
+                          '(("^ *\\([-]\\) "
+                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+#+end_src
+   
+*** Margins
+
+In order to center the buffer text and wrap lines at =fill-column= in =visual-line-mode= buffers, the [[https://github.com/joostkremers/visual-fill-column][visual-fill-column]] package is employed.
+
+#+begin_src emacs-lisp
+  (defun ngs/org-mode-visual-fill ()
+    (setq visual-fill-column-width 100
+          visual-fill-column-center-text t)
+    (visual-fill-column-mode 1))
+
+  (use-package visual-fill-column
+    :hook (org-mode . ngs/org-mode-visual-fill))
+#+end_src
+  
+*** Fixed Pitch Elements
+
+While the majority of content in my Org buffers uses a variable pitch font, some elements should use a fixed pitch font to maintain readability. These elements include tables and source code blocks, among others.
+
+#+begin_src emacs-lisp
+  (set-face-attribute 'org-block nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
+#+end_src
+
+*** Syntax
+
+** Setup
+
+#+begin_src emacs-lisp
+  (defun ngs/org-mode-setup ()
+    (org-indent-mode)
+    (variable-pitch-mode 1)
+    ;; (setq line-spacing 0.3)
+    (visual-line-mode 1)
+    (display-line-numbers-mode 0))
+
+  (use-package org
+    :hook (org-mode . ngs/org-mode-setup)
+    :config
+    (setq org-hide-emphasis-markers t)
+    (setq org-directory (expand-file-name "~/Dropbox/Org"))
+        (setq org-agenda-files '("tasks.org")))
+    #+end_src
+
+* Collected Miscellany
+
+Code here should be documented and moved to a more appropriate place.
+
+#+begin_src emacs-lisp
+  ;; Hide minor modes in the mode line
+  ;; (use-package diminish)
+
+  ;; Show potential keybindings
+  (use-package which-key
+    :config
+    (which-key-mode))
+
+  ;; Richer help buffers
+  (use-package helpful
+    :config
+    (global-set-key (kbd "C-h f") #'helpful-callable)
+    (global-set-key (kbd "C-h v") #'helpful-variable)
+    (global-set-key (kbd "C-h k") #'helpful-key))
+
+  ;; Get Emacs path from shell $PATH
+  (use-package exec-path-from-shell
+    :config
+    (exec-path-from-shell-initialize))
+
+  ;; Rainbow delimiters
+  (use-package rainbow-delimiters
+    :hook (prog-mode . rainbow-delimiters-mode))
+
+  ;; Project management
+  (use-package projectile
+    :config
+    (projectile-mode +1)
+    :bind-keymap
+    ("C-c p" . projectile-command-map)
+    :custom
+    (projectile-switch-project-action #'projectile-dired)
+    (projectile-project-search-path . '((expand-file-name "~/Projects"))))
+
+  ;; Language Server client
+  (use-package lsp-mode
+    :init
+    (setq lsp-keymap-prefix "C-c l")
+    :hook ((elixir-mode . lsp)
+           (lsp-mode . lsp-enable-which-key-integration))
+    :commands (lsp lsp-deferred))
+
+  ;; In-buffer completion
+  (use-package company
+    :delight
+    :after
+    lsp-mode
+    :hook
+    (prog-mode . company-mode))
+
+  (use-package company-box
+    :delight
+    :hook (company-mode . company-box-mode))
+
+  ;; Make <escape> quit prompts
+  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
+  ;; general.el
+  (use-package general
+    :after evil
+    :config
+    (general-create-definer ngs/leader-def
+      :keymaps '(normal insert visual emacs)
+      :prefix "SPC"
+      :global-prefix "C-SPC")
+
+    (ngs/leader-def
+      ;; Open my config.org
+      "fc" '(lambda () (interactive)
+              (find-file (expand-file-name "config.org" user-emacs-directory)))))
+
+  (use-package treemacs)
+  ;; (use-package treemacs-evil)
+  ;; (use-package treemacs-projectile)
+
+  (use-package hydra)
+
+  ;; Emacs Mini-Buffer Actions Rooted in Keymaps
+  (use-package embark
+    :bind
+    (("C-." . embark-act)))
+
+  (use-package flycheck
+    :init (global-flycheck-mode))
+#+end_src
+
+* Inspiration & Reference
+
+- [[https://github.com/daviwil/emacs-from-scratch][Emacs from Scratch]], a build-along configuration and video seriby [[https://youtube.com/c/SystemCrafters][David Wilson]] of System Crafters
+- Words, spoken and written, from [[https://protesilaos.com/emacs/][Protesilaos Stavrou]], aka /Prot/

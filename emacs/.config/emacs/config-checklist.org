@@ -1,0 +1,25 @@
+* DONE Show column number in mode line
+* TODO Why doesn't <s TAB create a src block in Org mode
+* TODO TAB just doesn't seem to work sometimes? Test this with no config.
+* TODO Disable Flycheck in Org Src buffers
+* TODO Document why I’m using staight.el over package.el
+* DONE Why doesn't =C-u= behave as in Vim?
+* TODO Customize =evil-undo-system= for redo functionality
+* TODO What are some things =user-full-name= and =user-mail-address= are used for?
+* DONE Soft or hard wrap org files at 80 or some odd chars
+* TODO What is =menu-bar-mode=?
+* TODO What is the fringe?
+* TODO Should I move straight.el bootstrap code to init.el?
+* DONE Line number + relative lines.
+* TODO Configure =savehist-file=?
+* TODO Do I need to set the default font if I set the fixed- and variable-pitch?
+* TODO =gj= and =gk= bindings?
+* TODO How do I paste into a buffer using the keyboard? 
+* TODO Why does can't I conceal markers inside of words like t*hi*s?
+- See this Stack Overflow answer re: the use of =org-emphasis-regexp-components= to allow partial word emphasis: https://stackoverflow.com/a/24540651/1408290
+* TODO Enable Elixir LSP code folding with origami.el
+- https://blog.evalcode.com/enable-elixir-code-folding-in-doom-emacs/
+- https://github.com/gregsexton/origami.el
+* TODO Doom look/feel?
+- https://github.com/seagle0128/doom-modeline
+- https://github.com/hlissner/emacs-doom-themes
