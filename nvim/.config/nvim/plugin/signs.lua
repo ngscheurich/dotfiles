@@ -1,10 +1,4 @@
--- =========================================================
--- Signs
--- =========================================================
-
-local define = vim.fn.sign_define
-
-define("LspDiagnosticsSignError",       {text = ""})
-define("LspDiagnosticsSignWarning",     {text = ""})
-define("LspDiagnosticsSignInformation", {text = ""})
-define("LspDiagnosticsSignHint",        {text = ""})
+vim.fn.sign_define("LspDiagnosticsSignError",       {text = ""})
+vim.fn.sign_define("LspDiagnosticsSignWarning",     {text = ""})
+vim.fn.sign_define("LspDiagnosticsSignInformation", {text = ""})
+vim.fn.sign_define("LspDiagnosticsSignHint",        {text = ""})
