@@ -1,5 +1,0 @@
-vim.api.nvim_set_keymap("n", "Y", "y$", {noremap = true})
-vim.api.nvim_set_keymap("n", "<Left>",  "<C-w>h", {noremap = true})
-vim.api.nvim_set_keymap("n", "<Down>",  "<C-w>h", {noremap = true})
-vim.api.nvim_set_keymap("n", "<Up>",    "<C-w>h", {noremap = true})
-vim.api.nvim_set_keymap("n", "<Right>", "<C-w>h", {noremap = true})
