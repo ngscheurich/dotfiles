@@ -1,2 +1,5 @@
 zsh/.config/zsh/.zcompdump
 zsh/.config/zsh/.zsh_sessions
+
+tmux/.tmux/plugins/tpm
+zsh/.config/zsh/.zcompcache
