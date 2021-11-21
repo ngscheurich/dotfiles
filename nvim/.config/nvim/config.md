@@ -2,7 +2,7 @@
 title: Neovim Configuration
 author: N. G. Scheurich
 email: nick@scheurich.haus
-url: 'https://github.com/ngscheurich/dotfiles/nvim'
+url: 'https://github.com/ngscheurich/dotfiles/nvim/.config/nvim/config.md'
 ---
 
 
