@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 
 RESPONSE=$(curl "https://api.openweathermap.org/data/2.5/weather?q=Denham+Springs&units=imperial&appid=$OPEN_WEATHER_MAP_API_KEY")
-cat "$RESPONSE" > /tmp/current_weather.json
+echo "$RESPONSE" > /tmp/current_weather.json
