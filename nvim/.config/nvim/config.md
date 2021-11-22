@@ -2,7 +2,7 @@
 title: Neovim Configuration
 author: N. G. Scheurich
 email: nick@scheurich.haus
-url: 'https://github.com/ngscheurich/dotfiles/nvim/.config/nvim/config.md'
+url: 'https://scheurich.haus/nvim'
 ---
 
 
@@ -20,7 +20,11 @@ url: 'https://github.com/ngscheurich/dotfiles/nvim/.config/nvim/config.md'
   * [Indentation](#indentation)
   * [Search and Replace](#search-and-replace)
   * [Yanking](#yanking)
-  * [Supplements](#supplements)
+  * [Motions](#motions)
+  * [Text Objects](#text-objects)
+  * [Commenting](#commenting)
+  * [Aligning](#aligning)
+  * [Utilities](#utilities)
 - [User Interface](#user-interface)
   * [Colors](#colors)
   * [Line Numbers](#line-numbers)
@@ -61,12 +65,8 @@ url: 'https://github.com/ngscheurich/dotfiles/nvim/.config/nvim/config.md'
   * [Command-line Mode](#command-line-mode)
 - [Notes and Prose](#notes-and-prose)
 - [TODO](#todo-1)
-  * [Interface](#interface)
-  * [Notes and prose](#notes-and-prose)
   * [Navigation](#navigation-1)
-  * [Code intelligence](#code-intelligence)
   * [Tools](#tools)
-  * [Miscellaneous](#miscellaneous)
 
 <!-- tocstop -->
 
@@ -182,7 +182,13 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 ```
 
-## Search and Replace
+## Search 
+
+I set a couple of options to improve the search/substitute experience:
+
+`ignorecase` is enabled so searching is case-insensitive be default, as I find this useful in most cases. Using `\C` in a search pattern will make it case-_sensitive_.
+
+Setting the `inccommand` option to `"split"` will show off-screen search results in a preview window, including substitutions. This is an extremely handy feature!
 
 ```lua tangle:plugin/options.lua
 vim.opt.ignorecase = true
@@ -191,9 +197,13 @@ vim.opt.inccommand = "split"
 
 ## Yanking
 
+By default, typing `Y` in Normal mode will cause the entire line to be yanked. I find it more practical to map this to `y$`, which will yank to the end of the line. Yanking the entire line can still be easily accomplished by typing `yy`.
+
 ```lua tangle:plugin/mappings.lua
 vim.api.nvim_set_keymap("n", "Y", "y$", {noremap = true})
 ```
+
+Neovim introduced a useful function, `vim.highlight.on_yank()`, which briefly highlights yanked text. This can be triggered each time text is yanked by hooking into the `TextYankPost` event.
 
 ```lua tangle:plugin/autocmds.lua
 vim.cmd [[
@@ -204,7 +214,60 @@ vim.cmd [[
 ]]
 ```
 
-## Supplements
+## Motions
+
+TODO: Notes.
+
+```lua tangle:plugin/packages.lua
+use {
+  "phaazon/hop.nvim",
+  branch = "v1",
+  config = function ()
+    require("hop").setup()
+    
+    local function map(lhs, funcname, opts)
+      opts = vim.tbl_extend("force", {current_line_only = true}, opts)
+      opts_str = ""
+      for k, v in pairs(opts) do
+        opts_str = opts_str .. string.format("%s=%s,", k, v)
+      end
+      opts = string.format("{%s}", opts_str)
+      rhs = string.format("<CMD>lua require('hop')['%s'](%s)<CR>", funcname, opts)
+      vim.api.nvim_set_keymap("n", lhs, rhs, {})
+    end
+    
+    local direction = require("hop.hint").HintDirection
+    
+    map("f", "hint_char1", {direction = direction.AFTER_CURSOR, inclusive_jump = true})
+    map("F", "hint_char1", {direction = direction.BEFORE_CURSOR, inclusive_jump = true})
+    map("t", "hint_char1", {direction = direction.AFTER_CURSOR})
+    map("T", "hint_char1", {direction = direction.BEFORE_CURSOR})
+    map("s", "hint_char2", {direction = direction.AFTER_CURSOR, inclusive_jump = true})
+    map("S", "hint_char2", {direction = direction.BEFORE_CURSOR, inclusive_jump = true})
+  end,
+}
+```
+
+## Text Objects
+
+```lua tangle:plugin/packages.lua
+use "tpope/vim-surround"
+```
+
+## Commenting
+
+Many types of structured text, especically programming languages, support a special syntax for marking a line or lines as document comments. [nvim-comment] is an excellent package that detects the proper comment syntax and allows the user to toggle it on/off for the current line or over a motion.
+
+```lua tangle:plugin/packages.lua
+use {
+  "terrortylor/nvim-comment",
+  config = function ()
+    require("nvim_comment").setup()
+  end,
+}
+```
+
+## Aligning
 
 [vim-easy-align] adds commands to align a block of text around a shared delimiter, e.g. `=`, `:` . I set the mapping `ga` in Normal and Visual mode to invoke the `EasyAlign` command, which waits for the user to press the desired delimiter character. This means that `gaip=` will align around `=` for the `i` nner `p` aragraph.
 
@@ -219,21 +282,25 @@ use {
 }
 ```
 
-TODO:
+## Utilities 
 
 ```lua tangle:plugin/packages.lua
--- TODO: Maybe hop?
-use "justinmk/vim-sneak"
--- TODO: Does this belong under Search/Replace
-use "tpope/vim-abolish"
--- TODO: Check newer alternatives
-use "tpope/vim-commentary"
--- TODO: Does this go here?
 use "tpope/vim-repeat"
-use "tpope/vim-sleuth"
+```
+
+```lua tangle:plugin/packages.lua
+use "tpope/vim-abolish"
+```
+
+```lua tangle:plugin/packages.lua
 use "tpope/vim-speeddating"
-use "tpope/vim-surround"
+```
+
+```lua tangle:plugin/packages.lua
 use "tpope/vim-unimpaired"
+```
+
+```lua tangle:plugin/packages.lua
 use "windwp/nvim-autopairs"
 ```
 
@@ -284,9 +351,9 @@ vim.opt.splitright = true
 Since the arrow keys aren’t necessary for line-wise or character-wise cursor movement in Neovim, I repurpose them for window navigation. Since I bind `Caps Lock` to `Ctrl` (when pressed with another key), and `Ctrl` + `h`/`j`/`k`/`l` to the arrow keys, window navigation commands are quite easy to access.
 
 ```lua tangle:plugin/mappings.lua
-vim.api.nvim_set_keymap("n", "<Left>",  "<C-w>h", {noremap = true})
-vim.api.nvim_set_keymap("n", "<Down>",  "<C-w>h", {noremap = true})
 vim.api.nvim_set_keymap("n", "<Up>",    "<C-w>h", {noremap = true})
+vim.api.nvim_set_keymap("n", "<Down>",  "<C-w>h", {noremap = true})
+vim.api.nvim_set_keymap("n", "<Left>",  "<C-w>h", {noremap = true})
 vim.api.nvim_set_keymap("n", "<Right>", "<C-w>h", {noremap = true})
 ```
 
@@ -347,6 +414,12 @@ use {
 ## TODO
 
 ```lua tangle:plugin/packages.lua
+use {
+  'lukas-reineke/headlines.nvim',
+  config = function()
+    require('headlines').setup()
+  end,
+}
 use {
   {"folke/todo-comments.nvim", requires = "nvim-lua/plenary.nvim"},
   "folke/trouble.nvim",
@@ -586,9 +659,59 @@ use {
 
 ```lua tangle:plugin/packages.lua
 use {
-  {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"},
-  "nvim-treesitter/playground",
+  "nvim-treesitter/nvim-treesitter",
+  run = ":TSUpdate",
+  config = function ()
+    local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
+
+    parser_configs.markdown = {
+      install_info = {
+        url = "https://github.com/ikatyang/tree-sitter-markdown",
+        files = {"src/parser.c", "src/scanner.cc"},
+      },
+      filetype = "markdown",
+    }
+
+    require("nvim-treesitter.configs").setup({
+      ensure_installed = {
+        "c",
+        "c_sharp",
+        "css",
+        "dockerfile",
+        "elixir",
+        "erlang",
+        "gdscript",
+        "graphql",
+        "javascript",
+        "lua",
+        "markdown",
+        "nix",
+        "python",
+        "regex",
+        "ruby",
+        "swift",
+        "toml",
+        "typescript",
+        "yaml",
+      },
+      highlight = {enable = true},
+      indent = {enable = true},
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "gnn",
+          node_incremental = "grn",
+          scope_incremental = "grc",
+          node_decremental = "grm",
+        },
+      },
+    })
+  end,
 }
+```
+
+```lua tangle:plugin/packages.lua
+use "nvim-treesitter/playground"
 ```
 
 ## Formatting
@@ -743,7 +866,7 @@ use {
 
 ## Command-line Completion
 
-TODO: Write about `wildmenu`
+TODO: Write about `wildmenu`. Try wilder package?
 
 # Abbreviations
 
@@ -773,30 +896,90 @@ use {
       syntax = "markdown",
       ext = ".md",
     }}
-  end
+    vim.g.vimwiki_table_auto_fmt = 0
+    vim.g.vimwiki_key_mappings = {
+      table_format = 0,
+      table_mappings = 0,
+    }
+  end,
 }
 ```
+
+```lua tangle:plugin/packages.lua
+use "dhruvasagar/vim-table-mode"
+```
+
+```lua tangle:plugin/packages.lua
+use {
+  "folke/zen-mode.nvim",
+  config = function()
+    require("zen-mode").setup({
+      window = {
+        backdrop = 1.0,
+        options = {
+          signcolumn = "no",
+          number = false,
+          relativenumber = false,
+        },
+      },
+      plugin = {
+        twilight = {enabled = false},
+        gitsigns = {enabled = false},
+      }
+    })
+  end,
+}
+```
+
+```lua tangle:plugin/packages.lua
+use {
+  "folke/twilight.nvim",
+  config = function()
+    require("twilight").setup({})
+  end,
+}
+```
+
+```lua tangle:plugin/packages.lua
+use {
+  "reedes/vim-pencil",
+  cmd = {"Pencil", "PencilToggle", "PencilSoft", "PencilHard"},
+}
+```
+
+# Mappings
+
+| Mode   | Sequence      | Action                                   |
+|--------|---------------|------------------------------------------|
+| Normal | `Y`           | Yank to the end of the line              |
+| Normal | `f`           | Hop forward inclusively using one char   |
+| Normal | `F`           | Hop backward inclusively using one char  |
+| Normal | `t`           | Hop forward exclusively using one char   |
+| Normal | `T`           | Hop backward exclusively using one char  |
+| Normal | `s`           | Hop forward inclusively using two chars  |
+| Normal | `S`           | Hop backward inclusively using two chars |
+| Normal | `<C-]>`       | Go to LSP definition                     |
+| Normal | `K`           | Trigger LSP hover                        |
+| Normal | `[d`          | Go to previous LSP diagnostic            |
+| Normal | `]d`          | Go to next LSP diagnostic                |
+| Normal | `<Leader>la`  | Trigger LSP code action menu             |
+| Normal | `<Leader>ld`  | Show LSP diagnostics for line            |
+| Normal | `<Leader>lf`  | Synchronously format buffer using LSP    |
+| Normal | `<Leader>lR`  | Trigger LSP rename                       |
+| Normal | `<Leader>lr`  | Fuzzy find LSP references                |
+| Normal | `<Leader>ls`  | Fuzzy find LSP document symbols          |
+| Normal | `ga`          | Trigger EasyAlign                        |
+| Visual | `ga`          | Trigger EasyAlign                        |
+| Normal | `<Up>`        | Select window above                      |
+| Normal | `<Down>`      | Select window below                      |
+| Normal | `<Left>`      | Select window to the left                |
+| Normal | `<Right>`     | Select window to the right               |
+| Normal | `<Leader>ui`  | Toggle indentation guides                |
+| Normal | `<Leader>ugb` | Toggle Git blame virtual text            |
 
 ---
 
 # TODO
-
-## Interface
-
-## Notes and prose
-
-```lua tangle:plugin/packages.lua
-use {
-  -- TODO: I believe there is a Lua/TS alternative
-  {"junegunn/limelight.vim", cmd = "Limelight"},
-  -- TODO: Replace with zen-mode.nvim
-  {"junegunn/goyo.vim", cmd = "Goyo"},
-  {"reedes/vim-pencil", cmd = {"Pencil", "PencilToggle"}},
-}
-```
-
-## Navigation
-
 
 ```lua tangle:plugin/packages.lua
 use {
@@ -805,26 +988,29 @@ use {
   "tpope/vim-projectionist",
   -- TODO: Move to Telescope section
 }
-```
 
-
-## Code intelligence
-
-## Tools
-
-```lua tangle:plugin/packages.lua
 use {
   -- TODO: Check out alternatives
   {"dstein64/vim-startuptime", opt = true},
   "tpope/vim-eunuch",
   "tpope/vim-fugitive",
   "tpope/vim-rsi",
+  {
+    "michaelb/sniprun",
+    run = "bash ./install.sh",
+    config = function ()
+      require("sniprun").setup({
+        display = {"NvimNotify"},
+      })
+    end
+  },
+  {
+    "rcarriga/nvim-notify",
+    config = function ()
+      require("notify").setup()
+    end,
+  },
 }
-```
-
-## Miscellaneous
-
-```lua tangle:plugin/packages.lua
 ```
 
 ---
@@ -856,6 +1042,4 @@ end
 [cmp-buffer]: https://github.com/hrsh7th/cmp-buffer
 [cmp-path]: https://github.com/hrsh7th/cmp-path
 [cmp_luasnip]: https://github.com/saadparwaiz1/cmp_luasnip
-
-
 
