@@ -19,7 +19,11 @@ local function init()
     "tpope/vim-speeddating",
     "tpope/vim-surround",
     "tpope/vim-unimpaired",
+  }
+
+  use {
     "windwp/nvim-autopairs",
+    config = "require('ngs.pkg.autopairs')"
   }
 
   -- Languages
@@ -41,49 +45,94 @@ local function init()
 
   --  Interface
   use {
-    "EdenEast/nightfox.nvim",
-    {"folke/todo-comments.nvim", requires = "nvim-lua/plenary.nvim"},
-    "folke/tokyonight.nvim",
-    "folke/trouble.nvim",
-    "hoob3rt/lualine.nvim",
-    "kyazdani42/nvim-tree.lua",
     "kyazdani42/nvim-web-devicons",
-    {"lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim"},
-    {"liuchengxu/vista.vim", cmd = "Vista"},
-    "lukas-reineke/indent-blankline.nvim",
-    "mhinz/vim-startify",
-    "norcalli/nvim-colorizer.lua",
-    "nvim-lua/lsp-status.nvim",
-    "onsails/lspkind-nvim",
-    "rktjmp/lush.nvim",
-    "romainl/vim-qf",
-    {"voldikss/vim-floaterm", cmd = "FloaterNew"},
+    config = "require('ngs.pkg.icons')"
   }
 
-  -- Notes and prose
   use {
-    {"junegunn/limelight.vim", cmd = "Limelight"},
-    {"junegunn/goyo.vim", cmd = "Goyo"},
-    {"reedes/vim-pencil", cmd = {"Pencil", "PencilToggle"}},
+    "folke/tokyonight.nvim",
+    config = function ()
+      vim.g.tokyonight_style = "night"
+      vim.cmd [[colorscheme tokyonight]]
+    end,
+  }
+
+  use {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = "require('todo-comments').setup()"
+  }
+
+  use {
+    "folke/trouble.nvim",
+    config = "require('trouble').setup()",
+  }
+
+  use {
+    "kyazdani42/nvim-tree.lua",
+    config = "require('ngs.pkg.tree')",
+  }
+
+  use {
+    "lewis6991/gitsigns.nvim",
+    requires = "nvim-lua/plenary.nvim",
+  }
+
+  use {
+    "liuchengxu/vista.vim",
+    cmd = "Vista",
+  }
+
+  use {
+    "lukas-reineke/indent-blankline.nvim",
+    config = "require('ngs.pkg.indent')",
+  }
+
+  use {
+    "mhinz/vim-startify",
+    config = "require('ngs.pkg.startify')",
+  }
+
+  use {
+    "norcalli/nvim-colorizer.lua",
+    config = "require('colorizer').setup()",
+  }
+
+  use {
+    "voldikss/vim-floaterm",
+    cmd = "FloaterNew",
   }
 
   -- Navigation
   use {
     "andymass/vim-matchup",
+    "ggandor/lightspeed.nvim",
     "justinmk/vim-dirvish",
     "tpope/vim-projectionist",
-    {"nvim-telescope/telescope.nvim", requires = {
-      {"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}}},
-    {"nvim-telescope/telescope-fzy-native.nvim",
-      run = "git submodule init && git submodule update",
-      config = function() require("telescope").load_extension("fzy_native") end},
+  }
+
+  use {
+    "nvim-telescope/telescope.nvim",
+    requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}},
+  }
+
+  use {
+    "nvim-telescope/telescope-fzy-native.nvim",
+    run = "git submodule init && git submodule update",
+    config = "require('telescope').load_extension('fzy_native')",
   }
 
   -- Code intelligence
   use {
     "neovim/nvim-lspconfig",
-    {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"},
-    "nvim-treesitter/playground",
+    config = "require('ngs.pkg.lsp')",
+  }
+
+  use "nvim-treesitter/playground"
+
+  use {
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
   }
 
   -- Completion and snippets
@@ -97,8 +146,6 @@ local function init()
 
   -- Tools
   use {
-    {"dstein64/vim-startuptime", opt = true},
-    {"janko/vim-test", cmd = {"TestNearest", "TestFile", "TestSuite", "TestLast", "TestVisit"}},
     "lukas-reineke/format.nvim",
     "tpope/vim-eunuch",
     "tpope/vim-fugitive",
@@ -106,16 +153,24 @@ local function init()
   }
 
   use {
-    "wincent/corpus", config = function ()
-      CorpusDirectories = {
-        ['~/Dropbox/Notes'] = {
-          autoreference = 1,
-          autotitle = 1,
-          base = './',
-          transform = 'local',
-        },
-      }
-    end
+    "mhartington/formatter.nvim",
+    config = "require('ngs.pkg.formatter')"
+  }
+
+  -- Notes and prose
+  use {
+    "folke/zen-mode.nvim",
+    cmd = "ZenMode",
+  }
+
+  use {
+    "reedes/vim-pencil",
+    cmd = {"PencilSoft", "PencilToggle"},
+  }
+
+  use {
+    "janko/vim-test",
+    cmd = {"TestNearest", "TestFile", "TestSuite", "TestLast", "TestVisit"},
   }
 
   return packer

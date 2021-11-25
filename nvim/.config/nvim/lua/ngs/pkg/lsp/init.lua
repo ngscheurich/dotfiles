@@ -43,7 +43,6 @@ end
 
 -- Servers to register with custom config
 local custom_servers = {
-    "diagnosticls",
     "elixirls",
     "haxe_language_server",
     "omnisharp",
@@ -52,7 +51,7 @@ local custom_servers = {
 }
 
 for _, server in ipairs(custom_servers) do
-    require("ngs.lspconfig.servers." .. server)(config)
+    require("ngs.pkg.lsp.servers." .. server)(config)
 end
 
 -- Format on save for servers that support it

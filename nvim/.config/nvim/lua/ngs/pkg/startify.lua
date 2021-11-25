@@ -1,40 +1,3 @@
-require("nvim-web-devicons").setup({
-  override = {
-    dirvish  = {icon = ""},
-    zsh      = {icon = ""},
-    quickfix = {icon = ""},
-    erlang   = {color = "#A1022B"},
-    NvimTree = {icon = ""},
-    text     = {icon = ""},
-  },
-})
-
-require("gitsigns").setup({
-  signs = {
-    add          = {text = '┃'},
-    change       = {text = '┃'},
-    delete       = {text = '┃'},
-    topdelete    = {text = '┃'},
-    changedelete = {text = '┃'},
-  },
-  keymaps = {},
-})
-
-require("lspkind").init({
-  symbol_map = {
-    Constant = "π",
-    Function = "",
-  },
-})
-
-vim.g.indent_blankline_enabled = false
-vim.g.indent_blankline_use_treesitter = true
-vim.g.indent_blankline_char = "│"
-
-require("trouble").setup()
-
-require("todo-comments").setup()
-
 vim.g.startify_files_number        = 5
 vim.g.startify_bookmarks           = {}
 vim.g.startify_session_persistence = 1
@@ -56,5 +19,3 @@ local header = {
 }
 
 vim.g.startify_custom_header = header
-
-require("colorizer").setup()
