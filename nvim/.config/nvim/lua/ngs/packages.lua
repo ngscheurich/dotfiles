@@ -39,7 +39,6 @@ local function init()
     "MaxMEllon/vim-jsx-pretty",
     "othree/html5.vim",
     "pangloss/vim-javascript",
-    "plasticboy/vim-markdown",
     "rust-lang/rust.vim",
   }
 
@@ -153,6 +152,11 @@ local function init()
   }
 
   use {
+    "janko/vim-test",
+    cmd = {"TestNearest", "TestFile", "TestSuite", "TestLast", "TestVisit"},
+  }
+
+  use {
     "mhartington/formatter.nvim",
     config = "require('ngs.pkg.formatter')"
   }
@@ -169,8 +173,9 @@ local function init()
   }
 
   use {
-    "janko/vim-test",
-    cmd = {"TestNearest", "TestFile", "TestSuite", "TestLast", "TestVisit"},
+    "vimwiki/vimwiki",
+    cmd = "VimwikiIndex",
+    setup = "require('ngs.pkg.vimwiki')",
   }
 
   return packer
