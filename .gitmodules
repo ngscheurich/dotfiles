@@ -1,0 +1,9 @@
+[submodule "nvim/.config/nvim/pack/ngs/start/conjure"]
+	path = nvim/.config/nvim/pack/ngs/start/conjure
+	url = https://github.com/Olical/conjure
+[submodule "nvim/.config/nvim/pack/ngs/start/fennel.vim"]
+	path = nvim/.config/nvim/pack/ngs/start/fennel.vim
+	url = https://github.com/bakpakin/fennel.vim
+[submodule "nvim/.config/nvim/pack/ngs/start/aniseed"]
+	path = nvim/.config/nvim/pack/ngs/start/aniseed
+	url = https://github.com/Olical/aniseed
