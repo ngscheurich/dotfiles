@@ -26,8 +26,9 @@
   (use :wbthomason/packer.nvim)
 
   ;; Editing
-  (use :b3nj5m1n/kommentary)
   (use :junegunn/vim-easy-align)
+  (use :numToStr/Comment.nvim
+       :config "require('Comment').setup()")
   (use :tpope/vim-repeat)
   (use :tpope/vim-speeddating)
   (use :tpope/vim-surround)
