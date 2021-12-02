@@ -48,6 +48,8 @@
        :module :indent)
   (use :norcalli/nvim-colorizer.lua
        :config "require('colorizer').setup()")
+  (use :https://gitlab.com/yorickpeterse/nvim-pqf.git
+       :config "require('pqf').setup()")
 
   ;; Navigation
   (use :andymass/vim-matchup)
