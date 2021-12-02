@@ -42,6 +42,9 @@
                  (vim.cmd "colorscheme tokyonight")))
   (use :folke/todo-comments.nvim
        :require [:nvim-lua/plenary.nvim])
+  (use :nvim-lualine/lualine.nvim
+       :requires [:kyazdani42/nvim-web-devicons]
+       :module :lualine)
   (use :kyazdani42/nvim-web-devicons
        :module :icons)
   (use :lukas-reineke/indent-blankline.nvim
