@@ -27,6 +27,7 @@
     astyle
     awscli
     aws-vault
+    autoconf
     bat
     cocoapods
     ctags
