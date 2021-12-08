@@ -28,7 +28,7 @@
                :tsserver
                :vimls]]
   (each [_ server (ipairs servers)]
-    (let [(ok? func) (pcall require (.. :config.package.lsp. server))]
+    (let [(ok? func) (pcall require (.. :config.plugin.lsp. server))]
       (if ok?
         (func config)
         ((. (. lspconfig server) :setup) config)))))
