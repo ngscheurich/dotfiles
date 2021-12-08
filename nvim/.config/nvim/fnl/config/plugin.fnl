@@ -78,6 +78,7 @@
   (use :MaxMEllon/vim-jsx-pretty)
   (use :calviken/vim-gdscript3)
   (use :cespare/vim-toml)
+  (use :dag/vim-fish)
   (use :elixir-editors/vim-elixir)
   (use :ericpruitt/tmux.vim)
   (use :euclidianAce/BetterLua.vim)
