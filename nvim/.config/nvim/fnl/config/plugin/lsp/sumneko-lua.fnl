@@ -1,4 +1,4 @@
-(module config.package.lsp.sumneko-lua
+(module config.plugin.lsp.sumneko-lua
   {autoload {lspconfig lspconfig}})
 
 (fn setup [config]

@@ -1,4 +1,4 @@
-(module config.package.lualine
+(module config.plugin.lualine
   {autoload {ll lualine}})
 
 (ll.setup
@@ -11,6 +11,6 @@
               :lualine_c [[:filename {:colored false}]]
               :lualine_x []
               :lualine_y [[:diagnostics {:sources [:nvim_lsp]}] :filetype]
-              :lualine_z ["%l  : %c ☰ %p%%"]}
+              :lualine_z ["%l  %c ☰ %p%%"]}
 
    :extensions [:quickfix :nvim-tree]})

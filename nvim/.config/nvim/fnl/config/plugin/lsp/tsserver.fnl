@@ -1,4 +1,4 @@
-(module config.package.lsp.tsserver
+(module config.plugin.lsp.tsserver
   {autoload {lspconfig lspconfig}})
 
 (fn setup [config]

@@ -1,4 +1,4 @@
-(module config.package.telescope
+(module config.plugin.telescope
   {autoload {u config.util}})
 
 (u.nnoremap :<Leader>ff "<Cmd>Telescope find_files<CR>")

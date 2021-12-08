@@ -6,7 +6,7 @@
   (match [key val]
     (where [:module mod]
            (= :string (type mod)))
-    [:config (.. "require('config.package." (.. mod "')"))]
+    [:config (.. "require('config.plugin." (.. mod "')"))]
     _
     [key val]))
 
@@ -41,7 +41,7 @@
                  (set vim.g.tokyonight_style :night)
                  (vim.cmd "colorscheme tokyonight")))
   (use :folke/todo-comments.nvim
-       :require [:nvim-lua/plenary.nvim])
+       :requires [:nvim-lua/plenary.nvim])
   (use :nvim-lualine/lualine.nvim
        :requires [:kyazdani42/nvim-web-devicons]
        :module :lualine)
@@ -51,6 +51,8 @@
        :module :indent)
   (use :norcalli/nvim-colorizer.lua
        :config "require('colorizer').setup()")
+  (use :yamatsum/nvim-nonicons
+       :requires [:kyazdani42/nvim-web-devicons])
   (use :https://gitlab.com/yorickpeterse/nvim-pqf.git
        :config "require('pqf').setup()")
 
@@ -118,7 +120,8 @@
   (use :Olical/aniseed)
   (use :Olical/conjure)
   (use :janko/vim-test
-       :cmd [:TestFile :TestLast :TestNearest :TestSuite :TestVisit])
+       :cmd [:TestFile :TestLast :TestNearest :TestSuite :TestVisit]
+       :module :test)
   (use :mhartington/formatter.nvim
        :module :formatter)
   (use :tpope/vim-abolish)

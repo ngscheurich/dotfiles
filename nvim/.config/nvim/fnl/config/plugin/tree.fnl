@@ -2,11 +2,12 @@
   {autoload {tree nvim-tree
              u config.util}})
 
-; (set vim.g.nvim_tree_icons {:git {:unstaged :
-;                                  :staged    :
-;                                  :unmerged  :
-;                                  :renamed   :
-;                                  :untracked : }})
+(set vim.g.nvim_tree_icons
+     {:git {:unstaged ""
+            :staged    ""
+            :unmerged  ""
+            :renamed   ""
+            :untracked "" }})
 
 (tree.setup
   {:update_to_buf_dir {:enable false}

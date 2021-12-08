@@ -6,4 +6,4 @@
 (require :config.core.mapping)
 (require :config.core.provider)
 (require :config.core.signs)
-(require :config.package)
+(require :config.plugin)
