@@ -32,7 +32,6 @@
     cocoapods
     ctags
     curl
-    dasht
     diff-so-fancy
     direnv
     elixir_ls
