@@ -15,7 +15,6 @@
     aws-vault
     autoconf
     bat
-    cocoapods
     ctags
     curl
     diff-so-fancy

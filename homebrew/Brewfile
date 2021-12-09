@@ -3,6 +3,7 @@ tap "homebrew/cask"
 tap "homebrew/core"
 tap "homebrew/services"
 
+brew "cocoapods"
 brew "mas"
 brew "shpotify"
 brew "trash"
