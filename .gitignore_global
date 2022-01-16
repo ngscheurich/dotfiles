@@ -1,0 +1,78 @@
+# Global gitignore rules
+#
+# Based on https://gist.github.com/octocat/9257657
+#
+# Authors:
+#   The Octocat <octocat@github.com>
+#   N. G. Scheurich <nick@scheurich.me>
+#
+# URL: https://github.com/ngscheurich/dotfiles
+
+# Compiled source
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Packages
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.swp
+*.swo
+*~
+
+# Tags
+tags
+
+# Project notes
+TODO
+NOTES
+TODO.md
+NOTES.md
+.notes.md
+.notes
+
+# Vim
+.netrwhist
+Session.vim
+
+# Secrets
+.env
+.env.production
+.envrc
+
+# Reference files
+*.sketch
+
+# Elixir LS caches
+.elixir_ls
+
+# Projectionist configs
+.projections.json
+
+# Elixir project lab modules
+__lab__.ex

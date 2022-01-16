@@ -1,0 +1,55 @@
+format = """
+$username\
+$hostname\
+$directory\
+$sudo\
+$cmd_duration\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$fill\
+$elixir\
+$nodejs\
+$lua\
+$time\
+$battery\
+$line_break\
+$jobs\
+$status\
+$character"""
+
+[aws]
+disabled = true
+
+[elixir]
+format = '[$symbol($version \(OTP $otp_version\) )]($style)'
+style= "purple"
+symbol = " "
+
+[hostname]
+ssh_only = true
+
+[fill]
+symbol = " "
+
+[lua]
+format = "[$symbol($version )]($style)"
+style = "blue"
+symbol = "  "
+
+[nodejs]
+format = "[$symbol($version )]($style)"
+style = "green"
+symbol = " "
+
+[status]
+disabled = false
+symbol = "✖ "
+
+[time]
+disabled = false
+format = "[$time]($style) "
+style = "bright-black"
+time_format = "%R"
