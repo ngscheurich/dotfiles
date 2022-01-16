@@ -47,4 +47,3 @@ SETUVAR fish_pager_color_prefix:normal\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
 SETUVAR fish_user_paths:/opt/homebrew/bin
 SETUVAR fisher_path:/Users/nick/\x2elocal/share/fish/fisher
-SETUVAR open_weather_api_key:34b92fa552905fc08244ef915424399e
