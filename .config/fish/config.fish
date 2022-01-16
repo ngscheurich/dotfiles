@@ -46,4 +46,8 @@ alias vboxls "VBoxManage list runningvms"
 alias vimdiff "nvim -d"
 alias weather "curl wttr.in"
 
+if test -f secrets.fish
+    source secrets.fish
+end
+
 starship init fish | source
