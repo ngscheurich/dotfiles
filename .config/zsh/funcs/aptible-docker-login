@@ -1,0 +1,7 @@
+aptible login
+aws-vault exec naveon -- \
+  aws ecr get-login-password --region us-east-1 \
+| docker login --username AWS \
+  --password-stdin 925810121934.dkr.ecr.us-east-1.amazonaws.com
+
+# vim: ft=zsh

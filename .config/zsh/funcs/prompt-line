@@ -1,0 +1,23 @@
+# Usage: prompt-line LEFT RIGHT
+#
+# Prints LEFT<spaces>RIGHT with enough spaces in the middle
+# to fill a terminal line.
+#
+# See: https://gist.github.com/romkatv/2a107ef9314f0d5f76563725b42f7cab
+
+emulate -L zsh
+
+
+local line
+local -i left_len=$(prompt-length $1)
+local -i right_len=$(prompt-length $2 9999)
+local -i pad_len=$((COLUMNS - left_len - right_len - ${ZLE_RPROMPT_INDENT:-1}))
+
+if (( pad_len < 1 )); then
+  echo $1
+else
+  local pad=${(pl.$pad_len.. .)} 
+  echo ${1}${pad}${2}
+fi
+
+# vim: ft=zsh

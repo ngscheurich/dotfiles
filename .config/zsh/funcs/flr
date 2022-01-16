@@ -1,0 +1,19 @@
+# Remove one or more versions of an asdf language.
+#
+# See: https://github.com/junegunn/fzf/wiki/Examples#asdf
+
+local lang=${1}
+
+if [[ ! $lang ]]; then
+  lang=$(asdf plugin-list | fzf)
+fi
+
+if [[ $lang ]]; then
+  local versions=$(asdf list $lang | fzf -m)
+  if [[ $versions ]]; then
+    for version in $(echo $versions);
+    do; asdf uninstall $lang $version; done;
+  fi
+fi
+
+# vim: ft=zsh

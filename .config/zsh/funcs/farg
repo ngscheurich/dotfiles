@@ -1,0 +1,8 @@
+# Use fd and fzf to pick the arg to a command.
+#
+# See: https://github.com/junegunn/fzf/wiki/Examples#general
+
+sels=( "${(@f)$(fd "${fd_default[@]}" "${@:2}"| fzf)}" )
+test -n "$sels" && print -z -- "$1 ${sels[@]:q:q}"
+
+# vim: ft=zsh
