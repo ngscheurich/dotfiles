@@ -53,4 +53,5 @@ if test -f $__fish_config_dir/secrets.fish
     source $__fish_config_dir/secrets.fish
 end
 
+source $__fish_config_dir/colors.fish
 starship init fish | source
