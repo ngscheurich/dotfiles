@@ -17,6 +17,9 @@
   ];
 
   homebrew.brews = [
+    "awscli"
+    "lunchy"
+    "postgresql"
     "shpotify"
     "trash"    
   ];
@@ -40,6 +43,7 @@
     "daisydisk"
     "dash"
     "discord"
+    "docker"
     "dropbox"
     "epic-games"
     "fantastical"
