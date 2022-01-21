@@ -31,6 +31,8 @@ fish_add_path /opt/homebrew/bin/
 fish_add_path /usr/local/sbin
 
 alias dot "git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
+alias fishconfig "$VISUAL $__fish_config_dir/config.fish"
+alias fishsource "source $__fish_config_dir/config.fish"
 alias l "exa"
 alias ls "exa"
 alias ll "exa --long"
