@@ -24,6 +24,7 @@ $character"""
 disabled = true
 
 [elixir]
+disabled = true
 format = '[$symbol($version \(OTP $otp_version\) )]($style)'
 style= "purple"
 symbol = " "
