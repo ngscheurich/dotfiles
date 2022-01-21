@@ -46,7 +46,7 @@ symbol = " "
 
 [status]
 disabled = false
-symbol = "✖ "
+symbol = ""
 
 [time]
 disabled = false
