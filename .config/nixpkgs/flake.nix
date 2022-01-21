@@ -9,17 +9,14 @@
 
     home-manager.url = github:nix-community/home-manager;
     home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
-
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
-  outputs = { self, darwin, home-manager, neovim-nightly-overlay, ... }:
+  outputs = { self, darwin, home-manager ... }:
   let
     inherit (darwin.lib) darwinSystem;
 
     nixpkgsConfig = {
       config = { allowUnfree = true; };
-      overlays = [ neovim-nightly-overlay.overlay ];
     };
   in
   {
