@@ -110,6 +110,7 @@
   (use :tpope/vim-fugitive)
 
   ;; Notes & Prose
+  (use :dhruvasagar/vim-table-mode)
   (use :folke/zen-mode.nvim
        :cmd :ZenMode)
   (use :reedes/vim-pencil
