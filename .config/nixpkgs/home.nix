@@ -15,6 +15,7 @@
       bat
       ctags
       curl
+      ddgr
       diff-so-fancy
       direnv
       elixir_ls
@@ -30,11 +31,13 @@
       gnupg
       htop
       httpie
+      imagemagick
       jq
       lazygit
       libressl
       neofetch
       neovim
+      ngrok
       ranger
       ripgrep
       shellcheck
