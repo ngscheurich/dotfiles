@@ -30,7 +30,7 @@ fish_add_path $HOME/go/bin
 fish_add_path /opt/homebrew/bin/
 fish_add_path /usr/local/sbin
 
-alias dotfiles="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
+alias dot "git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias l "exa"
 alias ls "exa"
 alias ll "exa --long"
