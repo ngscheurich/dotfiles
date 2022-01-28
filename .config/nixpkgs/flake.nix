@@ -11,7 +11,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 
-  outputs = { self, darwin, home-manager ... }:
+  outputs = { self, darwin, home-manager, ... }:
   let
     inherit (darwin.lib) darwinSystem;
 
