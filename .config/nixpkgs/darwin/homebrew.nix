@@ -14,10 +14,12 @@
     "homebrew/cask"
     "homebrew/core"
     "homebrew/services"
+    "adoptopenjdk/openjdk"
   ];
 
   homebrew.brews = [
     "awscli"
+    "cocoapods"
     "lunchy"
     "postgresql"
     "shpotify"
@@ -25,6 +27,7 @@
   ];
 
   homebrew.casks = [
+    "adoptopenjdk8"
     "1password"
     "1password-cli"
     "ableton-live-lite"
