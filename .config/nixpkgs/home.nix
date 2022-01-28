@@ -7,6 +7,7 @@
   programs.direnv.nix-direnv.enable = true;
 
   home.packages = with pkgs; [
+      ack
       asciinema
       asdf-vm
       astyle
