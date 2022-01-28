@@ -48,7 +48,9 @@
         (server-setup config)
         ((. lspconfig server :setup) config)))))
 
-(nls.setup {:sources [nls.builtins.formatting.prettier
-                      nls.builtins.formatting.eslint]
+(nls.setup {:sources [nls.builtins.formatting.prettierd
+                      nls.builtins.formatting.eslint_d
+                      nls.builtins.diagnostics.eslint_d
+                      ]
             :on_attach (fn [client]
                          (add-format-autocmd client))})
