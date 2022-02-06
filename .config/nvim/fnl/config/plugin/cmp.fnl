@@ -25,7 +25,7 @@
 
 (defn- do-tab [fallback]
   (if (cmp.visible) (cmp.select_next_item)
-      (snip.expand_or_jumpable) (snip.expand_or_jump)
+      (snip.expand_or_locally_jumpable) (snip.expand_or_jump)
       (has-words-before) (cmp.complete)
       (fallback)))
 
