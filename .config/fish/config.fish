@@ -1,5 +1,26 @@
 if status is-interactive
-    # Commands to run in interactive sessions can go here
+    fish_hybrid_key_bindings
+    fish_fzy_key_bindings
+
+    abbr -ag lg lazygit
+
+    alias cls clear
+    alias dot "git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
+    alias fishconfig "$EDITOR $__fish_config_dir/config.fish"
+    alias fishsource "source $__fish_config_dir/config.fish"
+    alias l exa
+    alias ls exa
+    alias ll "exa --long"
+    alias la "exa --long --all"
+    alias lt "exa --tree"
+    alias love /Applications/love.app/Contents/MacOS/love
+    alias pico8 /Applications/PICO-8.app/Contents/MacOS/pico8
+    alias serve "python -m http.server"
+    alias ta "tmux attach"
+    alias tn "tmuxdir"
+    alias vboxls "VBoxManage list runningvms"
+    alias vimdiff "nvim -d"
+    alias weather "curl wttr.in"
 end
 
 function fish_greeting
@@ -31,23 +52,6 @@ fish_add_path $HOME/go/bin
 fish_add_path /opt/homebrew/bin/
 fish_add_path /usr/local/sbin
 
-alias dot "git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
-alias fishconfig "$VISUAL $__fish_config_dir/config.fish"
-alias fishsource "source $__fish_config_dir/config.fish"
-alias l "exa"
-alias ls "exa"
-alias ll "exa --long"
-alias la "exa --long --all"
-alias lt "exa --tree"
-alias lg "lazygit"
-alias love "/Applications/love.app/Contents/MacOS/love"
-alias pico8 "/Applications/PICO-8.app/Contents/MacOS/pico8"
-alias serve "python -m http.server"
-alias ta "tmux attach"
-alias tn "tmuxdir"
-alias vboxls "VBoxManage list runningvms"
-alias vimdiff "nvim -d"
-alias weather "curl wttr.in"
 
 if test -f $__fish_config_dir/secrets.fish
     source $__fish_config_dir/secrets.fish
