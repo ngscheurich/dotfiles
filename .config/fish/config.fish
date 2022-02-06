@@ -29,7 +29,7 @@ end
 set -gx ANDROID_HOME $HOME/Library/Android/sdk
 set -gx AWS_VAULT_KEYCHAIN_NAME login
 set -gx BROWSER open
-set -gx EDITOR "nvim"
+set -gx EDITOR nvim
 set -gx ERL_AFLAGS "-kernel shell_history enabled"
 set -gx JAVA_HOME /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
 set -gx KERL_CONFIGURE_OPTIONS --without-javac
