@@ -36,9 +36,11 @@
       jq
       lazygit
       libressl
+      mkcert
       neofetch
       neovim
       ngrok
+      nss
       ranger
       ripgrep
       shellcheck
