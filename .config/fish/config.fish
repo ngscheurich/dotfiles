@@ -26,8 +26,6 @@ end
 function fish_greeting
 end
 
-fish_hybrid_key_bindings
-
 set -gx ANDROID_HOME $HOME/Library/Android/sdk
 set -gx AWS_VAULT_KEYCHAIN_NAME login
 set -gx BROWSER open
