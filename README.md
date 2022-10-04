@@ -1,3 +1,7 @@
+🚧 Moved to https://github.com/ngscheurich/system
+
+---
+
 # Dotfiles
 
 These are my dotfiles. I use a [bare Git repo] and [Nix] to manage them and
