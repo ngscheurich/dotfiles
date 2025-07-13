@@ -1,0 +1,28 @@
+adjust-cell-height = 20%
+
+font-family = MonoLisa Custom
+font-size = 11
+font-synthetic-style = no-bold,no-italic
+
+keybind = cmd+f=text:\x13f
+keybind = cmd+p=text:\x13e
+keybind = cmd+left=text:\x13h
+keybind = cmd+down=text:\x13j
+keybind = cmd+up=text:\x13k
+keybind = cmd+right=text:\x13l
+keybind = cmd+1=text:\x131
+keybind = cmd+2=text:\x132
+keybind = cmd+3=text:\x133
+keybind = cmd+4=text:\x134
+keybind = cmd+5=text:\x135
+keybind = cmd+6=text:\x136
+keybind = cmd+7=text:\x137
+keybind = cmd+8=text:\x138
+keybind = cmd+9=text:\x139
+
+window-padding-x = 8
+window-padding-y = 8
+
+macos-option-as-alt = true
+
+config-file = ?~/.theme/ghostty

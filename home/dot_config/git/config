@@ -1,0 +1,39 @@
+[user]
+	name = N. G. Scheurich
+	email = nick@scheurich.me
+	signingKey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBzHyqJW+HIsWjMesMW/i6QPHaaQ9UsUIoONMH9yqPjN
+[core]
+  editor = nvim
+	excludesfile = ~/.config/git/ignore
+[init]
+	defaultBranch = main
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = ~/.config/git/allowed_signers
+[tag]
+	gpgsign = true
+[commit]
+	gpgsign = true
+[diff]
+	external = difft
+  tool = vimdiff
+[merge]
+  conflictstyle = diff3
+  tool = vimdiff
+  prompt = false
+[alias]
+  amend = commit --amend --message
+  br = branch
+  ci = commit
+  co = checkout
+  d = diff
+  dl = log -p --ext-diff
+  ds = show --ext-diff
+  fixup = commit --fixup
+  pub = push --set-upstream origin HEAD
+  rb = rebase
+  rba = rebase --abort
+  rbc = rebase --continue
+  st = status
+  unstage = reset --soft HEAD^

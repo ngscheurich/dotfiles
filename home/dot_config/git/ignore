@@ -1,0 +1,76 @@
+# Compiled source
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Packages
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and databases
+*.log
+*.sqlite
+
+# OS-generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.swp
+*.swo
+*~
+
+# Tags
+tags
+
+# Project notes
+TODO.md
+TODO.org
+NOTES.md
+NOTES.org
+
+# Vim
+.netrwhist
+Session.vim
+
+# Emacs
+.dir-locals.el
+
+# Secrets
+.env
+.env.staging
+.env.production
+
+# Elixir
+.lexical
+__scratch__.ex
+
+# Projections
+.projections.json
+
+# Miscellaneous project files
+requests.http
+.sqllsrc.json
+
+# direnv caches
+.direnv/
+
+# Local tmux configs
+.tmux.local.conf
+
+# Aider
+.aider*
