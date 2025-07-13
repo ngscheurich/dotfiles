@@ -1,0 +1,7 @@
+{{ if ne .chezmoi.os "darwin" }}
+.chezmoiscripts/darwin/**
+.config/homebrew
+.config/karabiner
+{{ end }}
+
+.config/zsh/.zcompdump

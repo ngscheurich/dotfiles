@@ -1,0 +1,37 @@
+syntax enable
+
+colorscheme habamax
+
+let g:loaded_netrwPlugin      = 0
+let g:loaded_python_provider  = 0
+let g:loaded_python3_provider = 0
+let g:loaded_ruby_provider    = 0
+let g:loaded_node_provider    = 0
+let g:loaded_perl_provider    = 0
+
+set cursorline
+set expandtab
+set fillchars+=vert:│
+set foldlevel=99
+set foldmethod=indent
+set grepprg=rg\ --vimgrep
+set hidden
+set ignorecase
+set laststatus=2
+set modeline
+set noshowmode
+set noswapfile
+set number
+set scrolloff=10
+set shiftwidth=2
+set shortmess+=c
+set signcolumn=yes
+set smartcase
+set smartindent
+set softtabstop=2
+set splitbelow
+set splitright
+set tabstop=2
+set termguicolors
+set undofile
+set updatetime=1000
