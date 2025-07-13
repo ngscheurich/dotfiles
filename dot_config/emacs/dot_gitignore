@@ -1,0 +1,7 @@
+/.cache/
+/eln-cache/
+/elpa/
+/eshell/
+/transient/
+/tree-sitter/
+/var/
