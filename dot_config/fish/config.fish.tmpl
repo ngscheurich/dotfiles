@@ -5,8 +5,24 @@ set -g fish_key_bindings fish_hybrid_key_bindings
 set -g fish_greeting
 
 # Export global environment variables
-{{- range $key, $val := .envVars }}
-set -gx {{ $key }} {{ $val }}
+set -gx BROWSER "open"
+set -gx EDITOR "nvim"
+set -gx ERL_AFLAGS '-kernel shell_history = "enabled"'
+set -gx GPG_TTY "(tty)"
+set -gx KERL_CONFIGURE_OPTIONS "--without-javac"
+set -gx XDG_CACHE_HOME "$HOME/.cache"
+set -gx XDG_CONFIG_HOME "$HOME/.config"
+set -gx XDG_DATA_HOME "$HOME/.local/share"
+
+{{- if eq .chezmoi.os "darwin" }}
+set -gx HOMEBREW_BUNDLE_FILE_GLOBAL "$XDG_CONFIG_HOME/homebrew/Brewfile"
+set -gx HOMEBREW_BUNDLE_NO_UPGRADE true
+set -gx HOMEBREW_CELLAR "/opt/homebrew/Cellar"
+set -gx HOMEBREW_NO_AUTO_UPDATE true
+set -gx HOMEBREW_PREFIX "/opt/homebrew"
+set -gx HOMEBREW_REPOSITORY "/opt/homebrew"
+set -gx PLAYDATE_SDK_PATH "$HOME/Developer/PlaydateSDK/"
+set -gx SSH_AUTH_SOCK '$HOME/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock'
 {{- end }}
 
 # Set up Homebrew

@@ -6,24 +6,3 @@ args = [
   {{ printf "%q" "{{ .Source }}" }},
   {{ printf "%q" "{{ .Target }}" }},
 ]
-
-[data.envVars]
-BROWSER = "open"
-EDITOR = "nvim"
-ERL_AFLAGS = "'-kernel shell_history = \"enabled\"'"
-GPG_TTY = "(tty)"
-KERL_CONFIGURE_OPTIONS = "--without-javac"
-XDG_CACHE_HOME = "$HOME/.cache"
-XDG_CONFIG_HOME = "$HOME/.config"
-XDG_DATA_HOME = "$HOME/.local/share"
-
-{{- if eq .chezmoi.os "darwin" }}
-HOMEBREW_BUNDLE_FILE_GLOBAL = "$XDG_CONFIG_HOME/homebrew/Brewfile"
-HOMEBREW_BUNDLE_NO_UPGRADE = true
-HOMEBREW_CELLAR = "/opt/homebrew/Cellar"
-HOMEBREW_NO_AUTO_UPDATE = true
-HOMEBREW_PREFIX = "/opt/homebrew"
-HOMEBREW_REPOSITORY = "/opt/homebrew"
-PLAYDATE_SDK_PATH = "$HOME/Developer/PlaydateSDK/"
-SSH_AUTH_SOCK = '$HOME/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock'
-{{- end }}
