@@ -5,5 +5,6 @@
 if [ ! -d /opt/homebrew ]; then
   /bin/bash -c \
     "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  /opt/homebrew/bin/brew install 1password 1password-cli gum
+  export PATH="/opt/homebrew/bin:$PATH"
+  brew install 1password 1password-cli gum
 fi
