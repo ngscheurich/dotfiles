@@ -4,28 +4,17 @@ set -g fish_key_bindings fish_hybrid_key_bindings
 # Suppress greeing message
 set -g fish_greeting
 
+# Export global environment variables
+{{- range $key, $val := .envVars }}
+set -gx {{ $key }} {{ $val }}
+{{- end }}
+
 # Set up Homebrew
-set -gx HOMEBREW_PREFIX "/opt/homebrew";
-set -gx HOMEBREW_CELLAR "/opt/homebrew/Cellar";
-set -gx HOMEBREW_NO_AUTO_UPDATE true
-set -gx HOMEBREW_REPOSITORY "/opt/homebrew";
 fish_add_path -gmp "/opt/homebrew/bin" "/opt/homebrew/sbin";
 if test -n "$MANPATH[1]"; set -gx MANPATH '' $MANPATH; end;
 if not contains "/opt/homebrew/share/info" $INFOPATH
   set -gx INFOPATH "/opt/homebrew/share/info" $INFOPATH
 end
-
-# Export global environment variables
-set -gx BROWSER open
-set -gx EDITOR nvim
-set -gx ERL_AFLAGS '-kernel shell_history enabled'
-set -gx GPG_TTY (tty)
-set -gx KERL_CONFIGURE_OPTIONS --without-javac
-set -gx PLAYDATE_SDK_PATH $HOME/Developer/PlaydateSDK/
-set -gx SCRIPTS_DIR /etc/system/scripts
-set -gx XDG_CACHE_HOME $HOME/.cache
-set -gx XDG_CONFIG_HOME $HOME/.config
-set -gx XDG_DATA_HOME $HOME/.local/share
 
 # Add directories to path
 fish_add_path -gmp "$HOME/.local/bin"

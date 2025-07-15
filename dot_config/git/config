@@ -17,6 +17,11 @@
 	gpgsign = true
 [diff]
 	external = difft
+  tool = vimdiff
+[merge]
+  conflictstyle = diff3
+  tool = vimdiff
+  prompt = false
 [alias]
   amend = commit --amend --message
   br = branch
