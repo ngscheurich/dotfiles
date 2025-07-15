@@ -6,7 +6,7 @@ RESET="\033[0m"
 LOCAL_BIN="$HOME/.local/bin"
 
 log() {
-  echo -e "${BOLD}${BLUE}$1 $2${RESET}"
+  echo -e "${BOLD}${BLUE}$1${RESET}"
 }
 
 # Install chezmoi if necessary
