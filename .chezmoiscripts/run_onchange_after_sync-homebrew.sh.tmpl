@@ -5,6 +5,8 @@
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
+HOMEBREW_BUNDLE_FILE_GLOBAL="$XDG_CONFIG_HOME/homebrew/Brewfile"
+
 if [ -n "${DEBUG_SCRIPTS+x}" ] && [ "$DEBUG_SCRIPTS" -eq 1 ]; then
   set -v
 fi
