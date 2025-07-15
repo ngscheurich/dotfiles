@@ -3,6 +3,8 @@
 # Synchronize machine state with Brewfile
 # Brewfile hash: {{ include "dot_config/homebrew/Brewfile.tmpl" | sha256sum }}
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 if [ -n "${DEBUG_SCRIPTS+x}" ] && [ "$DEBUG_SCRIPTS" -eq 1 ]; then
   set -v
 fi
