@@ -28,9 +28,9 @@ else
 fi
 
 # Install chezmoi template dependencies
-log "🍻 Installing chezmoi template dependencies..."
+msg "🍻 Installing chezmoi template dependencies..."
 brew install 1password 1password-cli gum
 
 # Initialize and apply chezmoi local state
-log "🎒 Initializing dotfiles..."
+msg "🎒 Initializing dotfiles..."
 "$LOCAL_BIN/chezmoi" init --apply ngscheurich
