@@ -13,11 +13,12 @@ fi
 
 run() {
   INSTALL_RESULT="$(brew bundle install --global | grep '^Installing')"
-  CLEANUP_RESULT="$(brew bundle cleanup --global --force)"
 
   if [ -n "$INSTALL_RESULT" ]; then
     echo "$INSTALL_RESULT" | gum style --foreground 2
   fi
+
+  CLEANUP_RESULT="$(brew bundle cleanup --global --force)"
 
   if [ -n "$CLEANUP_RESULT" ]; then
     echo "$CLEANUP_RESULT" | gum style --foreground 1
