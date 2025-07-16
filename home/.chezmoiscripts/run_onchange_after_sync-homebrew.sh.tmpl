@@ -5,6 +5,8 @@
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
+echo $PATH
+
 BUNDLE_FILE="$HOME/.config/homebrew/Brewfile"
 
 if [ -n "${DEBUG_SCRIPTS+x}" ] && [ "$DEBUG_SCRIPTS" -eq 1 ]; then
