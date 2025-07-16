@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "tidewave": {
+      "args": [
+        "http://localhost:4000/tidewave/mcp"
+      ],
+      "command": "mcp-proxy",
+      "autoApprove": [
+        
+      ]
+    }
+  },
+  "nativeMCPServers": {
+    "neovim": {
+      "disabled": false
+    },
+    "mcphub": {
+      "disabled": false
+    }
+  }
+}
