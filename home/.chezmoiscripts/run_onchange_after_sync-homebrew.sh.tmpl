@@ -1,6 +1,6 @@
 #!/bin/sh
 # Synchronize machine state with Brewfile
-# Brewfile hash: {{ include "home/dot_config/homebrew/Brewfile.tmpl" | sha256sum }}
+# Brewfile hash: {{ include "dot_config/homebrew/Brewfile.tmpl" | sha256sum }}
 
 if [ -n "${DEBUG_SCRIPTS+x}" ] && [ "$DEBUG_SCRIPTS" -eq 1 ]; then
   set -ev
