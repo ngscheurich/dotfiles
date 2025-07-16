@@ -8,7 +8,7 @@ msg() {
   echo "${BOLD}[dotfiles] \033[$1m$2${RESET}"
 }
 
-# Install chezmoi if necessary
+# Install chezmoi
 if [ ! -f "$LOCAL_BIN/chezmoi" ]; then
   msg 34 "🏠 Installing chezmoi..."
   sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$LOCAL_BIN"
@@ -16,7 +16,7 @@ else
   msg 32 "🏠 Chezmoi detected ✓"
 fi
 
-# Install Homebrew if necessary
+# Install Homebrew
 if [ ! -d /opt/homebrew ]; then
   msg 34 "🍺 Installing Homebrew..."
   /bin/bash -c \
@@ -30,9 +30,13 @@ if [ ! -f /opt/homebrew/bin/gum ]; then
   msg 34 "🐚 Installing script dependencies..."
   /opt/homebrew/bin/brew install gum
 else
-  msg 32 "🐚 Script dependencies detected..."
+  msg 32 "🐚 Script dependencies detected ✓"
 fi
 
-# Initialize and apply chezmoi local state
-msg 34 "🎒 Initializing dotfiles..."
-"$LOCAL_BIN/chezmoi" init --apply ngscheurich
+# Initialize and apply chezmoi state
+if [ ! -d "$HOME/.local/share/chezmoi" ]; then
+  msg 34 "🎒 Initializing dotfiles..."
+  "$LOCAL_BIN/chezmoi" init --apply ngscheurich
+else
+  msg 32 "🎒 Dotfiles detected ✓"
+fi
