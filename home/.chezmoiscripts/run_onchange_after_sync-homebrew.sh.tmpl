@@ -1,30 +1,15 @@
 #!/bin/sh
-
 # Synchronize machine state with Brewfile
-# Brewfile hash: {{ include "dot_config/homebrew/Brewfile.tmpl" | sha256sum }}
-
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
-BUNDLE_FILE="$HOME/.config/homebrew/Brewfile"
+# Brewfile hash: {{ include "home/dot_config/homebrew/Brewfile.tmpl" | sha256sum }}
 
 if [ -n "${DEBUG_SCRIPTS+x}" ] && [ "$DEBUG_SCRIPTS" -eq 1 ]; then
-  set -v
+  set -ev
+else
+  set -e
 fi
 
-run() {
-  INSTALL_RESULT="$(brew bundle install --file $BUNDLE_FILE | grep '^Installing')"
+PATH="/opt/homebrew/bin:$PATH"
+BUNDLE_FILE="$HOME/.config/homebrew/Brewfile"
 
-  if [ -n "$INSTALL_RESULT" ]; then
-    echo "$INSTALL_RESULT" | gum style --foreground 2
-  fi
-
-  CLEANUP_RESULT="$(brew bundle cleanup --file $BUNDLE_FILE --force)"
-
-  if [ -n "$CLEANUP_RESULT" ]; then
-    echo "$CLEANUP_RESULT" | gum style --foreground 1
-  fi
-}
-
-export -f run
-
-gum spin --title "Syncing Brewfile..." -- sh -c run
+gum spin --title "Syncing Brewfile..." -- brew bundle install --file $BUNDLE_FILE
+brew bundle cleanup --file $BUNDLE_FILE --force

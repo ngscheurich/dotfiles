@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 LOCAL_BIN="$HOME/.local/bin"
 
 msg() {
