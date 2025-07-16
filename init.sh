@@ -25,9 +25,11 @@ else
   msg 32 "🍺 Homebrew detected ✓"
 fi
 
-# Install shell script dependencies
+# Install run script dependencies
 msg 34 "🐚 Installing script dependencies..."
-/opt/homebrew/bin/brew install gum
+if [ ! -f /opt/homebrew/bin/gum ]; then
+  /opt/homebrew/bin/brew install gum
+fi
 
 # Initialize and apply chezmoi local state
 msg 34 "🎒 Initializing dotfiles..."
