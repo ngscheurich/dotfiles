@@ -29,6 +29,8 @@ fi
 msg 34 "🐚 Installing script dependencies..."
 if [ ! -f /opt/homebrew/bin/gum ]; then
   /opt/homebrew/bin/brew install gum
+else
+  msg 32 "🐚 Script dependencies detected..."
 fi
 
 # Initialize and apply chezmoi local state
