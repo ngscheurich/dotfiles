@@ -26,8 +26,8 @@ else
 fi
 
 # Install run script dependencies
-msg 34 "🐚 Installing script dependencies..."
 if [ ! -f /opt/homebrew/bin/gum ]; then
+  msg 34 "🐚 Installing script dependencies..."
   /opt/homebrew/bin/brew install gum
 else
   msg 32 "🐚 Script dependencies detected..."
