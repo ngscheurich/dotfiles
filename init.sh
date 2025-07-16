@@ -21,14 +21,13 @@ if [ ! -d /opt/homebrew ]; then
   msg 34 "🍺 Installing Homebrew..."
   /bin/bash -c \
     "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  eval "$(/opt/homebrew/bin/brew shellenv)"
 else
   msg 32 "🍺 Homebrew detected ✓"
 fi
 
 # Install shell script dependencies
 msg 34 "🐚 Installing script dependencies..."
-brew install gum
+/opt/homebrew/bin/brew install gum
 
 # Initialize and apply chezmoi local state
 msg 34 "🎒 Initializing dotfiles..."
