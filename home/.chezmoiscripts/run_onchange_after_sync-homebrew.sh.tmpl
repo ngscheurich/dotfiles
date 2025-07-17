@@ -11,5 +11,14 @@ fi
 PATH="/opt/homebrew/bin:$PATH"
 BUNDLE_FILE="$HOME/.config/homebrew/Brewfile"
 
-gum spin --title "Syncing Brewfile..." -- brew bundle install --file $BUNDLE_FILE
-brew bundle cleanup --file $BUNDLE_FILE --force
+gum spin \
+  --title "Homebrew install..." \
+  --show-error \
+  --spinner.foreground="2" \
+  -- brew bundle install --file $BUNDLE_FILE
+
+gum spin \
+  --title "Homebrew cleanup..." \
+  --show-error \
+  --spinner.foreground="3" \
+  -- brew bundle cleanup --file $BUNDLE_FILE --force
