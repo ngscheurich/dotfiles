@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd("FileType", {
   group = ft_group,
   pattern = "codecompanion",
   callback = function()
-    vim.opt_local.winhighlight = "Normal:NormalDark"
+    vim.opt_local.winhighlight = "Normal:NormalAlt"
   end,
 })
 
@@ -26,6 +26,6 @@ vim.api.nvim_create_autocmd("TermOpen", {
   group = term_group,
   pattern = "*",
   callback = function()
-    vim.opt_local.winhighlight = "Normal:NormalDark"
+    vim.opt_local.winhighlight = "Normal:NormalAlt"
   end,
 })

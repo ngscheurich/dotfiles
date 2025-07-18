@@ -14,6 +14,15 @@ return {
 		bigfile = { enabled = true },
 
 		-- ===================================================================
+		--  bigfile (snacks.nvim)
+		-- -------------------------------------------------------------------
+		--  https://github.com/folke/snacks.nvim/blob/main/docs/bigfile.md
+		--  Deal with big files
+		--  misc
+		-- -------------------------------------------------------------------
+		explorer = { enabled = true },
+
+		-- ===================================================================
 		--  gitbrowse (snacks.nvim)
 		-- -------------------------------------------------------------------
 		--  https://github.com/folke/snacks.nvim/blob/main/docs/gitbrowse.md
@@ -148,6 +157,7 @@ return {
     { "grr", function() Snacks.picker.lsp_references() end, desc = "References" },
 
     -- Miscellaneous
+    { "<Leader>e", function() Snacks.explorer.open() end, desc = "Explorer (toggle)", },
   	{ "<Leader>gB", function() Snacks.gitbrowse() end, desc = "View on GitHub", },
 
   	{

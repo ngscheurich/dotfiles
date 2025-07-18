@@ -59,7 +59,7 @@ return {
             width = 0.3,
             opts = {
               number = false,
-              winhighlight = "Normal:NormalDark",
+              winhighlight = "Normal:NormalAlt",
             },
           },
         },

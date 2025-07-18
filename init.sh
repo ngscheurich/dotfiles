@@ -3,6 +3,7 @@
 set -e
 
 LOCAL_BIN="$HOME/.local/bin"
+HOMEBREW_BIN="/opt/homebrew/bin"
 
 msg() {
   local BOLD="\033[1m"
@@ -10,16 +11,8 @@ msg() {
   echo "${BOLD}[dotfiles] \033[$1m$2${RESET}"
 }
 
-# Install chezmoi
-if [ ! -f "$LOCAL_BIN/chezmoi" ]; then
-  msg 34 "🏠 Installing chezmoi..."
-  sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$LOCAL_BIN"
-else
-  msg 32 "🏠 Chezmoi detected ✓"
-fi
-
 # Install Homebrew
-if [ ! -d /opt/homebrew ]; then
+if [ ! -d "$HOMEBREW_BIN" ]; then
   msg 34 "🍺 Installing Homebrew..."
   /bin/bash -c \
     "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -29,10 +22,26 @@ fi
 
 # Install run script dependencies
 if [ ! -f /opt/homebrew/bin/gum ]; then
-  msg 34 "🐚 Installing script dependencies..."
+  msg 34 "🐚 Installing setup dependencies..."
+  /opt/homebrew/bin/brew install --cask 1password-cli
   /opt/homebrew/bin/brew install gum
 else
-  msg 32 "🐚 Script dependencies detected ✓"
+  msg 32 "🐚 Setup dependencies detected ✓"
+fi
+
+# Halt execution until user presses a key
+if [ "${SHELL##*/}" = "fish" ]; then
+  read -l -P "Press any key to continue..."
+else
+  read -n 1 -rsp "Press any key to continue..."; echo
+fi
+
+# Install chezmoi
+if [ ! -f "$LOCAL_BIN/chezmoi" ]; then
+  msg 34 "🏠 Installing chezmoi..."
+  sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$LOCAL_BIN"
+else
+  msg 32 "🏠 Chezmoi detected ✓"
 fi
 
 # Initialize and apply chezmoi state

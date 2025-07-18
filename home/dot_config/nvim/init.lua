@@ -8,14 +8,13 @@ vim.g.ngs = {
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
-vim.lsp.enable({ "lexical", "lua_ls", "nil", "typescript_ls" })
-
 require("ngs.core.abbrevs")
 require("ngs.core.autocmds")
-require("ngs.core.diag")
+require("ngs.core.commands")
+require("ngs.core.diagnostic")
 require("ngs.core.keymaps")
+require("ngs.core.lsp")
 require("ngs.core.options")
-require("ngs.core.usercmds")
 
 require("ngs.util").load_theme()
 
