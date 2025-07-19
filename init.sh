@@ -21,7 +21,7 @@ else
 fi
 
 # Install run script dependencies
-if [ ! -f /opt/homebrew/bin/gum ]; then
+if [ ! -f /opt/homebrew/bin/gum ] || [ ! -f /opt/homebrew/bin/op ]; then
   msg 34 "🐚 Installing setup dependencies..."
   /opt/homebrew/bin/brew install --cask 1password-cli
   /opt/homebrew/bin/brew install gum
