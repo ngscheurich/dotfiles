@@ -1,14 +1,21 @@
 #!/bin/bash
 
-set -e
+if [ -n "${DEBUG_SCRIPTS+x}" ] && [ "$DEBUG_SCRIPTS" -eq 1 ]; then
+  set -ev
+else
+  set -e
+fi
 
 LOCAL_BIN="$HOME/.local/bin"
 HOMEBREW_BIN="/opt/homebrew/bin"
 
+read -n 1 -rsp "Press any key to continue...?"; echo
+
 msg() {
   local BOLD="\033[1m"
   local RESET="\033[0m"
-  printf '%s[dotfiles] \033[%s%s%s' "$BOLD" "$1" "$2" "$RESET"
+  # shellcheck disable=SC2028
+  echo "${BOLD}[dotfiles] \033[$1m$2${RESET}"
 }
 
 # Install Homebrew
