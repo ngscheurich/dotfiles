@@ -14,8 +14,7 @@ read -n 1 -rsp "Press any key to continue...?"; echo
 msg() {
   local BOLD="\033[1m"
   local RESET="\033[0m"
-  # shellcheck disable=SC2028
-  echo "${BOLD}[dotfiles] \033[$1m$2${RESET}"
+  echo -e "${BOLD}[dotfiles] \033[$1m$2${RESET}"
 }
 
 # Install Homebrew
