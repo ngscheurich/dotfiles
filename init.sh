@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
@@ -8,7 +8,7 @@ HOMEBREW_BIN="/opt/homebrew/bin"
 msg() {
   local BOLD="\033[1m"
   local RESET="\033[0m"
-  echo "${BOLD}[dotfiles] \033[$1m$2${RESET}"
+  printf '%s[dotfiles] \033[%s%s%s' "$BOLD" "$1" "$2" "$RESET"
 }
 
 # Install Homebrew
@@ -30,11 +30,12 @@ else
 fi
 
 # Halt execution until user presses a key
-if [ "${SHELL##*/}" = "fish" ]; then
-  read -l -P "Press any key to continue..."
-else
-  read -n 1 -rsp "Press any key to continue..."; echo
-fi
+read -n 1 -rsp "Press any key to continue..."; echo
+# if [ "${SHELL##*/}" = "fish" ]; then
+#   read -l -P "Press any key to continue..."
+# else
+#   read -n 1 -rsp "Press any key to continue..."; echo
+# fi
 
 # Install chezmoi
 if [ ! -f "$LOCAL_BIN/chezmoi" ]; then
