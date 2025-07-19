@@ -9,13 +9,15 @@ fi
 LOCAL_BIN="$HOME/.local/bin"
 HOMEBREW_BIN="/opt/homebrew/bin"
 
-read -n 1 -rsp "Press any key to continue...?"; echo
 
 msg() {
   local BOLD="\033[1m"
   local RESET="\033[0m"
   echo -e "${BOLD}[dotfiles] \033[$1m$2${RESET}"
 }
+
+msg 34 "🍺 Installing Homebrew..."
+exit 0
 
 # Install Homebrew
 if [ ! -d "$HOMEBREW_BIN" ]; then
