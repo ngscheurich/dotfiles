@@ -37,8 +37,8 @@ else
   WORKDIR="/tmp/dotfiles"
 fi
 
-if which gum >/dev/null; then
-  GUM="$(which gum)"
+if command -v gum >/dev/null 2>&1; then
+  GUM="$(command -v gum)"
 else
   GUM="${WORKDIR}/${GUM_RELEASE}/gum"
 fi
@@ -292,7 +292,7 @@ get_op_login() {
 change_shell_to_fish() {
   icon="🐟"
   shell=$(dscl . -read "/Users/${USER}" UserShell | awk '{print $2}')
-  fish=$(which fish)
+  fish=$(command -v fish)
 
   # If the current shell is not Fish, set it using chsh
   if [ "$shell" = "$fish" ]; then
