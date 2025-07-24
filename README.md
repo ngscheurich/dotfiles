@@ -12,6 +12,15 @@ I’ve published them here so that folks such as you or future I might extract s
 
 The files are managed with [chezmoi] and can be initialized on a new machine with [init.sh].
 
+## Contents
+
+I track the configuration for a wide assortment of CLI/TUI tools, but a subset of those are truly essential to my daily workflow. The configs for these come to mind, and may be worth a look:
+
+- 🛠️ [Neovim], the hyperextensible Vim-based text editor ([config](home/dot_config/nvim))
+- 🍱 [tmux], a terminal multiplexer ([config](home/dot_config/tmux))
+- 🐟 [Fish], a command line shell for the 90s ([config](home/dot_config/fish))
+- 👻 [Ghostty], a fast, feature-rich, terminal emulator ([config](home/dot_config/ghostty))
+
 ## Quickstart
 
 Getting a new system up and running is just a `curl` away:
@@ -60,7 +69,11 @@ bash -c "$(curl -fsLS https://raw.githubusercontent.com/ngscheurich/themes/main/
 
 [1password]: https://1password.com/
 [chezmoi]: https://www.chezmoi.io/
+[fish]: https://fishshell.com/
+[ghostty]: https://ghostty.org/
 [homebrew]: https://brew.sh/
 [init.sh]: init.sh
 [more color]: https://github.com/ngscheurich/themes
+[neovim]: https://neovim.io/
+[tmux]: https://github.com/tmux/tmux/wiki
 [useful incantations]: https://github.com/ngscheurich/grimoire
