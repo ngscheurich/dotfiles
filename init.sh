@@ -91,7 +91,7 @@ rely on. Namely, it:
 1. Installs dependencies for this script to run
 2. Installs [chezmoi](https://www.chezmoi.io/)
 3. Ensures a 1Password user is active (for chezmoi templates)
-4. Initializes chezmoi local state
+4. Initializes and applies my current chezmoi state
 
 Additionally, if the platform is Darwin (macOS), a couple of additional
 programs are installed:
