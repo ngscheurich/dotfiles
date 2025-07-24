@@ -118,3 +118,7 @@ cask "obs"
 cask "playdate-simulator"
 cask "steam"
 {{ end }}
+
+{{- if eq .chezmoi.hostname "joulie" }}
+cask "microsoft-office"
+{{ end }}
