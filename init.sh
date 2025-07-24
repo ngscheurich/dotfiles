@@ -11,9 +11,18 @@
 
 set -euo pipefail
 
+case "$(uname)" in
+Darwin)
+  GUM_PLATFORM="Darwin_arm64"
+  ;;
+*)
+  echo "[fatal] Unsupported platform: $(uname)"
+  exit 1
+  ;;
+esac
+
 VERSION="1.0.0"
 GUM_VERSION="0.16.2"
-GUM_PLATFORM="Darwin_arm64"
 GUM_RELEASE="gum_${GUM_VERSION}_${GUM_PLATFORM}"
 GUM_ARCHIVE="${GUM_RELEASE}.tar.gz"
 GUM_SBOM="${GUM_ARCHIVE}.sbom.json"
