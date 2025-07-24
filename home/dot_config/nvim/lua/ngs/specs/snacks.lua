@@ -1,119 +1,119 @@
 return {
-	"folke/snacks.nvim",
-	priority = 1000,
-	lazy = false,
+  "folke/snacks.nvim",
+  priority = 1000,
+  lazy = false,
 
-	opts = {
-		-- ===================================================================
-		--  bigfile (snacks.nvim)
-		-- -------------------------------------------------------------------
-		--  https://github.com/folke/snacks.nvim/blob/main/docs/bigfile.md
-		--  Deal with big files
-		--  misc
-		-- -------------------------------------------------------------------
-		bigfile = { enabled = true },
+  opts = {
+    -- ===================================================================
+    --  bigfile (snacks.nvim)
+    -- -------------------------------------------------------------------
+    --  https://github.com/folke/snacks.nvim/blob/main/docs/bigfile.md
+    --  Deal with big files
+    --  misc
+    -- -------------------------------------------------------------------
+    bigfile = { enabled = true },
 
-		-- ===================================================================
-		--  bigfile (snacks.nvim)
-		-- -------------------------------------------------------------------
-		--  https://github.com/folke/snacks.nvim/blob/main/docs/bigfile.md
-		--  Deal with big files
-		--  misc
-		-- -------------------------------------------------------------------
-		explorer = { enabled = true },
+    -- ===================================================================
+    --  bigfile (snacks.nvim)
+    -- -------------------------------------------------------------------
+    --  https://github.com/folke/snacks.nvim/blob/main/docs/bigfile.md
+    --  Deal with big files
+    --  misc
+    -- -------------------------------------------------------------------
+    explorer = { enabled = true },
 
-		-- ===================================================================
-		--  gitbrowse (snacks.nvim)
-		-- -------------------------------------------------------------------
-		--  https://github.com/folke/snacks.nvim/blob/main/docs/gitbrowse.md
-		--  Open the current file, branch, commit, or repo in a browser
-		--  source-control
-		-- -------------------------------------------------------------------
-		gitbrowse = { enabled = true },
+    -- ===================================================================
+    --  gitbrowse (snacks.nvim)
+    -- -------------------------------------------------------------------
+    --  https://github.com/folke/snacks.nvim/blob/main/docs/gitbrowse.md
+    --  Open the current file, branch, commit, or repo in a browser
+    --  source-control
+    -- -------------------------------------------------------------------
+    gitbrowse = { enabled = true },
 
-		-- ===================================================================
-		--  image (snacks.nvim)
-		-- -------------------------------------------------------------------
-		--  https://github.com/folke/snacks.nvim/blob/main/docs/image.md
-		--  Image viewer using Kitty Graphics Protocol
-		--  misc
-		-- -------------------------------------------------------------------
-		image = { enabled = true },
+    -- ===================================================================
+    --  image (snacks.nvim)
+    -- -------------------------------------------------------------------
+    --  https://github.com/folke/snacks.nvim/blob/main/docs/image.md
+    --  Image viewer using Kitty Graphics Protocol
+    --  misc
+    -- -------------------------------------------------------------------
+    image = { enabled = true },
 
-		-- ===================================================================
-		--  indent (snacks.nvim)
-		-- -------------------------------------------------------------------
-		--  https://github.com/folke/snacks.nvim/blob/main/docs/indent.md
-		--  Indent guides and scopes
-		--  ui
-		-- -------------------------------------------------------------------
-		indent = {
-			enabled = false,
-			char = ";",
-			only_scope = true,
-			only_current = true,
-			hl = "Statement",
-		},
+    -- ===================================================================
+    --  indent (snacks.nvim)
+    -- -------------------------------------------------------------------
+    --  https://github.com/folke/snacks.nvim/blob/main/docs/indent.md
+    --  Indent guides and scopes
+    --  ui
+    -- -------------------------------------------------------------------
+    indent = {
+      enabled = false,
+      char = ";",
+      only_scope = true,
+      only_current = true,
+      hl = "Statement",
+    },
 
-		-- ===================================================================
-		--  notifier (snacks.nvim)
-		-- -------------------------------------------------------------------
-		--  https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md
-		--  Enhanced `vim.notify`
-		--  ui
-		-- -------------------------------------------------------------------
-		notifier = { enabled = true },
+    -- ===================================================================
+    --  notifier (snacks.nvim)
+    -- -------------------------------------------------------------------
+    --  https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md
+    --  Enhanced `vim.notify`
+    --  ui
+    -- -------------------------------------------------------------------
+    notifier = { enabled = true },
 
-		-- ===================================================================
-		--  picker (snacks.nvim)
-		-- -------------------------------------------------------------------
-		--  https://github.com/folke/snacks.nvim/blob/main/docs/picker.md
-		--  Fuzzy picker for selecting items from sources
-		--  workflow
-		-- -------------------------------------------------------------------
-		picker = { enabled = true },
+    -- ===================================================================
+    --  picker (snacks.nvim)
+    -- -------------------------------------------------------------------
+    --  https://github.com/folke/snacks.nvim/blob/main/docs/picker.md
+    --  Fuzzy picker for selecting items from sources
+    --  workflow
+    -- -------------------------------------------------------------------
+    picker = { enabled = true },
 
-		-- ===================================================================
-		--  quickfile (snacks.nvim)
-		-- -------------------------------------------------------------------
-		--  https://github.com/folke/snacks.nvim/blob/main/docs/quickfile.md
-		--  Render files as quickly as possible
-		--  misc
-		-- -------------------------------------------------------------------
-		quickfile = { enabled = true },
+    -- ===================================================================
+    --  quickfile (snacks.nvim)
+    -- -------------------------------------------------------------------
+    --  https://github.com/folke/snacks.nvim/blob/main/docs/quickfile.md
+    --  Render files as quickly as possible
+    --  misc
+    -- -------------------------------------------------------------------
+    quickfile = { enabled = true },
 
-		-- ===================================================================
-		--  statuscolumn (snacks.nvim)
-		-- -------------------------------------------------------------------
-		--  https://github.com/folke/snacks.nvim/blob/main/docs/statuscolumn.md
-		--  Enhanced statuscolumn
-		--  ui
-		-- -------------------------------------------------------------------
-		statuscolumn = { enabled = true },
+    -- ===================================================================
+    --  statuscolumn (snacks.nvim)
+    -- -------------------------------------------------------------------
+    --  https://github.com/folke/snacks.nvim/blob/main/docs/statuscolumn.md
+    --  Enhanced statuscolumn
+    --  ui
+    -- -------------------------------------------------------------------
+    statuscolumn = { enabled = true },
 
-		-- ===================================================================
-		--  zen (snacks.nvim)
-		-- -------------------------------------------------------------------
-		--  https://github.com/folke/snacks.nvim/blob/main/docs/zen.md
-		--  Distraction-free editing
-		--  ui
-		-- -------------------------------------------------------------------
-		zen = {
-			enabled = true,
-			toggles = {
-				dim = false,
-				line_number = false,
-			},
-			on_open = function()
-				vim.cmd("PencilSoft")
-			end,
-			win = {
-				backdrop = { transparent = false },
-			},
-		},
-	},
+    -- ===================================================================
+    --  zen (snacks.nvim)
+    -- -------------------------------------------------------------------
+    --  https://github.com/folke/snacks.nvim/blob/main/docs/zen.md
+    --  Distraction-free editing
+    --  ui
+    -- -------------------------------------------------------------------
+    zen = {
+      enabled = true,
+      toggles = {
+        dim = false,
+        line_number = false,
+      },
+      on_open = function()
+        vim.cmd("PencilSoft")
+      end,
+      win = {
+        backdrop = { transparent = false },
+      },
+    },
+  },
 
-	keys = {
+  keys = {
     -- stylua: ignore start
     -- Picker Quick
     { "<C-f>", function () Snacks.picker.files({layout = "ivy"}) end, desc = "Files" },
@@ -171,6 +171,6 @@ return {
   		end,
   		desc = "Indent Guides",
   	},
-		-- stylua: ignore end
-	},
+    -- stylua: ignore end
+  },
 }

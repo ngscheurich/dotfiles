@@ -1,1 +1,20 @@
-{"shset":{"prefix":"shset","body":["#!/usr/bin/env bash","","set -euo pipefail"]}}
+{
+  "header": {
+    "prefix": "header",
+    "body": [
+      "#!${1:/bin/bash}",
+      "#",
+      "# Usage: ${2:filename.sh [flags] <command>}",
+      "#",
+      "# ${3:Description}",
+      "#",
+      "",
+      "set -eu${0:}"
+    ]
+  },
+  "shellcheck disable": {
+    "prefix": "shellcheck-disable",
+    "body": "# shellcheck disable=SC${1:}"
+  }
+}
+

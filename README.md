@@ -1,8 +1,8 @@
 # Dotfiles
 
-![A collection of terminal emulator windows runnning fastfetch, btm, and Neovim.](screenshot.png)
+![A collection of terminal emulator windows runnning fastfetch, btm, and Neovim.](assets/system.png)
 
-This repository contains everything I need to set up and maintain a personalized computer system. Wanderers beware: **this place is ever-evolving and fraught with great peril.**
+This repository contains everything I need to set up and maintain a personalized computer system. Wanderers beware: this place is ever-evolving and fraught with great peril.
 
 ## Prelude
 

@@ -1,8 +1,15 @@
+-- ===================================================================
+--  Neogit
+-- -------------------------------------------------------------------
+--  https://github.com/folke/lazydev.nvim
+--  Interactive Git interface inspired by Magit
+--  source-control
+-- -------------------------------------------------------------------
 return {
-	"NeogitOrg/neogit",
+  "NeogitOrg/neogit",
 
-	dependencies = {
-		"nvim-lua/plenary.nvim",
-		"sindrets/diffview.nvim",
-	},
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "sindrets/diffview.nvim",
+  },
 }

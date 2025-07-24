@@ -1,5 +1,7 @@
 # Neovim Configuration
 
+![Neovim with multiple windows open, including one displaying a buffer for this file, as well as UI elements like a file tree and key map reminder](../../../assets/nvim.png)
+
 This is my configuration for [Neovim], the hyperextensible Vim-based text editor.
 
 I spend most of my time in Neovim exploring and editing source code, but
@@ -47,6 +49,7 @@ directory and sorted by category.
 ### Editing
 
 - [TreeSJ](https://github.com/Wansmer/treesj): Split/join blocks of code
+- [dial.nvim](https://github.com/monaqa/dial.nvim): Enhanced increment/decrement
 - [flash.nvim](https://github.com/folke/flash.nvim): Navigate using search labels
 - [mini.align](https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-align.md): Align text interactively
 - [mini.pairs](https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-pairs.md): Automatically inserts the other half of a character pair
@@ -71,6 +74,7 @@ directory and sorted by category.
 - [Conjure](https://github.com/Olical/conjure): Conversational software development
 - [Kulala](https://github.com/mistweaverco/kulala.nvim): Fully-featured HTTP client
 - [bigfile (snacks.nvim)](https://github.com/folke/snacks.nvim/blob/main/docs/bigfile.md): Deal with big files
+- [bigfile (snacks.nvim)](https://github.com/folke/snacks.nvim/blob/main/docs/bigfile.md): Deal with big files
 - [ccc.nvim](https://github.com/uga-rosa/ccc.nvim): Color picker and highlighter
 - [image (snacks.nvim)](https://github.com/folke/snacks.nvim/blob/main/docs/image.md): Image viewer using Kitty Graphics Protocol
 - [quickfile (snacks.nvim)](https://github.com/folke/snacks.nvim/blob/main/docs/quickfile.md): Render files as quickly as possible
@@ -92,7 +96,10 @@ directory and sorted by category.
 
 ### Source Control
 
+- [Diffview.nvim](https://github.com/sindrets/diffview.nvim): Tab page interface for working with Git diffs
 - [Gitsigns](https://github.com/lewis6991/gitsigns.nvim): Git integration for buffers
+- [Neogit](https://github.com/folke/lazydev.nvim): Interactive Git interface inspired by Magit
+- [fugitive.vim](https://github.com/tpope/vim-fugitive): A Git wrapper so awesome, it should be illegal
 - [gitbrowse (snacks.nvim)](https://github.com/folke/snacks.nvim/blob/main/docs/gitbrowse.md): Open the current file, branch, commit, or repo in a browser
 - [mini.diff](https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-diff.md): Work with diff hunks
 
@@ -108,27 +115,31 @@ directory and sorted by category.
 ### User Interface
 
 - [Aerial](https://github.com/stevearc/aerial.nvim): Code outline window
+- [Catppuccin](https://github.com/catppuccin/nvim): Community-driven theming with pastel defaults
 - [Fidget](https://github.com/j-hui/fidget.nvim): Extensible UI for Neovim notifications and LSP progress messages
 - [Heirline](https://github.com/rebelot/heirline.nvim): Statusline framework designed around recursive inheritance
-- [Kanagawa](https://github.com/rebelot/kanagawa.nvim): Colorscheme inspired by _The Great Wave off Kanagawa_
-- [Neo-tree](https://github.com/nvim-neo-tree/neo-tree.nvim): View and manage the file system and other tree-like structures
 - [Trouble](https://github.com/folke/trouble.nvim): Interactive listing of diagnostics, references, and more
 - [WhichKey](https://github.com/folke/which-key.nvim): Show available keybindings as you type
+- [bufferline.nvim](https://github.com/akinsho/bufferline.nvim): A bufferline to display tabs
 - [dropbar.nvim](https://github.com/Bekaboo/dropbar.nvim): Document breadcrumbs bar
 - [incline](https://github.com/b0o/incline.nvim): Lightweight floating statuslines
 - [indent (snacks.nvim)](https://github.com/folke/snacks.nvim/blob/main/docs/indent.md): Indent guides and scopes
 - [notifier (snacks.nvim)](https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md): Enhanced `vim.notify`
 - [nvim-scrollbar](https://github.com/petertriho/nvim-scrollbar): Extensible scrollbar
+- [nvim-ufo](https://github.com/kevinhwang91/nvim-ufo): High-performance folds with a modern look
 - [smear-cursor.nvim](https://github.com/sphamba/smear-cursor.nvim): Animates the cursor with a smear effect
 - [statuscolumn (snacks.nvim)](https://github.com/folke/snacks.nvim/blob/main/docs/statuscolumn.md): Enhanced statuscolumn
 - [tiny-glimmer.nvim](https://github.com/rachartier/tiny-glimmer.nvim): Adds subtle animations to some operations
+- [zen (snacks.nvim)](https://github.com/folke/snacks.nvim/blob/main/docs/zen.md): Distraction-free editing
 
 ### Workflow
 
+- [lazydev.nvim](https://github.com/folke/lazydev.nvim): LuaLS setup for Neovim
 - [mini.bracketed](https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-bracketed.md): Move back and forth between locations
 - [nvim-hlslens](https://github.com/kevinhwang91/nvim-hlslens): Enhancements for search matches
 - [oil.nvim](https://github.com/stevearc/oil.nvim): Explore the filesystem and edit it like a buffer
 - [picker (snacks.nvim)](https://github.com/folke/snacks.nvim/blob/main/docs/picker.md): Fuzzy picker for selecting items from sources
+- [quicker.nvim](https://github.com/stevearc/quicker.nvim): Improved UI and workflow for the quickfix list
 
 <!-- nvim-plugins:end -->
 
