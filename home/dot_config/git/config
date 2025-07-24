@@ -31,6 +31,7 @@
   dl = log -p --ext-diff
   ds = show --ext-diff
   fixup = commit --fixup
+  fucked = !~/.local/share/grimoire/git_fuckup.sh
   pub = push --set-upstream origin HEAD
   rb = rebase
   rba = rebase --abort
