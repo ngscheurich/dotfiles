@@ -4,7 +4,7 @@
 
 BUNDLE_FILE="$HOME/.config/homebrew/Brewfile"
 
-if ! command gum >/dev/null 2>&1 || [ "$VERBOSE_SCRIPTS" = 1 ]; then
+if ! command -v gum >/dev/null 2>&1 || [ "$VERBOSE_SCRIPTS" = "1" ]; then
   brew bundle install --file $BUNDLE_FILE
   brew bundle cleanup --file $BUNDLE_FILE --force
 else
