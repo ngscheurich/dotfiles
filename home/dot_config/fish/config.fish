@@ -1,3 +1,5 @@
+status is-interactive; or exit
+
 # Set command line key bindings
 set -g fish_key_bindings fish_hybrid_key_bindings
 
@@ -9,6 +11,7 @@ source "$HOME/.theme/shell.fish"
 
 # Initialize shell tools
 fzf --fish | source
+atuin init fish | source
 zoxide init fish | source
 pay-respects fish --alias | source
 starship init fish | source
