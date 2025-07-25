@@ -1,0 +1,9 @@
+ctrl_n_shortcuts = true
+filter_mode_shell_up_key_binding = "directory"
+inline_height = 14
+invert = false
+keymap_mode = "vim-insert"
+show_help = false
+show_tabs = false
+style = "full"
+enter_accept = true
