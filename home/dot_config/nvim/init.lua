@@ -20,8 +20,8 @@ require("ngs.util").load_theme()
 
 require("ngs.lazy")
 require("lazy").setup({
-	spec = { { import = "ngs.specs" } },
-	install = { colorscheme = { vim.g.ngs.theme.colorscheme } },
-	checker = { enabled = true },
-	change_detection = { notify = false },
+  spec = { { import = "ngs.specs" } },
+  install = { colorscheme = { vim.g.ngs.theme.colorscheme } },
+  checker = { enabled = false },
+  change_detection = { notify = false },
 })
