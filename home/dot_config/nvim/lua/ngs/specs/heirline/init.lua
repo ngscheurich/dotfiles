@@ -22,7 +22,7 @@ return {
         c.file,
         c.gap(2),
         c.git(),
-        { provider = "%=" },
+        c.span,
         c.diagnostics,
         c.gap(2),
         c.lsp,

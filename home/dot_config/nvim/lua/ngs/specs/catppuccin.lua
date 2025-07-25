@@ -13,7 +13,6 @@ return {
 
   config = function()
     local catppuccin = require("catppuccin")
-    local mod = string.format("ngs.specs.catppuccin.mods.%s", vim.g.ngs.theme.mod)
-    require(mod).apply(catppuccin.setup)
+    vim.g.ngs.theme.apply(catppuccin.setup)
   end,
 }

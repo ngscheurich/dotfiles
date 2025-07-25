@@ -7,22 +7,19 @@ local pal_ok, pal = pcall(require, "catppuccin.palettes")
 local lib_ok, lib = pcall(require, "catppuccin.utils.colors")
 
 local theme = vim.g.ngs.theme
-local colors = {}
+local colors = theme.status or {}
 
 if pal_ok and theme.name ~= "default" then
   local p = pal.get_palette("mocha")
 
-  colors = {
+  colors = vim.tbl_extend("keep", colors, {
     fg = p.text,
-    fg_dim = p.subtext1,
+    fg_alt = p.subtext0,
     bg = p.mantle,
-
-    lsp = p.sapphire,
-    readonly = p.flamingo,
+    bg_alt = p.surface0,
 
     mode_name_fg = p.mantle,
-    mode_name_bg = p.text,
-    mode_icon_fg = p.subtext1,
+    mode_icon_fg = p.base,
     mode_normal = p.blue,
     mode_visual = p.rosewater,
     mode_select = p.rosewater,
@@ -33,6 +30,8 @@ if pal_ok and theme.name ~= "default" then
     mode_wait = p.flamingo,
     mode_terminal = p.maroon,
 
+    readonly = p.flamingo,
+
     vcs_branch = p.mauve,
     vcs_added = p.green,
     vcs_removed = p.red,
@@ -42,7 +41,9 @@ if pal_ok and theme.name ~= "default" then
     diag_warning = p.yellow,
     diag_info = p.sapphire,
     diag_hint = p.lavender,
-  }
+
+    lsp = p.sapphire,
+  })
 end
 
 local function get_mode_opts(mode)
@@ -178,14 +179,6 @@ local function darken(color, amount)
   return lib.darken(color, amount)
 end
 
-local function lighten(color, amount)
-  if not lib_ok or not color or not amount then
-    return
-  end
-
-  return lib.lighten(color, amount)
-end
-
 M.mode_bar = {
   init = mode_init,
   update = mode_update,
@@ -194,30 +187,25 @@ M.mode_bar = {
       return string.format(" %s  ", get_mode_opts(self.mode).icon)
     end,
     hl = function(self)
-      local c1 = get_mode_opts(self.mode).color
-
       return {
-        fg = darken(c1, 0.15),
-        bg = darken(c1, 0.75),
+        fg = colors.mode_icon_fg,
+        bg = darken(get_mode_opts(self.mode).color, 0.75),
         bold = true,
       }
     end,
   },
-  -- {
-  --   provider = function(self)
-  --     return string.format(" %s ", get_mode_opts(self.mode).name)
-  --   end,
-  --   hl = function(self)
-  --     local c1 = get_mode_opts(self.mode).color
-  --     local c2 = colors.mode_name_fg
-  --
-  --     return {
-  --       fg = darken(c2, 0.95),
-  --       bg = c1,
-  --       bold = true,
-  --     }
-  --   end,
-  -- },
+  {
+    provider = function(self)
+      return string.format(" %s ", get_mode_opts(self.mode).name)
+    end,
+    hl = function(self)
+      return {
+        fg = colors.mode_name_fg,
+        bg = get_mode_opts(self.mode).color,
+        bold = true,
+      }
+    end,
+  },
 }
 
 M.mode_tag = {
@@ -239,7 +227,7 @@ M.file = {
   end,
   {
     provider = file_path_provider,
-    hl = { fg = colors.fg_dim },
+    hl = { fg = colors.fg_alt },
   },
   {
     provider = file_name_provider,
@@ -377,7 +365,7 @@ M.filetype = function()
         provider = function(self)
           return " " .. self.ft
         end,
-        hl = { fg = colors.fg_dim },
+        hl = { fg = colors.fg_alt },
       },
     }
   else
@@ -391,7 +379,12 @@ end
 
 M.ruler = {
   provider = " %7(%l/%3L%):%2c %P ",
-  hl = { fg = colors.fg, bg = lighten(colors.bg, 0.9) },
+  hl = { fg = colors.fg, bg = colors.bg_alt },
+}
+
+M.span = {
+  provider = "%=",
+  hl = { bg = colors.bg },
 }
 
 M.gap = function(width)
