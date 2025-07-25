@@ -1,8 +1,8 @@
 vim.g.ngs = {
-	theme = {
-		name = "default",
-		colorscheme = "default",
-	},
+  theme = {
+    name = "default",
+    colorscheme = "default",
+  },
 }
 
 vim.g.mapleader = " "
