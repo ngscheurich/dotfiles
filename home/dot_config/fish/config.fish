@@ -11,7 +11,7 @@ source "$HOME/.theme/shell.fish"
 
 # Initialize shell tools
 fzf --fish | source
-atuin init fish | source
+atuin init fish --disable-up-arrow | source
 zoxide init fish | source
 pay-respects fish --alias | source
 starship init fish | source
