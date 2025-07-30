@@ -1,0 +1,33 @@
+#!/bin/sh
+
+dockutil --remove all --no-restart
+
+dockutil --add "/Applications/Ghostty.app" --no-restart
+dockutil --add "/Applications/Arc.app" --no-restart
+dockutil --add "/System/Applications/Mail.app" --no-restart
+dockutil --add "/System/Applications/Messages.app" --no-restart
+dockutil --add "/Applications/Fantastical.app" --no-restart
+dockutil --add "/Applications/Discord.app" --no-restart
+
+{{- if eq .chezmoi.hostname "bienjensu" }}
+dockutil --add "/Applications/Logic Pro.app" --no-restart
+dockutil --add "/Applications/Affinity Photo.app" --no-restart
+dockutil --add "/Applications/Affinity Designer.app" --no-restart
+dockutil --add "/Applications/Affinity Publisher.app" --no-restart
+dockutil --add "/System/Applications/Photos.app" --no-restart
+{{ end }}
+
+{{- if eq .chezmoi.hostname "joulie" }}
+dockutil --add "/Applications/Slack.app" --no-restart
+dockutil --add "/Applications/Microsoft Teams.app" --no-restart
+dockutil --add "/Applications/Microsoft Outlook.app" --no-restart
+{{ end }}
+
+dockutil --add "/System/Applications/Music.app" --no-restart
+dockutil --add "/System/Applications/App Store.app" --no-restart
+dockutil --add "/System/Applications/System Settings.app" --no-restart
+
+dockutil --add "~/Downloads" --view grid --display folder --no-restart
+dockutil --add "~/Documents" --view list --display folder --no-restart
+
+killall Dock
