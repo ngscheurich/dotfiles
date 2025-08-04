@@ -7,7 +7,7 @@ local pal_ok, pal = pcall(require, "catppuccin.palettes")
 local lib_ok, lib = pcall(require, "catppuccin.utils.colors")
 
 local theme = vim.g.ngs.theme
-local colors = theme.status or {}
+local colors = theme.statusline or {}
 
 if pal_ok and theme.name ~= "default" then
   local p = pal.get_palette("mocha")
