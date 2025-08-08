@@ -8,6 +8,8 @@
 return {
   "b0o/incline.nvim",
 
+  cond = false,
+
   event = "VeryLazy",
 
   config = function()

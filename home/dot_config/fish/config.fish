@@ -3,11 +3,17 @@ status is-interactive; or exit
 # Set command line key bindings
 set -g fish_key_bindings fish_hybrid_key_bindings
 
+# Add libpq binaries to path
+fish_add_path -gm /opt/homebrew/opt/libpq/bin
+
 # Add local executables to path
-fish_add_path -gmp "$HOME/.local/bin"
+fish_add_path -gm "$HOME/.local/bin"
 
 # Load theme
-source "$HOME/.theme/shell.fish"
+set theme "$HOME/.theme/shell.fish"
+if test -e $theme
+    source $theme
+end
 
 # Initialize shell tools
 fzf --fish | source

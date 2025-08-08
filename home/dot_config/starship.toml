@@ -5,3 +5,6 @@ symbol = " "
 
 [gleam]
 symbol = "󰦥 "
+
+[golang]
+symbol = " "
