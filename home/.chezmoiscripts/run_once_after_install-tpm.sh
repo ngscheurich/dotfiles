@@ -1,6 +1,6 @@
 #!/bin/sh
 
-TPMDIR="$TMUX_PLUGIN_MANAGER_PATH/tpm"
+TPMDIR="$XDG_DATA_HOME/tpm"
 
 if [ ! -d "$TPMDIR" ]; then
   git clone https://github.com/tmux-plugins/tpm "$TPMDIR"
