@@ -27,6 +27,9 @@ return {
         filetypes = { "markdown", "codecompanion" },
         ignore_buftypes = {},
       },
+      experimental = {
+        check_rtp_message = false,
+      },
       html = {
         container_elements = {
           ["^buf$"] = conceal_tag("", "CodeCompanionChatVariable"),
