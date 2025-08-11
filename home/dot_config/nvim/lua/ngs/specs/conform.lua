@@ -32,6 +32,7 @@ return {
       sql = { "sleek" },
       toml = { "tombi" },
       typescript = { "prettier" },
+      xml = { "xmlformatter" },
       yaml = { "prettier" },
     },
   },
