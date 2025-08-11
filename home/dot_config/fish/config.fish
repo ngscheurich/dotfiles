@@ -7,7 +7,9 @@ set -g fish_key_bindings fish_hybrid_key_bindings
 fish_add_path -gmp "$HOME/.local/bin"
 
 # Load theme
-source "$HOME/.theme/shell.fish"
+if test -e "$HOME/.theme/shell.fish"
+    source "$HOME/.theme/shell.fish"
+end
 
 # Initialize shell tools
 fzf --fish | source
