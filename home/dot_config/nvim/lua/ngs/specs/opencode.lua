@@ -1,0 +1,3 @@
+return {
+  "NickvanDyke/opencode.nvim",
+}
