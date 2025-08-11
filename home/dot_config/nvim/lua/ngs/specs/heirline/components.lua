@@ -3,46 +3,46 @@ local M = {}
 local conds = require("heirline.conditions")
 local util = require("ngs.util")
 
-local pal_ok, pal = pcall(require, "catppuccin.palettes")
-local lib_ok, lib = pcall(require, "catppuccin.utils.colors")
+local pal_ok, pal = pcall(require, "nightfox.palette")
+local lib_ok, lib = pcall(require, "nightfox.lib.color")
 
 local theme = vim.g.ngs.theme
 local colors = theme.statusline or {}
 
-if pal_ok and theme.name ~= "default" then
-  local p = pal.get_palette("mocha")
+if pal_ok then
+  local p = pal.load("nightfox")
 
   colors = vim.tbl_extend("keep", colors, {
-    fg = p.text,
-    fg_alt = p.subtext0,
-    bg = p.mantle,
-    bg_alt = p.surface0,
+    fg = p.fg1,
+    fg_alt = p.fg2,
+    bg = p.bg0,
+    bg_alt = p.bg2,
 
-    mode_name_fg = p.mantle,
-    mode_icon_fg = p.base,
-    mode_normal = p.blue,
-    mode_visual = p.rosewater,
-    mode_select = p.rosewater,
-    mode_insert = p.teal,
-    mode_replace = p.red,
-    mode_command = p.yellow,
-    mode_ex = p.yellow,
-    mode_wait = p.flamingo,
-    mode_terminal = p.maroon,
+    mode_name_fg = p.bg0,
+    mode_icon_fg = p.bg0,
+    mode_normal = p.blue.base,
+    mode_visual = p.magenta.base,
+    mode_select = p.pink.base,
+    mode_insert = p.green.base,
+    mode_replace = p.red.base,
+    mode_command = p.yellow.base,
+    mode_ex = p.yellow.base,
+    mode_wait = p.orange.base,
+    mode_terminal = p.black.base,
 
-    readonly = p.flamingo,
+    readonly = p.red.base,
 
-    vcs_branch = p.mauve,
-    vcs_added = p.green,
-    vcs_removed = p.red,
-    vcs_changed = p.sapphire,
+    vcs_branch = p.magenta.base,
+    vcs_added = p.green.base,
+    vcs_removed = p.red.base,
+    vcs_changed = p.blue.base,
 
-    diag_error = p.red,
-    diag_warning = p.yellow,
-    diag_info = p.sapphire,
-    diag_hint = p.lavender,
+    diag_error = p.red.base,
+    diag_warning = p.yellow.base,
+    diag_info = p.blue.base,
+    diag_hint = p.cyan.base,
 
-    lsp = p.sapphire,
+    lsp = p.blue.base,
   })
 end
 
@@ -171,12 +171,12 @@ local function get_diagnostic_count(severity)
   return #vim.diagnostic.get(0, { severity = severity })
 end
 
-local function darken(color, amount)
+local function shade(color, amount)
   if not lib_ok or not color or not amount then
     return
   end
 
-  return lib.darken(color, amount)
+  return lib.from_hex(color):shade(amount):to_hex()
 end
 
 M.mode_bar = {
@@ -189,7 +189,7 @@ M.mode_bar = {
     hl = function(self)
       return {
         fg = colors.mode_icon_fg,
-        bg = darken(get_mode_opts(self.mode).color, 0.75),
+        bg = shade(get_mode_opts(self.mode).color, -0.2),
         bold = true,
       }
     end,
