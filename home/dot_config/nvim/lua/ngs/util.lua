@@ -56,7 +56,7 @@ M.reload_theme = function(reload_theme)
     M.load_theme()
   end
 
-  local specs = { "ngs.specs.catppuccin", "ngs.specs.heirline" }
+  local specs = { "ngs.specs.nightfox", "ngs.specs.heirline" }
   for _, spec in ipairs(specs) do
     M.unload(spec)
     require(spec).config()
