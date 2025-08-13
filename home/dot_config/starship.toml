@@ -1,7 +1,22 @@
 "$schema" = "https://starship.rs/config-schema.json"
 
+[bun]
+symbol = ""
+
+[deno]
+symbol = "󱍢"
+
 [elixir]
 symbol = " "
+
+[elm]
+symbol = ""
+
+[erlang]
+symbol = ""
+
+[fennel]
+symbol = ""
 
 [gleam]
 symbol = "󰦥 "
@@ -9,5 +24,44 @@ symbol = "󰦥 "
 [golang]
 symbol = " "
 
+[haxe]
+symbol = ""
+
+[kotlin]
+symbol = ""
+
 [lua]
 symbol = " "
+
+[nodejs]
+symbol = ""
+
+[ocaml]
+symbol = ""
+
+[perl]
+symbol = ""
+
+[php]
+symbol = ""
+
+[purescript]
+symbol = ""
+
+[python]
+symbol = ""
+
+[ruby]
+symbol = ""
+
+[rust]
+symbol = ""
+
+[typst]
+symbol = ""
+
+[swift]
+symbol = ""
+
+[zig]
+symbol = ""
