@@ -19,7 +19,6 @@ return {
     },
     handlers = {
       gitsigns = true,
-      search = true,
     },
   },
 }

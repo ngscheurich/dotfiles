@@ -61,4 +61,21 @@ return {
       },
     },
   },
+
+  -- ==============================================================================
+  --  mini.base16
+  -- ------------------------------------------------------------------------------
+  --  https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-base16.md
+  --  Theme implementing the Base16 spec
+  --  ui
+  -- ------------------------------------------------------------------------------
+  {
+    "echasnovski/mini.base16",
+    version = "*",
+    priority = 1000,
+
+    config = function()
+      vim.g.ngs.theme.apply(require("mini.base16").setup)
+    end,
+  },
 }

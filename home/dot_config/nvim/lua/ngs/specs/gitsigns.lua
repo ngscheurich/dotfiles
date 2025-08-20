@@ -12,7 +12,6 @@ return {
 
   config = function()
     local gs = require("gitsigns")
-    local sb_handler = require("scrollbar.handlers.search")
     local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
 
     gs.setup({
@@ -38,8 +37,6 @@ return {
     vim.keymap.set("n", "<Leader>gr", gs.reset_hunk, { desc = "Reset hunk" })
     vim.keymap.set("n", "]h", gs.next_hunk, { desc = "Next hunk" })
     vim.keymap.set("n", "[h", gs.prev_hunk, { desc = "Previous hunk" })
-
-    sb_handler.setup()
 
     local next_hunk_repeat, prev_hunk_repeat =
       ts_repeat_move.make_repeatable_move_pair(gs.next_hunk, gs.prev_hunk)

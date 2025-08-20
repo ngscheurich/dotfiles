@@ -8,15 +8,18 @@ vim.g.ngs = {
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
-require("ngs.core.abbrevs")
-require("ngs.core.autocmds")
-require("ngs.core.commands")
-require("ngs.core.diagnostic")
-require("ngs.core.keymaps")
-require("ngs.core.lsp")
-require("ngs.core.options")
-
 require("ngs.util").load_theme()
+
+vim.diagnostic.config({
+  signs = {
+    text = {
+      ["vim.diagnostic.severity.ERROR"] = "",
+      ["vim.diagnostic.severity.WARN"] = "",
+      ["vim.diagnostic.severity.INFO"] = "",
+      ["vim.diagnostic.severity.HINT"] = "",
+    },
+  },
+})
 
 require("ngs.lazy")
 require("lazy").setup({

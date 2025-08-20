@@ -8,9 +8,7 @@
 return {
   "rebelot/heirline.nvim",
 
-  dependencies = {
-    "catppuccin/nvim",
-  },
+  dependencies = { "echasnovski/mini.base16" },
 
   config = function()
     local heirline = require("heirline")
