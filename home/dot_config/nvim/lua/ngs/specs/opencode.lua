@@ -1,3 +1,0 @@
-return {
-  "NickvanDyke/opencode.nvim",
-}

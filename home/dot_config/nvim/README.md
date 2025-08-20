@@ -59,12 +59,6 @@ directory and sorted by category.
 
 - [Conform](https://github.com/stevearc/conform.nvim): Lightweight yet powerful formatter
 
-### Generative AI
-
-- [CodeCompanion](https://codecompanion.olimorris.dev/): Seamless, AI-powered coding
-- [MCP Hub](https://github.com/ravitemer/mcphub.nvim): Model Context Protocol client
-- [copilot.lua](https://github.com/zbirenbaum/copilot.lua): GitHub Copilot integration
-
 ### Linting
 
 - [nvim-lint](https://github.com/mfussenegger/nvim-lint): Asynchronous linter
@@ -115,7 +109,6 @@ directory and sorted by category.
 ### User Interface
 
 - [Aerial](https://github.com/stevearc/aerial.nvim): Code outline window
-- [Catppuccin](https://github.com/catppuccin/nvim): Community-driven theming with pastel defaults
 - [Fidget](https://github.com/j-hui/fidget.nvim): Extensible UI for Neovim notifications and LSP progress messages
 - [Heirline](https://github.com/rebelot/heirline.nvim): Statusline framework designed around recursive inheritance
 - [Trouble](https://github.com/folke/trouble.nvim): Interactive listing of diagnostics, references, and more
@@ -124,6 +117,7 @@ directory and sorted by category.
 - [dropbar.nvim](https://github.com/Bekaboo/dropbar.nvim): Document breadcrumbs bar
 - [incline](https://github.com/b0o/incline.nvim): Lightweight floating statuslines
 - [indent (snacks.nvim)](https://github.com/folke/snacks.nvim/blob/main/docs/indent.md): Indent guides and scopes
+- [mini.base16](https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-base16.md): Theme implementing the Base16 spec
 - [notifier (snacks.nvim)](https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md): Enhanced `vim.notify`
 - [nvim-scrollbar](https://github.com/petertriho/nvim-scrollbar): Extensible scrollbar
 - [nvim-ufo](https://github.com/kevinhwang91/nvim-ufo): High-performance folds with a modern look
@@ -136,7 +130,6 @@ directory and sorted by category.
 
 - [lazydev.nvim](https://github.com/folke/lazydev.nvim): LuaLS setup for Neovim
 - [mini.bracketed](https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-bracketed.md): Move back and forth between locations
-- [nvim-hlslens](https://github.com/kevinhwang91/nvim-hlslens): Enhancements for search matches
 - [oil.nvim](https://github.com/stevearc/oil.nvim): Explore the filesystem and edit it like a buffer
 - [picker (snacks.nvim)](https://github.com/folke/snacks.nvim/blob/main/docs/picker.md): Fuzzy picker for selecting items from sources
 - [quicker.nvim](https://github.com/stevearc/quicker.nvim): Improved UI and workflow for the quickfix list
@@ -147,4 +140,3 @@ directory and sorted by category.
 [lazy.nvim]: https://github.com/folke/lazy.nvim
 [my terminal emulator]: https://ghostty.org/
 [neovim]: https://neovim.io/
-
