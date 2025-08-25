@@ -1,10 +1,10 @@
 return {
-	cmd = { "nil" },
-	filetypes = { "nix" },
-	root_markers = { "flake.nix", ".git" },
-	["nil"] = {
-		formatting = {
-			command = { "nixfmt" },
-		},
-	},
+  cmd = { "nil" },
+  filetypes = { "nix" },
+  root_markers = { "flake.nix" },
+  ["nil"] = {
+    formatting = {
+      command = { "nixfmt" },
+    },
+  },
 }

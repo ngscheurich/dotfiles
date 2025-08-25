@@ -1,0 +1,54 @@
+-- -- ===================================================================
+-- --  Markview
+-- -- -------------------------------------------------------------------
+-- --  https://github.com/OXY2DEV/markview.nvim
+-- --  Hackable document previewer
+-- --  prose
+-- -- -------------------------------------------------------------------
+-- MiniDeps.add("OXY2DEV/markview.nvim")
+--
+-- local function conceal_tag(icon, hl_group)
+--   return {
+--     on_node = { hl_group = hl_group },
+--     on_closing_tag = { conceal = "" },
+--     on_opening_tag = {
+--       conceal = "",
+--       virt_text_pos = "inline",
+--       virt_text = { { icon .. " ", hl_group } },
+--     },
+--   }
+-- end
+--
+-- vim.api.nvim_create_autocmd("FileType", {
+--   desc = "Load Markview",
+--   group = vim.api.nvim_create_augroup("ngs.packages.markview", {}),
+--   pattern = { "markdown" },
+--   callback = function()
+--     if not package.loaded["markview"] then
+--       require("markview").setup({
+--         preview = {
+--           filetypes = { "markdown", "codecompanion" },
+--           ignore_buftypes = {},
+--         },
+--         experimental = {
+--           check_rtp_message = false,
+--         },
+--         html = {
+--           container_elements = {
+--             ["^buf$"] = conceal_tag("", "CodeCompanionChatVariable"),
+--             ["^file$"] = conceal_tag("", "CodeCompanionChatVariable"),
+--             ["^help$"] = conceal_tag("󰘥", "CodeCompanionChatVariable"),
+--             ["^image$"] = conceal_tag("", "CodeCompanionChatVariable"),
+--             ["^symbols$"] = conceal_tag("", "CodeCompanionChatVariable"),
+--             ["^url$"] = conceal_tag("󰖟", "CodeCompanionChatVariable"),
+--             ["^var$"] = conceal_tag("", "CodeCompanionChatVariable"),
+--             ["^tool$"] = conceal_tag("", "CodeCompanionChatTool"),
+--             ["^user_prompt$"] = conceal_tag("", "CodeCompanionChatTool"),
+--             ["^prompt$"] = conceal_tag("", "CodeCompanionChatTool"),
+--             ["^group$"] = conceal_tag("", "CodeCompanionChatToolGroup"),
+--           },
+--         },
+--       })
+--     end
+--   end,
+-- })
