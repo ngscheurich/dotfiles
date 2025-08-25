@@ -6,6 +6,5 @@ return {
     "pyproject.toml",
     "Cargo.toml",
     "Project.toml",
-    ".git",
   },
 }

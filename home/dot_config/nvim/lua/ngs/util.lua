@@ -1,15 +1,27 @@
 local M = {}
 
----Unload a Lua module.
+---Check if a Lua module is loaded
 ---@param module string
----@return nil
+---@return boolean
+M.is_loaded = function(module)
+  return package.loaded[module] ~= nil
+end
+
+---Unload a Lua module
+---@param module string
 M.unload = function(module)
   package.loaded[module] = nil
 end
 
----Toggle a Neovim option.
+---Reload a Lua module
+---@param module string
+M.reload = function(module)
+  package.loaded[module] = nil
+  require(module)
+end
+
+---Toggle a Neovim option
 ---@param name string
----@return nil
 M.toggle_opt = function(name)
   local on, off
 
@@ -26,17 +38,17 @@ M.toggle_opt = function(name)
   end
 end
 
----Get the `attr` of the given Neovim highlight group.
+---Get the `attr` of the given Neovim highlight group
 ---@param name string
 ---@param attr string
 ---@return string
 M.get_hl_attr = function(name, attr)
   local id = vim.fn.hlID(name)
-  return vim.fn.synIDattr(id, attr)
+  local resolved_id = vim.fn.synIDtrans(id)
+  return vim.fn.synIDattr(resolved_id, attr)
 end
 
----Load local theme plugin.
----@return nil
+---Load local theme plugin
 M.load_theme = function()
   vim.opt.runtimepath:prepend(vim.env.HOME .. "/.theme/nvim")
   M.unload("ngs.theme")
@@ -48,9 +60,8 @@ M.load_theme = function()
   end
 end
 
----Reconfigure plugins that rely on `vim.g.ngs.theme`.
+---Reconfigure plugins that rely on `vim.g.ngs.theme`
 ---@param reload_theme? boolean | nil
----@return nil
 M.reload_theme = function(reload_theme)
   if reload_theme then
     M.load_theme()
