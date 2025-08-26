@@ -6,6 +6,10 @@ symbol = ""
 [deno]
 symbol = "󱍢"
 
+[docker_context]
+format = "[$symbol$context]($style) "
+symbol = " "
+
 [elixir]
 symbol = " "
 
