@@ -67,6 +67,7 @@ M.reload_theme = function(reload_theme)
     M.load_theme()
   end
 
+  -- TODO: Update to reflect new colorscheme and config
   local specs = { "ngs.specs.nightfox", "ngs.specs.heirline" }
   for _, spec in ipairs(specs) do
     M.unload(spec)
