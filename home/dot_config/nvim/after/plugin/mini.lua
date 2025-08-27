@@ -71,3 +71,23 @@ require("mini.surround").setup({
 -- ------------------------------------------------------------------------------
 add({ source = "echasnovski/mini.base16", checkout = "stable" })
 vim.g.ngs.theme.apply(require("mini.base16").setup)
+
+-- ==============================================================================
+--  mini.hipatterns
+-- ------------------------------------------------------------------------------
+--  https://github.com/echasnovski/mini.hipatterns
+--  Highlight patterns in text
+--  ui
+-- ------------------------------------------------------------------------------
+add({ source = "echasnovski/mini.hipatterns", checkout = "stable" })
+local hipatterns = require("mini.hipatterns")
+hipatterns.setup({
+  highlighters = {
+    fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
+    hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
+    todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
+    note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
+
+    hex_color = hipatterns.gen_highlighter.hex_color(),
+  },
+})
