@@ -76,7 +76,7 @@ vim.api.nvim_create_autocmd("LspProgress", {
 })
 
 -- mini.hipatterns
-local hipatterns_ok, hipatterns = pcall(require, "hipatterns")
+local hipatterns_ok, hipatterns = pcall(require, "mini.hipatterns")
 if hipatterns_ok then
   hipatterns.setup({
     highlighters = {
