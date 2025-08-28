@@ -61,18 +61,16 @@ M.load_theme = function()
 end
 
 ---Reconfigure plugins that rely on `vim.g.ngs.theme`
----@param reload_theme? boolean | nil
-M.reload_theme = function(reload_theme)
-  if reload_theme then
-    M.load_theme()
-  end
+M.reload_theme = function()
+  M.load_theme()
+  vim.g.ngs.theme.apply(require("nightfox").setup)
+  require("ngs.statusline").build()
+end
 
-  -- TODO: Update to reflect new colorscheme and config
-  local specs = { "ngs.specs.nightfox", "ngs.specs.heirline" }
-  for _, spec in ipairs(specs) do
-    M.unload(spec)
-    require(spec).config()
-  end
+M.shade = function(hex, amount)
+  local color_lib = require("nightfox.lib.color")
+  local color = color_lib.from_hex(hex)
+  return color:shade(amount):to_css()
 end
 
 return M
