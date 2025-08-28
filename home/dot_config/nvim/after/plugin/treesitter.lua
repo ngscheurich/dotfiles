@@ -1,8 +1,8 @@
 -- nvim-treesitter
-local tsconfig_ok, tsconfig = pcall(require, "nvim-treesitter.config")
-if tsconfig_ok then
+local tsconfigs_ok, tsconfigs = pcall(require, "nvim-treesitter.configs")
+if tsconfigs_ok then
   ---@diagnostic disable-next-line
-  tsconfig.setup({
+  tsconfigs.setup({
     highlight = { enable = true },
     indent = { enable = true },
     ensure_installed = {

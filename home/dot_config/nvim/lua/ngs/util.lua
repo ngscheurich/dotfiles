@@ -64,6 +64,7 @@ end
 M.reload_theme = function()
   M.load_theme()
   vim.g.ngs.theme.apply(require("nightfox").setup)
+  package.loaded["ngs.statusline"] = nil
   require("ngs.statusline").build()
 end
 

@@ -210,27 +210,25 @@ local file = {
   end,
   {
     provider = file_path_provider,
-    hl = { fg = colors.fg_alt },
+    hl = { fg = colors.fg_alt, bg = colors.bg },
   },
   {
     provider = file_name_provider,
-    hl = function()
-      return vim.bo.modified and { fg = colors.fg }
-    end,
+    hl = { fg = colors.fg, bg = colors.bg },
   },
   {
     condition = function()
       return vim.bo.modified
     end,
     provider = "",
-    hl = { fg = colors.vcs_changed },
+    hl = { fg = colors.vcs_changed, bg = colors.bg },
   },
   {
     condition = function()
       return not vim.bo.modifiable or vim.bo.readonly
     end,
     provider = " ",
-    hl = { fg = colors.readonly },
+    hl = { fg = colors.readonly, bg = colors.bg },
   },
 }
 
@@ -248,25 +246,25 @@ local git = function()
       provider = function(self)
         return string.format(" %s ", self.status.head)
       end,
-      hl = { fg = colors.vcs_branch },
+      hl = { fg = colors.vcs_branch, bg = colors.bg },
     },
     {
       provider = function(self)
         return git_diff_provider(self, "added", "+")
       end,
-      hl = { fg = colors.vcs_added },
+      hl = { fg = colors.vcs_added, bg = colors.bg },
     },
     {
       provider = function(self)
         return git_diff_provider(self, "removed", "-")
       end,
-      hl = { fg = colors.vcs_removed },
+      hl = { fg = colors.vcs_removed, bg = colors.bg },
     },
     {
       provider = function(self)
         return git_diff_provider(self, "changed", "~")
       end,
-      hl = { fg = colors.vcs_changed },
+      hl = { fg = colors.vcs_changed, bg = colors.bg },
     },
   }
 end
@@ -275,10 +273,10 @@ local diagnostics = {
   condition = conds.has_diagnostics,
   static = {
     icons = {
-      error = get_diagnostic_sign("vim.diagnostic.severity.ERROR"),
-      warn = get_diagnostic_sign("vim.diagnostic.severity.WARN"),
-      info = get_diagnostic_sign("vim.diagnostic.severity.INFO"),
-      hint = get_diagnostic_sign("vim.diagnostic.severity.HINT"),
+      error = get_diagnostic_sign(vim.diagnostic.severity.ERROR),
+      warn = get_diagnostic_sign(vim.diagnostic.severity.WARN),
+      info = get_diagnostic_sign(vim.diagnostic.severity.INFO),
+      hint = get_diagnostic_sign(vim.diagnostic.severity.HINT),
     },
   },
   init = function(self)
@@ -292,34 +290,34 @@ local diagnostics = {
     provider = function(self)
       return self.errors > 0 and string.format(" %s %i", self.icons.error, self.errors)
     end,
-    hl = { fg = colors.diag_error },
+    hl = { fg = colors.diag_error, bg = colors.bg },
   },
   {
     provider = function(self)
       return self.warns > 0 and string.format(" %s %i", self.icons.warn, self.warns)
     end,
-    hl = { fg = colors.diag_warning },
+    hl = { fg = colors.diag_warning, bg = colors.bg },
   },
   {
     provider = function(self)
       return self.infos > 0 and string.format(" %s %i", self.icons.info, self.infos)
     end,
-    hl = { fg = colors.diag_info },
+    hl = { fg = colors.diag_info, bg = colors.bg },
   },
   {
     provider = function(self)
       return self.hints > 0 and string.format(" %s %i", self.icons.hint, self.hints)
     end,
-    hl = { fg = colors.diag_hint },
+    hl = { fg = colors.diag_hint, bg = colors.bg },
   },
 }
 
 local lsp = {
   condition = conds.lsp_attached,
   update = { "LspAttach", "LspDetach" },
-  static = { hidden = { "GitHub Copilot" } },
+  static = { hidden = {} },
   provider = lsp_provider,
-  hl = { fg = colors.lsp },
+  hl = { fg = colors.lsp, bg = colors.bg },
 }
 
 local filetype = function()
@@ -341,14 +339,14 @@ local filetype = function()
           return self.icon
         end,
         hl = function(self)
-          return { fg = util.get_hl_attr(self.hl_group, "fg") }
+          return { fg = util.get_hl_attr(self.hl_group, "fg"), bg = colors.bg }
         end,
       },
       {
         provider = function(self)
           return " " .. self.ft
         end,
-        hl = { fg = colors.fg_alt },
+        hl = { fg = colors.fg_alt, bg = colors.bg },
       },
     }
   else
@@ -373,17 +371,19 @@ local span = {
 local function gap(width)
   return {
     provider = function()
-      local gap = ""
+      local g = ""
       for _ = 1, width or 1 do
-        gap = gap .. " "
+        g = g .. " "
       end
-      return gap
+      return g
     end,
+    hl = { bg = colors.bg },
   }
 end
 
 return {
   build = function()
+    vim.print(1, 2, 3, 4)
     require("heirline").setup({
       statusline = {
         mode_bar,
