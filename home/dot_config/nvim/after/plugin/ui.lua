@@ -75,6 +75,40 @@ vim.api.nvim_create_autocmd("LspProgress", {
   end,
 })
 
+-- incline
+local incline_ok, incline = pcall(require, "incline")
+if incline_ok then
+  local util = require("ngs.util")
+  local helpers = require("incline.helpers")
+
+  incline.setup({
+    hide = {
+      focused_win = true,
+      only_win = true,
+    },
+    render = function(props)
+      local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
+      local modified = vim.bo[props.buf].modified
+      local icon, hl = MiniIcons.get("file", filename)
+      local bg = util.get_hl_attr(hl, "fg")
+      local fg = nil
+      if filename == "" then
+        filename = "[No Name]"
+      end
+      if bg and bg ~= "" then
+        fg = bg and helpers.contrast_color(bg)
+      end
+
+      return {
+        icon and { " ", icon, " ", guibg = bg, guifg = fg } or "",
+        " ",
+        { filename, gui = modified and "bold,italic" or "" },
+        " ",
+      }
+    end,
+  })
+end
+
 -- mini.hipatterns
 local hipatterns_ok, hipatterns = pcall(require, "mini.hipatterns")
 if hipatterns_ok then
@@ -129,6 +163,12 @@ if ufo_ok then
   vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
 end
 
+-- smear-cursor.nvim
+local smear_ok, smear = pcall(require, "smear")
+if smear_ok then
+  smear.setup()
+end
+
 -- Trouble
 local trouble_ok, trouble = pcall(require, "trouble")
 if trouble_ok then
@@ -174,39 +214,5 @@ if which_key_ok then
     { "<Leader>s", group = "search" },
     { "<Leader>t", group = "toggle" },
     { "<LocalLeader>t", group = "test" },
-  })
-end
-
--- incline
-local incline_ok, incline = pcall(require, "incline")
-if incline_ok then
-  local util = require("ngs.util")
-  local helpers = require("incline.helpers")
-
-  incline.setup({
-    hide = {
-      focused_win = true,
-      only_win = true,
-    },
-    render = function(props)
-      local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
-      local modified = vim.bo[props.buf].modified
-      local icon, hl = MiniIcons.get("file", filename)
-      local bg = util.get_hl_attr(hl, "fg")
-      local fg = nil
-      if filename == "" then
-        filename = "[No Name]"
-      end
-      if bg and bg ~= "" then
-        fg = bg and helpers.contrast_color(bg)
-      end
-
-      return {
-        icon and { " ", icon, " ", guibg = bg, guifg = fg } or "",
-        " ",
-        { filename, gui = modified and "bold,italic" or "" },
-        " ",
-      }
-    end,
   })
 end
