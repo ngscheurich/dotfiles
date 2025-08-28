@@ -1,3 +1,7 @@
+-- =============================================================================
+--  Language Server Protocol Client
+-- -----------------------------------------------------------------------------
+
 vim.lsp.config("*", {
   root_markers = { ".git" },
 })
@@ -16,10 +20,6 @@ vim.lsp.config("lua_ls", {
         version = "LuaJIT",
         path = { "lua/?.lua", "lua/?/init.lua" },
       },
-      -- workspace = {
-      --   checkThirdParty = true,
-      --   library = { vim.env.VIMRUNTIME },
-      -- },
       workspace = { library = vim.api.nvim_get_runtime_file("", true) },
     })
   end,

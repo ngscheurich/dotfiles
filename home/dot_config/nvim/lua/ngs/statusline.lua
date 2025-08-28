@@ -1,53 +1,41 @@
--- ===================================================================
---  Heirline
--- -------------------------------------------------------------------
---  https://github.com/rebelot/heirline.nvim
---  Statusline framework designed around recursive inheritance
---  ui
--- -------------------------------------------------------------------
-MiniDeps.add({
-  source = "rebelot/heirline.nvim",
-  depends = { "echasnovski/mini.base16" },
-})
-
 local conds = require("heirline.conditions")
 local util = require("ngs.util")
+local palette = require("nightfox.palette").load("nightfox")
 
 local theme = vim.g.ngs.theme
-local pal = theme.palette or {}
 local colors = theme.statusline or {}
 
 colors = vim.tbl_extend("keep", colors, {
-  fg = pal.base05,
-  fg_alt = pal.base04,
-  bg = pal.base01,
-  bg_alt = pal.base02,
+  fg = palette.fg1,
+  fg_alt = palette.fg2,
+  bg = palette.bg0,
+  bg_alt = palette.bg2,
 
-  mode_name_fg = pal.base00,
-  mode_icon_fg = pal.base00,
-  mode_normal = pal.base0D,
-  mode_visual = pal.base0E,
-  mode_select = pal.base0E,
-  mode_insert = pal.base0B,
-  mode_replace = pal.base08,
-  mode_command = pal.base0A,
-  mode_ex = pal.baseOA,
-  mode_wait = pal.base09,
-  mode_terminal = pal.base0F,
+  mode_name_fg = palette.bg0,
+  mode_icon_fg = palette.bg0,
+  mode_normal = palette.blue.base,
+  mode_visual = palette.magenta.base,
+  mode_select = palette.pink.base,
+  mode_insert = palette.green.base,
+  mode_replace = palette.red.base,
+  mode_command = palette.yellow.base,
+  mode_ex = palette.yellow.base,
+  mode_wait = palette.orange.base,
+  mode_terminal = palette.black.base,
 
-  readonly = pal.base08,
+  readonly = palette.red.base,
 
-  vcs_branch = pal.base0E,
-  vcs_added = pal.base0B,
-  vcs_removed = pal.base08,
-  vcs_changed = pal.base0D,
+  vcs_branch = palette.magenta.base,
+  vcs_added = palette.green.base,
+  vcs_removed = palette.red.base,
+  vcs_changed = palette.blue.base,
 
-  diag_error = pal.base04,
-  diag_warning = pal.base0A,
-  diag_info = pal.base0D,
-  diag_hint = pal.base0C,
+  diag_error = palette.red.base,
+  diag_warning = palette.yellow.base,
+  diag_info = palette.blue.base,
+  diag_hint = palette.cyan.base,
 
-  lsp = pal.base0F,
+  lsp = palette.blue.base,
 })
 
 local function get_mode_opts(mode)
@@ -175,18 +163,6 @@ local function get_diagnostic_count(severity)
   return #vim.diagnostic.get(0, { severity = severity })
 end
 
-local function darken(hex_color, amount)
-  local r, g, b = hex_color:match("#(%x%x)(%x%x)(%x%x)")
-  r, g, b = tonumber(r, 16), tonumber(g, 16), tonumber(b, 16)
-
-  local factor = 1.0 - amount
-  r = math.floor(r * factor)
-  g = math.floor(g * factor)
-  b = math.floor(b * factor)
-
-  return string.format("#%02x%02x%02x", r, g, b)
-end
-
 local mode_bar = {
   init = mode_init,
   update = mode_update,
@@ -197,8 +173,7 @@ local mode_bar = {
     hl = function(self)
       return {
         fg = colors.mode_icon_fg,
-        bg = darken(get_mode_opts(self.mode).color, 0.2),
-        bold = true,
+        bg = util.shade(get_mode_opts(self.mode).color, -0.2),
       }
     end,
   },
@@ -407,21 +382,25 @@ local function gap(width)
   }
 end
 
-require("heirline").setup({
-  statusline = {
-    mode_bar,
-    gap(2),
-    file,
-    gap(2),
-    git(),
-    span,
-    diagnostics,
-    gap(2),
-    lsp,
-    gap(2),
-    filetype(),
-    gap(2),
-    ruler,
-    mode_tag,
-  },
-})
+return {
+  build = function()
+    require("heirline").setup({
+      statusline = {
+        mode_bar,
+        gap(2),
+        file,
+        gap(2),
+        git(),
+        span,
+        diagnostics,
+        gap(2),
+        lsp,
+        gap(2),
+        filetype(),
+        gap(2),
+        ruler,
+        mode_tag,
+      },
+    })
+  end,
+}
