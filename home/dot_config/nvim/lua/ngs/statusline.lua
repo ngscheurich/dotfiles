@@ -383,7 +383,6 @@ end
 
 return {
   build = function()
-    vim.print(1, 2, 3, 4)
     require("heirline").setup({
       statusline = {
         mode_bar,
