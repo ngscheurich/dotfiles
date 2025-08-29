@@ -30,9 +30,9 @@ vim.lsp.config("lua_ls", {
 
 vim.lsp.enable({
   "bash_ls",
+  "expert",
   "fish_lsp",
   "gleam",
-  "lexical",
   "lua_ls",
   "nil",
   "tombi",
