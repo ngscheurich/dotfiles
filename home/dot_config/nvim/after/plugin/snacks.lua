@@ -23,6 +23,11 @@ if snacks_ok then
       hl = "Statement",
     },
 
+    -- Enhanced `vim.ui.input`
+    input = {
+      enabled = true,
+    },
+
     -- Enhanced `vim.notify`
     notifier = { enabled = true },
 
