@@ -205,12 +205,12 @@ if which_key_ok then
 
   which_key.add({
     { "<Leader>a", group = "ai" },
-    { "<Leader>ac", group = "codecompanion" },
     { "<Leader>e", group = "explore" },
     { "<Leader>f", group = "find" },
     { "<Leader>g", group = "git" },
     { "<Leader>l", group = "list" },
     { "<Leader>n", group = "notes" },
+    { "<Leader>o", group = "opencode" },
     { "<Leader>s", group = "search" },
     { "<Leader>t", group = "toggle" },
     { "<LocalLeader>t", group = "test" },
