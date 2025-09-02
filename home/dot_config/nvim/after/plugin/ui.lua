@@ -164,7 +164,7 @@ if ufo_ok then
 end
 
 -- smear-cursor.nvim
-local smear_ok, smear = pcall(require, "smear")
+local smear_ok, smear = pcall(require, "smear_cursor")
 if smear_ok then
   smear.setup()
 end
