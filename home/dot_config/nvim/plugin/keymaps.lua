@@ -22,6 +22,6 @@ vim.keymap.set("n", "<Leader>uc", function()
 end, { desc = "Cursorline" })
 
 vim.keymap.set("n", "<Esc>", "<Cmd>nohlsearch<CR>")
-vim.keymap.set("n", "<Esc><Esc>", "<C-\\><C-n>")
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
 vim.keymap.set("n", "<LocalLeader>d", vim.diagnostic.open_float, { desc = "Show diagnostics" })
