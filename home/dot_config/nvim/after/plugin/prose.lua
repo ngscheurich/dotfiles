@@ -6,18 +6,16 @@ if peek_ok then
   vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
 end
 
--- Markview.nvim
+-- render-markdown.md
 vim.api.nvim_create_autocmd("FileType", {
-  desc = "Load Markview",
-  group = vim.api.nvim_create_augroup("ngs.packages.markview", {}),
-  pattern = { "markdown", "typst", "latex", "yaml" },
+  desc = "Load render-markdown.md",
+  group = vim.api.nvim_create_augroup("ngs.packages.render_markdown", {}),
+  pattern = { "markdown" },
   callback = function()
-    if not package.loaded["markview"] then
-      local markview_ok, markview = pcall(require, "markview")
-      if markview_ok then
-        markview.setup({
-          experimental = { check_rtp_message = false },
-        })
+    if not package.loaded["render-markdown"] then
+      local render_md_ok, render_md = pcall(require, "render-markdown")
+      if render_md_ok then
+        render_md.setup()
       end
     end
   end,
