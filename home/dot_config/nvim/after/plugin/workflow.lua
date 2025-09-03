@@ -48,3 +48,6 @@ vim.api.nvim_create_autocmd("FileType", {
     end
   end,
 })
+
+-- vim-slime
+vim.g.slime_target = "tmux"
