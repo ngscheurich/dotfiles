@@ -210,7 +210,6 @@ if which_key_ok then
     { "<Leader>g", group = "git" },
     { "<Leader>l", group = "list" },
     { "<Leader>n", group = "notes" },
-    { "<Leader>o", group = "opencode" },
     { "<Leader>s", group = "search" },
     { "<Leader>t", group = "toggle" },
     { "<LocalLeader>t", group = "test" },
