@@ -26,6 +26,7 @@ defaults write NSGlobalDomain com.apple.mouse.scaling -float "2.5"
 defaults write NSGlobalDomain AppleKeyboardUIMode -int "3"
 defaults write NSGlobalDomain "InitialKeyRepeat" -float "15"
 defaults write NSGlobalDomain "KeyRepeat" -float "2"
+defaults write -g ApplePressAndHoldEnabled -bool "false"
 
 # Mission Control
 defaults write com.apple.spaces "spans-displays" -bool "true"
