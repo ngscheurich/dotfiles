@@ -173,7 +173,7 @@ local mode_bar = {
     hl = function(self)
       return {
         fg = colors.mode_icon_fg,
-        bg = util.shade(get_mode_opts(self.mode).color, -0.2),
+        bg = colors.mode_icon_bg or util.shade(get_mode_opts(self.mode).color, -0.2),
       }
     end,
   },
@@ -339,6 +339,9 @@ local filetype = function()
           return self.icon
         end,
         hl = function(self)
+          if colors.ft_icon then
+            return { fg = colors.ft_icon, bg = colors.bg }
+          end
           return { fg = util.get_hl_attr(self.hl_group, "fg"), bg = colors.bg }
         end,
       },
