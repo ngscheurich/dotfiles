@@ -25,4 +25,6 @@ window-padding-y = 8
 
 macos-option-as-alt = true
 
+custom-shader = ?./shaders/cursor_smear_fade.glsl
+
 config-file = ?~/.theme/ghostty
