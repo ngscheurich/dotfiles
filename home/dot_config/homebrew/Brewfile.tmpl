@@ -39,9 +39,11 @@ brew "glow"
 brew "gnupg"
 brew "gomplate"
 brew "gpg-tui"
+brew "gs"
 brew "gum"
 brew "htop"
 brew "icu4c@77"
+brew "imagemagick"
 brew "jq"
 brew "lazygit"
 brew "libgccjit"
@@ -115,7 +117,10 @@ cask "raycast"
 cask "utm"
 cask "vlc"
 
+mas "Kagi for Safari", id: 1622835804
+mas "Klack", id: 6446206067
 mas "Looking Glass - Music Remote", id: 1602004436
+mas "Tailscale", id: 1475387142
 
 {{- if eq .chezmoi.hostname "bienjensu" }}
 cask "affinity-designer"
@@ -129,12 +134,12 @@ cask "magicavoxel"
 cask "obs"
 cask "playdate-simulator"
 cask "steam"
-
 mas "Logic Pro", id: 634148309
 {{ end }}
 
 {{- if eq .chezmoi.hostname "joulie" }}
+brew "exiftool"
+brew "openjdk@17"
 cask "microsoft-office"
+mas "Transporter", id: 1450874784?mt=12
 {{ end }}
-
-mas "Tailscale", id: 1475387142
