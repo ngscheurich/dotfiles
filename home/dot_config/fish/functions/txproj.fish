@@ -1,3 +1,3 @@
 function txproj
-    grim txproj -- $argv
+    "$XDG_DATA_HOME/grimoire/txproj" $argv
 end

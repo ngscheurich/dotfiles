@@ -1,3 +1,3 @@
 function theme
-    grim theme -- $argv
+    "$XDG_DATA_HOME/grimoire/theme" $argv
 end
