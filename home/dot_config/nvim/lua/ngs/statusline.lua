@@ -151,7 +151,7 @@ local function lsp_provider(self)
   end
 
   if #clients > 0 then
-    return "  " .. table.concat(clients, " | ")
+    return " " .. table.concat(clients, " ")
   end
 end
 
@@ -227,7 +227,7 @@ local file = {
     condition = function()
       return not vim.bo.modifiable or vim.bo.readonly
     end,
-    provider = " ",
+    provider = " ",
     hl = { fg = colors.readonly, bg = colors.bg },
   },
 }
@@ -315,7 +315,7 @@ local diagnostics = {
 local lsp = {
   condition = conds.lsp_attached,
   update = { "LspAttach", "LspDetach" },
-  static = { hidden = {} },
+  static = { hidden = { "copilot" } },
   provider = lsp_provider,
   hl = { fg = colors.lsp, bg = colors.bg },
 }
@@ -362,7 +362,7 @@ local filetype = function()
 end
 
 local ruler = {
-  provider = " %7(%l/%3L%):%2c %P ",
+  provider = "  %7(%l/%3L%):%2c %P ",
   hl = { fg = colors.fg, bg = colors.bg_alt },
 }
 
@@ -401,7 +401,7 @@ return {
         filetype(),
         gap(2),
         ruler,
-        mode_tag,
+        -- mode_tag,
       },
     })
   end,
