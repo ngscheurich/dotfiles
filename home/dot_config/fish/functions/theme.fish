@@ -1,3 +1,3 @@
 function theme
-    "$XDG_DATA_HOME/grimoire/theme" $argv
+    "$XDG_DATA_HOME/grimoire/theme.sh" $argv
 end
