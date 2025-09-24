@@ -1,7 +1,7 @@
 adjust-cell-height = 20%
 
-font-family = MonoLisa Custom
-font-size = 11
+font-family = Berkeley Mono
+font-size = 12
 font-synthetic-style = no-bold,no-italic
 
 keybind = cmd+f=text:\x13f
@@ -20,11 +20,11 @@ keybind = cmd+7=text:\x137
 keybind = cmd+8=text:\x138
 keybind = cmd+9=text:\x139
 
-window-padding-x = 8
-window-padding-y = 8
+window-padding-x = 12
+window-padding-y = 12
 
 macos-option-as-alt = true
 
-custom-shader = ?./shaders/cursor_smear_fade.glsl
+# custom-shader = ?./shaders/cursor_smear_fade.glsl
 
 config-file = ?~/.theme/ghostty
