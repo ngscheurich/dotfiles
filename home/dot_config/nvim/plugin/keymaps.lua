@@ -25,3 +25,8 @@ vim.keymap.set("n", "<Esc>", "<Cmd>nohlsearch<CR>")
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
 vim.keymap.set("n", "<LocalLeader>d", vim.diagnostic.open_float, { desc = "Show diagnostics" })
+
+vim.keymap.set("n", "<Leader>td", function()
+  local new_config = not vim.diagnostic.config().virtual_lines
+  vim.diagnostic.config({ virtual_lines = new_config })
+end, { desc = "Diagnostic virtual lines" })
