@@ -1,4 +1,5 @@
 local M = {}
+local colors = require("lib.colors")
 
 ---Check if a Lua module is loaded
 ---@param module string
@@ -70,8 +71,13 @@ M.reload_theme = function()
   require("ngs.statusline").build()
 end
 
-M.shade = function(hex, _amount)
-  return hex
+---Adjust the lightness of a hexidecimal color
+---@param hex string
+---@param amount number
+---@return string
+M.lighten_to = function(hex, amount)
+  local color = colors.new(hex)
+  return color:lighten_to(amount):to_rgb()
 end
 
 return M
