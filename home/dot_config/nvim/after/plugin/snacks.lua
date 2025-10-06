@@ -24,10 +24,10 @@ if snacks_ok then
       },
     },
 
+    animate = { enabled = false },
+
     -- Enhanced `vim.ui.input`
-    input = {
-      enabled = true,
-    },
+    input = { enabled = true },
 
     -- Enhanced `vim.notify`
     notifier = { enabled = true },
