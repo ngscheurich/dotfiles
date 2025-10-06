@@ -114,7 +114,7 @@ if snacks_ok then
     Snacks.explorer.open()
   end, { desc = "Explorer (toggle)" })
 
-  vim.keymap.set("n", "<Leader>gB", function()
+  vim.keymap.set("n", "<Leader>go", function()
     Snacks.gitbrowse()
   end, { desc = "View on GitHub" })
 

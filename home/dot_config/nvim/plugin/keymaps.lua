@@ -9,15 +9,15 @@ vim.keymap.set("n", "<Down>", "<C-w>j")
 vim.keymap.set("n", "<Up>", "<C-w>k")
 vim.keymap.set("n", "<Right>", "<C-w>l")
 
-vim.keymap.set("n", "<Leader>un", function()
+vim.keymap.set("n", "<Leader>tn", function()
   util.toggle_opt("number")
 end, { desc = "Line numbers" })
 
-vim.keymap.set("n", "<Leader>uw", function()
+vim.keymap.set("n", "<Leader>tw", function()
   util.toggle_opt("list")
 end, { desc = "Whitespace" })
 
-vim.keymap.set("n", "<Leader>uc", function()
+vim.keymap.set("n", "<Leader>tc", function()
   util.toggle_opt("cursorline")
 end, { desc = "Cursorline" })
 
