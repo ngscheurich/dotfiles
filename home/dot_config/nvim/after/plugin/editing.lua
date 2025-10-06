@@ -72,3 +72,33 @@ if surround_ok then
     },
   })
 end
+
+local multicursor_ok, multicursor = pcall(require, "multicursor-nvim")
+if multicursor_ok then
+  multicursor.setup()
+
+  vim.keymap.set({ "n", "x" }, "<LocalLeader>n", function()
+    multicursor.matchAddCursor(1)
+  end, { desc = "Add cursor forward" })
+  vim.keymap.set({ "n", "x" }, "<LocalLeader>s", function()
+    multicursor.matchSkipCursor(1)
+  end, { desc = "Skip cursor forward" })
+  vim.keymap.set({ "n", "x" }, "<LocalLeader>N", function()
+    multicursor.matchAddCursor(-1)
+  end, { desc = "Add cursor backward" })
+  vim.keymap.set({ "n", "x" }, "<LocalLeader>S", function()
+    multicursor.matchSkipCursor(-1)
+  end, { desc = "Skip cursor backward" })
+
+  vim.keymap.set({ "n", "x" }, "<LocalLeader>q", multicursor.toggleCursor, { desc = "Toggle multiple cursors" })
+
+  multicursor.addKeymapLayer(function(layerSet)
+    layerSet("n", "<Esc>", function()
+      if not multicursor.cursorsEnabled() then
+        multicursor.enableCursors()
+      else
+        multicursor.clearCursors()
+      end
+    end)
+  end)
+end
