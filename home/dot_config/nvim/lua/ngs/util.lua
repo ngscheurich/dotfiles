@@ -57,21 +57,21 @@ M.load_theme = function()
     local ngs = vim.g.ngs
     ngs.theme = theme
     vim.g.ngs = ngs
+  else
+    vim.notify("Could not load theme")
   end
 end
 
 ---Reconfigure plugins that rely on `vim.g.ngs.theme`
 M.reload_theme = function()
   M.load_theme()
-  vim.g.ngs.theme.apply(require("nightfox").setup)
+  vim.g.ngs.theme.apply(require("mini.base16").setup)
   package.loaded["ngs.statusline"] = nil
   require("ngs.statusline").build()
 end
 
-M.shade = function(hex, amount)
-  local color_lib = require("nightfox.lib.color")
-  local color = color_lib.from_hex(hex)
-  return color:shade(amount):to_css()
+M.shade = function(hex, _amount)
+  return hex
 end
 
 return M
