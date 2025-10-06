@@ -16,11 +16,12 @@ if snacks_ok then
 
     -- Indent guides and scopes
     indent = {
-      enabled = false,
-      char = ";",
-      only_scope = true,
-      only_current = true,
-      hl = "Statement",
+      indent = {
+        enabled = true,
+      },
+      animate = {
+        enabled = false,
+      },
     },
 
     -- Enhanced `vim.ui.input`
