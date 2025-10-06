@@ -1,42 +1,47 @@
 local conds = require("heirline.conditions")
 local util = require("ngs.util")
-local palette = require("nightfox.palette").load("nightfox")
+local base16_ok, base16 = pcall(require, "mini.base16")
 
 local theme = vim.g.ngs.theme
 local colors = theme.statusline or {}
 
-colors = vim.tbl_extend("keep", colors, {
-  fg = palette.fg1,
-  fg_alt = palette.fg2,
-  bg = palette.bg0,
-  bg_alt = palette.bg2,
+if base16_ok then
+  local palette = base16.config.palette
+  if palette then
+    colors = vim.tbl_extend("keep", colors, {
+      fg = palette.base05,
+      fg_alt = palette.base04,
+      bg = palette.base01,
+      bg_alt = palette.base02,
 
-  mode_name_fg = palette.bg0,
-  mode_icon_fg = palette.bg0,
-  mode_normal = palette.blue.base,
-  mode_visual = palette.magenta.base,
-  mode_select = palette.pink.base,
-  mode_insert = palette.green.base,
-  mode_replace = palette.red.base,
-  mode_command = palette.yellow.base,
-  mode_ex = palette.yellow.base,
-  mode_wait = palette.orange.base,
-  mode_terminal = palette.black.base,
+      mode_name_fg = palette.base00,
+      mode_icon_fg = palette.base00,
+      mode_normal = palette.base04,
+      mode_visual = palette.base0E,
+      mode_select = palette.base0C,
+      mode_insert = palette.base0B,
+      mode_replace = palette.base08,
+      mode_command = palette.base0A,
+      mode_ex = palette.base0A,
+      mode_wait = palette.base09,
+      mode_terminal = palette.base04,
 
-  readonly = palette.red.base,
+      readonly = palette.base08,
 
-  vcs_branch = palette.magenta.base,
-  vcs_added = palette.green.base,
-  vcs_removed = palette.red.base,
-  vcs_changed = palette.blue.base,
+      vcs_branch = palette.base0E,
+      vcs_added = palette.base0B,
+      vcs_removed = palette.base08,
+      vcs_changed = palette.base0D,
 
-  diag_error = palette.red.base,
-  diag_warning = palette.yellow.base,
-  diag_info = palette.blue.base,
-  diag_hint = palette.cyan.base,
+      diag_error = palette.base08,
+      diag_warning = palette.base0A,
+      diag_info = palette.base0D,
+      diag_hint = palette.base0C,
 
-  lsp = palette.blue.base,
-})
+      lsp = palette.base0D,
+    })
+  end
+end
 
 local function get_mode_opts(mode)
   local mode_opts = {
