@@ -11,5 +11,6 @@ vim.diagnostic.config({
       [vim.diagnostic.severity.HINT] = "",
     },
   },
-  virtual_lines = true,
+  virtual_lines = false,
+  virtual_text = true,
 })
