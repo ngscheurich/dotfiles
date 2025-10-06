@@ -178,7 +178,7 @@ local mode_bar = {
     hl = function(self)
       return {
         fg = colors.mode_icon_fg,
-        bg = colors.mode_icon_bg or util.shade(get_mode_opts(self.mode).color, -0.2),
+        bg = colors.mode_icon_bg or util.lighten_to(get_mode_opts(self.mode).color, 0.49),
       }
     end,
   },
@@ -196,18 +196,18 @@ local mode_bar = {
   },
 }
 
-local mode_tag = {
-  init = mode_init,
-  update = mode_update,
-  provider = function()
-    return " "
-  end,
-  hl = function(self)
-    return {
-      bg = get_mode_opts(self.mode).color,
-    }
-  end,
-}
+-- local mode_tag = {
+--   init = mode_init,
+--   update = mode_update,
+--   provider = function()
+--     return " "
+--   end,
+--   hl = function(self)
+--     return {
+--       bg = get_mode_opts(self.mode).color,
+--     }
+--   end,
+-- }
 
 local file = {
   init = function(self)
