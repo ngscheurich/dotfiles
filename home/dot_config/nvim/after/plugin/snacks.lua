@@ -39,7 +39,10 @@ if snacks_ok then
     quickfile = { enabled = true },
 
     -- Enhanced statuscolumn
-    statuscolumn = { enabled = true },
+    statuscolumn = {
+      left = { "git", "sign" },
+      right = { "fold", "mark" },
+    },
 
     -- Distraction-free editing
     zen = {
