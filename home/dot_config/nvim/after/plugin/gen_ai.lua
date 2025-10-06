@@ -36,13 +36,8 @@ if copilot_ok then
   })
 end
 
-local opencode_ok, opencode = pcall(require, "opencode")
+local opencode_ok = pcall(require, "opencode")
 if opencode_ok then
-  opencode.setup(
-    ---@type opencode.Opts
-    {}
-  )
-
   local function map(mode, lhs, call_data, opts)
     local name, arg = call_data[1], call_data[2]
     vim.keymap.set(mode, lhs, function()
