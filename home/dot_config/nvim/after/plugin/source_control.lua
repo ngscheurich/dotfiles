@@ -1,3 +1,5 @@
+vim.keymap.set("n", "<Leader>gB", "<Cmd>Git blame<CR>", { desc = "Blame buffer" })
+
 local gitsigns_ok, gitsigns = pcall(require, "gitsigns")
 if gitsigns_ok then
   gitsigns.setup({
