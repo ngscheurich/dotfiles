@@ -188,6 +188,14 @@ end
 local tiny_glimmer_ok, tiny_glimmer = pcall(require, "tiny-glimmer")
 if tiny_glimmer_ok then
   tiny_glimmer.setup({
+    animations = {
+      fade = {
+        max_duration = 600,
+        min_duration = 500,
+        from_color = "PMenuSel",
+        to_color = "CursorLine",
+      },
+    },
     overwrite = {
       search = { enabled = true },
       undo = { enabled = true },
