@@ -1,7 +1,15 @@
--- Blink Completion
-local blink_ok, blink = pcall(require, "blink.cmp")
-if blink_ok then
-  blink.setup(
+-- ┌──────────────────────────────────────────────────┬──────────────────────┐
+-- │  Blink Completion                               │  completion         │
+-- ├──────────────────────────────────────────────────┴──────────────────────┤
+-- │  Performant, batteries-included completion                             │
+-- └─────────────────────────────────────────────────────────────────────────┘
+MiniDeps.later(function()
+  MiniDeps.add({
+    source = "saghen/blink.cmp",
+    checkout = "v1.6.0",
+  })
+
+  require("blink.cmp").setup(
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     {
@@ -74,4 +82,4 @@ if blink_ok then
       },
     }
   )
-end
+end)

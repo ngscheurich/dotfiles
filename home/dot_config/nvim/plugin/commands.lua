@@ -1,6 +1,7 @@
 -- =============================================================================
 --   User Commands
 -- -----------------------------------------------------------------------------
+
 local command = vim.api.nvim_create_user_command
 
 command("LspInfo", ":checkhealth vim.lsp", { desc = "Alias to `:checkhealth vim.lsp`" })

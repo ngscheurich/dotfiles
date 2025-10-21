@@ -1,43 +1,11 @@
-local copilot_ok, copilot = pcall(require, "copilot")
-if copilot_ok then
-  copilot.setup({
-    filetypes = {
-      elixir = true,
-      lua = true,
-      ["*"] = false,
-    },
-  })
+-- ┌──────────────────────────────────────────────────┬──────────────────────┐
+-- │  opencode.nvim                                  │  gen-ai             │
+-- ├──────────────────────────────────────────────────┴──────────────────────┤
+-- │  Integration with opencode AI coding agent                             │
+-- └─────────────────────────────────────────────────────────────────────────┘
+MiniDeps.later(function()
+  MiniDeps.add("NickvanDyke/opencode.nvim")
 
-  vim.keymap.set("i", "<C-c>", function()
-    local suggestion = require("copilot.suggestion")
-    if suggestion.is_visible() then
-      suggestion.accept()
-    else
-      suggestion.next()
-    end
-  end, { desc = "Get/accept Copilot suggestion" })
-
-  vim.keymap.set("n", "<Leader>aC", function()
-    require("copilot.suggestion").toggle_auto_trigger()
-  end, { desc = "Toggle Copilot auto-trigger" })
-
-  vim.api.nvim_create_autocmd("User", {
-    pattern = "BlinkCmpMenuOpen",
-    callback = function()
-      vim.b.copilot_suggestion_hidden = true
-    end,
-  })
-
-  vim.api.nvim_create_autocmd("User", {
-    pattern = "BlinkCmpMenuClose",
-    callback = function()
-      vim.b.copilot_suggestion_hidden = false
-    end,
-  })
-end
-
-local opencode_ok = pcall(require, "opencode")
-if opencode_ok then
   local function map(mode, lhs, call_data, opts)
     local name, arg = call_data[1], call_data[2]
     vim.keymap.set(mode, lhs, function()
@@ -55,4 +23,4 @@ if opencode_ok then
   map({ "n", "v" }, "<Leader>ap", { "select_prompt" }, { desc = "Select opencode prompt" })
   map("n", "<C-S-U", { "command", "messages_half_page_up" }, { desc = "Scroll opencode messages up" })
   map("n", "<C-S-D>", { "command", "messages_half_page_down" }, { desc = "Scroll opencode messages down" })
-end
+end)

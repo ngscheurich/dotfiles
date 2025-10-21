@@ -1,13 +1,6 @@
 local M = {}
 local colors = require("lib.colors")
 
----Check if a Lua module is loaded
----@param module string
----@return boolean
-M.is_loaded = function(module)
-  return package.loaded[module] ~= nil
-end
-
 ---Unload a Lua module
 ---@param module string
 M.unload = function(module)
