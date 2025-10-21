@@ -1,12 +1,10 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "{env:OPENCODE_MODEL}",
-  "provider": {
-    "anthropic": {
-      "models": {},
-      "options": {
-        "apiKey": "{env:OPENCODE_API_KEY}"
-      }
+  "lsp": {
+    "elixir-ls": { "disabled": true },
+    "expert": {
+      "command": ["expert"],
+      "extensions": [".ex", ".exs", ".eex", ".heex"]
     }
   }
 }
