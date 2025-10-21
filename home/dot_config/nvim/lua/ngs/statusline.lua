@@ -196,19 +196,6 @@ local mode_bar = {
   },
 }
 
--- local mode_tag = {
---   init = mode_init,
---   update = mode_update,
---   provider = function()
---     return " "
---   end,
---   hl = function(self)
---     return {
---       bg = get_mode_opts(self.mode).color,
---     }
---   end,
--- }
-
 local file = {
   init = function(self)
     self.filename = vim.api.nvim_buf_get_name(0)
@@ -392,6 +379,7 @@ end
 return {
   build = function()
     require("heirline").setup({
+      ---@diagnostic disable-next-line
       statusline = {
         mode_bar,
         gap(2),
@@ -406,7 +394,6 @@ return {
         filetype(),
         gap(2),
         ruler,
-        -- mode_tag,
       },
     })
   end,

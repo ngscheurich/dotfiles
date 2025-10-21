@@ -1,7 +1,12 @@
-local snacks_ok, snacks = pcall(require, "snacks")
+-- ┌──────────────────────────────────────────────────┬──────────────────────┐
+-- │  snacks.nvim                                    │  prose              │
+-- ├──────────────────────────────────────────────────┴──────────────────────┤
+-- │  Collection of quality-of-life plugins                                 │
+-- └─────────────────────────────────────────────────────────────────────────┘
+MiniDeps.now(function()
+  MiniDeps.add("folke/snacks.nvim")
 
-if snacks_ok then
-  snacks.setup({
+  require("snacks").setup({
     -- Deal with big files
     bigfile = { enabled = true },
 
@@ -16,14 +21,11 @@ if snacks_ok then
 
     -- Indent guides and scopes
     indent = {
-      indent = {
-        enabled = true,
-      },
-      animate = {
-        enabled = false,
-      },
+      indent = { enabled = true },
+      animate = { enabled = false },
     },
 
+    -- Animations
     animate = { enabled = false },
 
     -- Enhanced `vim.ui.input`
@@ -116,7 +118,7 @@ if snacks_ok then
 
   vim.keymap.set("n", "<Leader>go", function()
     Snacks.gitbrowse()
-  end, { desc = "View on GitHub" })
+  end, { desc = "Open on GitHub" })
 
   vim.keymap.set("n", "<Leader>ti", function()
     if Snacks.indent.enabled then
@@ -125,4 +127,4 @@ if snacks_ok then
       Snacks.indent.enable()
     end
   end, { desc = "Indent Guides" })
-end
+end)

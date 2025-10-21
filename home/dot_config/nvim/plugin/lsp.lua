@@ -1,5 +1,5 @@
 -- =============================================================================
---  Language Server Protocol Client
+-- 󱐋 Language Server Protocol Client
 -- -----------------------------------------------------------------------------
 
 vim.lsp.config("*", {
@@ -37,4 +37,5 @@ vim.lsp.enable({
   "nil",
   "tombi",
   "typescript_ls",
+  "vscode_json_ls",
 })

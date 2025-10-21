@@ -1,0 +1,276 @@
+-- ┌──────────────────────────────────────────────────┬──────────────────────┐
+-- │  Aerial                                         │  ui                 │
+-- ├──────────────────────────────────────────────────┴──────────────────────┤
+-- │  Code outline window                                                   │
+-- └─────────────────────────────────────────────────────────────────────────┘
+MiniDeps.later(function()
+  MiniDeps.add("stevearc/aerial.nvim")
+  local aerial = require("aerial")
+  aerial.setup({
+    on_attach = function(buffer)
+      vim.keymap.set("n", "}", "<Cmd>AerialNext<CR>", { buffer = buffer })
+      vim.keymap.set("n", "{", "<Cmd>AerialPrev<CR>", { buffer = buffer })
+    end,
+  })
+
+  vim.keymap.set("n", "<Leader>o", "<Cmd>AerialToggle!<CR>", { desc = "Outline" })
+  vim.keymap.set("n", "gO", function()
+    require("aerial").snacks_picker()
+  end, { desc = "Symbols" })
+end)
+
+-- ┌──────────────────────────────────────────────────┬──────────────────────┐
+-- │  Fidget                                         │  ui                 │
+-- ├──────────────────────────────────────────────────┴──────────────────────┤
+-- │  UI for notifications and progress messages                            │
+-- └─────────────────────────────────────────────────────────────────────────┘
+MiniDeps.later(function()
+  MiniDeps.add("j-hui/fidget.nvim")
+
+  vim.api.nvim_create_autocmd("LspProgress", {
+    desc = "Load Fidget",
+    group = vim.api.nvim_create_augroup("ngs.packages.fidget", {}),
+    callback = function()
+      if not package.loaded["fidget"] then
+        require("fidget").setup({
+          progress = {
+            display = { done_icon = "" },
+          },
+        })
+      end
+    end,
+  })
+end)
+
+-- ┌──────────────────────────────────────────────────┬──────────────────────┐
+-- │  Trouble                                        │  ui                 │
+-- ├──────────────────────────────────────────────────┴──────────────────────┤
+-- │  Interactive listing of diagnostics, references, and more              │
+-- └─────────────────────────────────────────────────────────────────────────┘
+MiniDeps.later(function()
+  MiniDeps.add("folke/trouble.nvim")
+
+  require("trouble").setup()
+
+  local function map(lhs, rhs, opts)
+    vim.keymap.set("n", lhs, rhs, opts)
+  end
+
+  map("<Leader>ld", "<Cmd>Trouble diagnostics toggle filter.buf=0<CR>", { desc = "Diagnostics (buffer)" })
+  map("<Leader>lD", "<Cmd>Trouble diagnostics toggle<CR>", { desc = "Diagnostics" })
+  map("<Leader>ll", "<cmd>Trouble loclist toggle<CR>", { desc = "Location list" })
+  map("<Leader>lq", "<cmd>Trouble qflist toggle<CR>", { desc = "Quickfix list" })
+end)
+
+-- ┌──────────────────────────────────────────────────┬──────────────────────┐
+-- │  WhichKey                                       │  ui                 │
+-- ├──────────────────────────────────────────────────┴──────────────────────┤
+-- │  Shows available keybindings as you type                                │
+-- └─────────────────────────────────────────────────────────────────────────┘
+MiniDeps.later(function()
+  MiniDeps.add("folke/which-key.nvim")
+
+  local which_key = require("which-key")
+  which_key.setup({ icons = { mappings = false } })
+  which_key.add({
+    { "<Leader>a", group = "ai" },
+    { "<Leader>e", group = "explore" },
+    { "<Leader>f", group = "find" },
+    { "<Leader>g", group = "git" },
+    { "<Leader>l", group = "list" },
+    { "<Leader>n", group = "notes" },
+    { "<Leader>s", group = "search" },
+    { "<Leader>t", group = "toggle" },
+    { "<LocalLeader>t", group = "test" },
+  })
+end)
+
+-- ┌──────────────────────────────────────────────────┬──────────────────────┐
+-- │  bufferline.nvim                                │  ui                 │
+-- ├──────────────────────────────────────────────────┴──────────────────────┤
+-- │  A bufferline to display tabs                                          │
+-- └─────────────────────────────────────────────────────────────────────────┘
+MiniDeps.later(function()
+  MiniDeps.add("akinsho/bufferline.nvim")
+
+  vim.api.nvim_create_autocmd({ "TabEnter", "TabNew", "TabNewEntered" }, {
+    desc = "Load bufferline.nvim",
+    group = vim.api.nvim_create_augroup("ngs.packges.bufferline", {}),
+    callback = function()
+      if not package.loaded["bufferline"] then
+        require("bufferline").setup({
+          options = {
+            mode = "tabs",
+            indicator = { icon = "┃" },
+          },
+        })
+      end
+    end,
+  })
+end)
+
+-- ┌──────────────────────────────────────────────────┬──────────────────────┐
+-- │  dropbar.nvim                                   │  ui                 │
+-- ├──────────────────────────────────────────────────┴──────────────────────┤
+-- │  Document breadcrumbs bar                                              │
+-- └─────────────────────────────────────────────────────────────────────────┘
+MiniDeps.later(function()
+  MiniDeps.add("Bekaboo/dropbar.nvim")
+  require("dropbar").setup({
+    bar = { enable = false },
+  })
+
+  vim.keymap.set("n", "<Leader>tb", function()
+    if vim.o.winbar == "" then
+      vim.opt.winbar = "%{%v:lua.dropbar()%}"
+    else
+      vim.opt.winbar = ""
+    end
+  end, { desc = "Breadcrumbs" })
+end)
+
+-- ┌──────────────────────────────────────────────────┬──────────────────────┐
+-- │  incline                                        │  ui                 │
+-- ├──────────────────────────────────────────────────┴──────────────────────┤
+-- │  Lightweight floating statuslines                                      │
+-- └─────────────────────────────────────────────────────────────────────────┘
+MiniDeps.later(function()
+  MiniDeps.add("b0o/incline.nvim")
+  local util = require("ngs.util")
+  local helpers = require("incline.helpers")
+
+  require("incline").setup({
+    hide = {
+      focused_win = true,
+      only_win = true,
+    },
+    render = function(props)
+      local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
+      local modified = vim.bo[props.buf].modified
+      local icon, hl = MiniIcons.get("file", filename)
+      local bg = util.get_hl_attr(hl, "fg")
+      local fg = nil
+      if filename == "" then
+        filename = "[No Name]"
+      end
+      if bg and bg ~= "" then
+        fg = bg and helpers.contrast_color(bg)
+      end
+
+      return {
+        icon and { " ", icon, " ", guibg = bg, guifg = fg } or "",
+        " ",
+        { filename, gui = modified and "bold,italic" or "" },
+        " ",
+      }
+    end,
+  })
+end)
+
+-- ┌──────────────────────────────────────────────────┬──────────────────────┐
+-- │  mini.hipatterns                                │  ui                 │
+-- ├──────────────────────────────────────────────────┴──────────────────────┤
+-- │  Highlight patterns in text                                            │
+-- └─────────────────────────────────────────────────────────────────────────┘
+MiniDeps.later(function()
+  MiniDeps.add({
+    source = "https://github.com/echasnovski/mini.hipatterns",
+    checkout = "stable",
+  })
+  local hipatterns = require("mini.hipatterns")
+  hipatterns.setup({
+    highlighters = {
+      fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
+      hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
+      todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
+      note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
+
+      hex_color = hipatterns.gen_highlighter.hex_color(),
+    },
+  })
+end)
+
+-- mini.icons
+-- ┌──────────────────────────────────────────────────┬──────────────────────┐
+-- │  mini.icons                                     │  ui                 │
+-- ├──────────────────────────────────────────────────┴──────────────────────┤
+-- │  Icon provider                                                         │
+-- └─────────────────────────────────────────────────────────────────────────┘
+MiniDeps.now(function()
+  MiniDeps.add({
+    source = "https://github.com/echasnovski/mini.icons",
+    checkout = "stable",
+  })
+  require("mini.icons").setup()
+end)
+
+-- ┌──────────────────────────────────────────────────┬──────────────────────┐
+-- │  nvim-scrollbar                                 │  ui                 │
+-- ├──────────────────────────────────────────────────┴──────────────────────┤
+-- │  Extensible scrollbar                                                  │
+-- └─────────────────────────────────────────────────────────────────────────┘
+MiniDeps.now(function()
+  MiniDeps.add("petertriho/nvim-scrollbar")
+
+  -- TODO: Reload on theme change
+  require("scrollbar").setup({
+    hide_if_all_visible = true,
+    excluded_buftypes = {},
+    excluded_filetypes = {
+      "popup",
+      "blink-cmp-menu",
+      "blink-cmp-signature",
+      "blink-cmp-documentation",
+    },
+    handlers = {
+      gitsigns = true,
+    },
+  })
+end)
+
+-- ┌──────────────────────────────────────────────────┬──────────────────────┐
+-- │  nvim-ufo                                       │  ui                 │
+-- ├──────────────────────────────────────────────────┴──────────────────────┤
+-- │  High-performance folds with a modern look                             │
+-- └─────────────────────────────────────────────────────────────────────────┘
+MiniDeps.now(function()
+  MiniDeps.add({ source = "kevinhwang91/nvim-ufo", depends = { "kevinhwang91/promise-async" } })
+
+  local ufo = require("ufo")
+
+  vim.opt.foldmethod = "manual"
+  vim.opt.foldcolumn = "1"
+  vim.opt.foldlevel = 99
+  vim.opt.foldlevelstart = 99
+  vim.opt.foldenable = true
+
+  ufo.setup()
+
+  vim.keymap.set("n", "zR", ufo.openAllFolds)
+  vim.keymap.set("n", "zM", ufo.closeAllFolds)
+end)
+
+-- ┌──────────────────────────────────────────────────┬──────────────────────┐
+-- │  tiny-glimmer.nvim                              │  ui                 │
+-- ├──────────────────────────────────────────────────┴──────────────────────┤
+-- │   Adds subtle animations to various operations                         │
+-- └─────────────────────────────────────────────────────────────────────────┘
+MiniDeps.later(function()
+  MiniDeps.add("rachartier/tiny-glimmer.nvim")
+
+  require("tiny-glimmer").setup({
+    animations = {
+      fade = {
+        max_duration = 600,
+        min_duration = 500,
+        from_color = "PMenuSel",
+        to_color = "CursorLine",
+      },
+    },
+    overwrite = {
+      search = { enabled = true },
+      undo = { enabled = true },
+      redo = { enabled = true },
+    },
+  })
+end)
