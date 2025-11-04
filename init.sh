@@ -259,7 +259,13 @@ initialize_chezmoi() {
 # Fish --------------------------------------------------------------------- {{{
 change_shell_to_fish() {
   icon="🐟"
-  shell=$(dscl . -read "/Users/${USER}" UserShell | awk '{print $2}')
+
+  if is_darwin; then
+    shell=$(dscl . -read "/Users/${USER}" UserShell | awk '{print $2}')
+  else
+    shell=$(getent passwd | awk -F: -v user="${USER}" '$1 == user {print $NF}')
+  fi
+
   fish=$(command -v fish)
 
   # If the current shell is not Fish, set it using chsh
