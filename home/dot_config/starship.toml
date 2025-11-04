@@ -1,10 +1,10 @@
 "$schema" = "https://starship.rs/config-schema.json"
 
 [bun]
-symbol = ""
+symbol = " "
 
 [deno]
-symbol = "󱍢"
+symbol = "󱍢 "
 
 [docker_context]
 format = "[$symbol$context]($style) "
@@ -14,13 +14,13 @@ symbol = " "
 symbol = " "
 
 [elm]
-symbol = ""
+symbol = " "
 
 [erlang]
-symbol = ""
+symbol = " "
 
 [fennel]
-symbol = ""
+symbol = " "
 
 [gleam]
 symbol = "󰦥 "
@@ -29,43 +29,50 @@ symbol = "󰦥 "
 symbol = " "
 
 [haxe]
-symbol = ""
+symbol = " "
+
+[hostname]
+ssh_symbol = "󰁥 "
+format = "[$ssh_symbol$hostname]($style) in "
 
 [kotlin]
-symbol = ""
+symbol = " "
 
 [lua]
 symbol = " "
 
 [nodejs]
-symbol = ""
+symbol = " "
 
 [ocaml]
-symbol = ""
+symbol = " "
 
 [perl]
-symbol = ""
+symbol = " "
 
 [php]
-symbol = ""
+symbol = " "
 
 [purescript]
-symbol = ""
+symbol = " "
 
 [python]
-symbol = ""
+symbol = " "
 
 [ruby]
-symbol = ""
+symbol = " "
 
 [rust]
-symbol = ""
+symbol = " "
 
 [typst]
-symbol = ""
+symbol = " "
+
+[username]
+format = "[$user]($style) "
 
 [swift]
-symbol = ""
+symbol = " "
 
 [zig]
-symbol = ""
+symbol = " "
