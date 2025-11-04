@@ -33,12 +33,7 @@ HOMEBREW_BIN="/opt/homebrew/bin"
 SCRIPT_DEPS="1password 1password-cli fish"
 LOCAL_BIN="${HOME}/.local/bin"
 CHEZMOI_STATE="${HOME}/.local/share/chezmoi"
-
-if [ -n "$TMPDIR" ]; then
-  WORKDIR="${TMPDIR%/}/dotfiles"
-else
-  WORKDIR="/tmp/dotfiles"
-fi
+WORKDIR="${TMPDIR:-/tmp}/dotfiles"
 
 if command -v gum >/dev/null 2>&1; then
   GUM="$(command -v gum)"
