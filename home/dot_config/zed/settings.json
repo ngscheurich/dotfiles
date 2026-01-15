@@ -1,0 +1,24 @@
+{
+  "show_edit_predictions": true,
+  "base_keymap": "Emacs",
+  "buffer_font_size": 13,
+  "git": {
+    "inline_blame": {
+      "enabled": false,
+      "show_commit_summary": true,
+    },
+  },
+  "languages": {
+    "Elixir": {
+      "language_servers": ["!expert", "elixir-ls"],
+    },
+  },
+  "terminal": {
+    "font_family": "Lilex Nerd Font",
+  },
+  "title_bar": {
+    "show_user_picture": false,
+  },
+  "ui_font_size": 14,
+  "vim_mode": true,
+}
