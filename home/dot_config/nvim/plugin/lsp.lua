@@ -33,6 +33,7 @@ vim.lsp.enable({
   "elixir_ls",
   "fish_lsp",
   "gleam",
+  "gopls",
   "lua_ls",
   "nil",
   "tombi",
