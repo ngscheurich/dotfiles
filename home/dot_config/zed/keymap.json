@@ -1,0 +1,75 @@
+[
+  // =======================================================
+  // General
+  // -------------------------------------------------------
+  {
+    "bindings": {
+      "cmd-/": "terminal_panel::ToggleFocus",
+      "cmd-shift-g": "git_panel::ToggleFocus"
+    }
+  },
+
+  // =======================================================
+  // Normal mode
+  // -------------------------------------------------------
+  {
+    "context": "vim_mode == normal && !menu",
+    "bindings": {
+      "shift-y": ["workspace::SendKeystrokes", "y $"],
+
+      // Git
+      "space g b": "editor::ToggleGitBlameInline",
+      "space g B": "git::Blame",
+
+      // Toggle
+      "space t i": "editor::ToggleIndentGuides",
+      "space t p": "workspace::ToggleEditPrediction"
+    }
+  },
+
+  // =======================================================
+  // Normal + visual mode
+  // -------------------------------------------------------
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      "s": "vim::PushSneak",
+      "shift-s": "vim::PushSneakBackward"
+    }
+  },
+
+  // =======================================================
+  // Insert mode
+  // -------------------------------------------------------
+  {
+    "context": "vim_mode == insert",
+    "bindings": {
+      // "j k": "vim::NormalBefore" // In insert mode, make jk escape to normal mode.
+    }
+  },
+
+  // =======================================================
+  // Dock
+  // -------------------------------------------------------
+  {
+    "context": "Dock",
+    "bindings": {
+      "ctrl-w h": "workspace::ActivatePaneLeft",
+      "ctrl-w l": "workspace::ActivatePaneRight",
+      "ctrl-w k": "workspace::ActivatePaneUp",
+      "ctrl-w j": "workspace::ActivatePaneDown"
+    }
+  },
+
+  // =======================================================
+  // No editor
+  // -------------------------------------------------------
+  {
+    "context": "EmptyPane || SharedScreen",
+    "bindings": {
+      // Put key bindings here (in addition to the context above) if you want them to
+      // work when no editor exists.
+      // "space f": "file_finder::Toggle"
+    }
+  }
+]
