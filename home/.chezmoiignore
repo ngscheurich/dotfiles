@@ -3,5 +3,4 @@
 .config/karabiner
 {{ end }}
 
-.config/homebrew
 .config/zsh/.zcompdump
