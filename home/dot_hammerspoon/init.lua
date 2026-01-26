@@ -34,7 +34,7 @@ hs.hotkey.bind(hyper, "]", function()
 end)
 
 -- Window switching
-hs.hints.fontName = "MonoLisa Variable"
+hs.hints.fontName = "Lilex"
 hs.hints.iconAlpha = 0
 hs.hints.fontSize = 24
 hs.hints.showTitleThresh = 0
