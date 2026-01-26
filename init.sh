@@ -27,7 +27,7 @@ GUM_RELEASE="gum_${GUM_VERSION}_${GUM_PLATFORM}"
 GUM_ARCHIVE="${GUM_RELEASE}.tar.gz"
 GUM_SBOM="${GUM_ARCHIVE}.sbom.json"
 HOMEBREW_BIN="/opt/homebrew/bin"
-SCRIPT_DEPS="1password 1password-cli fish"
+SCRIPT_DEPS="fish"
 LOCAL_BIN="${HOME}/.local/bin"
 CHEZMOI_STATE="${HOME}/.local/share/chezmoi"
 
@@ -99,14 +99,10 @@ rely on. Namely, it:
 
 1. Installs dependencies for this script to run
 2. Installs [chezmoi](https://www.chezmoi.io/)
-3. Ensures a 1Password user is active (for chezmoi templates)
-4. Initializes and applies my current chezmoi state
+3. Initializes and applies my current chezmoi state
 
-Additionally, if the platform is Darwin (macOS), a couple of additional
-programs are installed:
-
-- macOS command line developer tools
-- Homebrew
+Additionally, if the platform is Darwin, the macOS command line developer tools
+are installed.
 
 ## Idempotency
 
@@ -259,35 +255,6 @@ initialize_chezmoi() {
 }
 # }}}
 
-# 1Password ---------------------------------------------------------------- {{{
-op_logged_in() {
-  "$HOMEBREW_BIN/op" whoami >/dev/null 2>&1
-}
-
-get_op_login() {
-  icon="🔑"
-
-  # Try to get current user
-  name=$(op user get --me --format=json | sed -n 's/ *"name": "\([^"]*\)".*/\1/p')
-
-  # If no user found, prompt for login
-  if [ -z "$name" ]; then
-    log warn "${icon} 1Password account not found."
-    wait_user "Configure a 1Password account for use with the CLI, then press ${CONTINUE_KEY}..."
-
-    # Try to get current user again
-    name=$(op user get --me --format=json | sed -n 's/ *"name": "\([^"]*\)".*/\1/p')
-  fi
-
-  # If name is blank, we were unable to login with the token
-  if [ -n "$name" ]; then
-    log info "${icon} 1Password account found." name "$name"
-  else
-    raise "Unable to get 1Password account."
-  fi
-}
-# }}}
-
 # Fish --------------------------------------------------------------------- {{{
 change_shell_to_fish() {
   icon="🐟"
@@ -326,7 +293,6 @@ main() {
 
   install_script_deps
   install_chezmoi
-  get_op_login
   change_shell_to_fish
   initialize_chezmoi
 
