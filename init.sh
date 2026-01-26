@@ -34,7 +34,7 @@ SCRIPT_DEPS="fish"
 LOCAL_BIN="${HOME}/.local/bin"
 CHEZMOI_STATE="${HOME}/.local/share/chezmoi"
 
-if [ -n "$TMPDIR" ]; then
+if [ -n "${TMPDIR:-}" ]; then
   WORKDIR="${TMPDIR%/}/dotfiles"
 else
   WORKDIR="/tmp/dotfiles"
