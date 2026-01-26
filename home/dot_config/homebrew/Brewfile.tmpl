@@ -1,31 +1,26 @@
+# ==========================================================
 # Taps
+# ----------------------------------------------------------
 tap "charmbracelet/tap"
+tap "sst/tap"
+
+{{- if eq .chezmoi.hostname "darwin" }}
 tap "d12frosted/emacs-plus"
 tap "morantron/tmux-fingers"
-tap "nikitabobko/tap"
-tap "sst/tap"
-tap "timescam/tap"
+{{ end }}
 
+# ==========================================================
 # Formulae
-brew "aichat"
+# ----------------------------------------------------------
 brew "atuin"
 brew "bash-language-server"
 brew "bat"
 brew "bob"
 brew "bottom"
-brew "colima"
-brew "curl"
 brew "difftastic"
-brew "docker"
-brew "docker-buildx"
-brew "docker-compose"
-brew "docker-credential-helper"
-brew "dockutil"
 brew "dust"
 brew "eslint_d"
-brew "exercism"
 brew "eza"
-brew "fabric-ai"
 brew "fastfetch"
 brew "fd"
 brew "fish"
@@ -33,30 +28,19 @@ brew "fish-lsp"
 brew "flyctl"
 brew "fnlfmt"
 brew "fzf"
-brew "gcc"
 brew "gh"
 brew "git"
 brew "glow"
 brew "gnupg"
-brew "gomplate"
 brew "gpg-tui"
 brew "gs"
 brew "gum"
 brew "htop"
-brew "icu4c@77"
-brew "imagemagick"
 brew "jq"
 brew "lazygit"
-brew "libgccjit"
-brew "libpq"
-brew "libressl"
-brew "llvm"
 brew "luajit"
-brew "mermaid-cli"
 brew "mise"
-brew "morantron/tmux-fingers/tmux-fingers"
 brew "nmap"
-brew "node"
 brew "ossp-uuid"
 brew "pgformatter"
 brew "pkgconf"
@@ -67,26 +51,62 @@ brew "rg"
 brew "sd"
 brew "sleek"
 brew "sqlfluff"
-brew "sst/tap/opencode"
 brew "starship"
 brew "stylelint"
-brew "timescam/tap/pay-respects"
-brew "tio"
 brew "tldr"
-brew "tmux"
-brew "tmuxp"
 brew "tree"
 brew "tree-sitter"
 brew "vale"
 brew "w3m"
 brew "watchexec"
 brew "websocat"
-brew "xmlstarlet"
 brew "yazi"
-brew "zlib"
 brew "zoxide"
 
+{{- if eq .chezmoi.hostname "darwin" }}
+brew "colima"
+brew "curl"
+brew "docker"
+brew "docker-buildx"
+brew "docker-compose"
+brew "docker-credential-helper"
+brew "dockutil"
+brew "exercism"
+brew "fabric-ai"
+brew "gcc"
+brew "gomplate"
+brew "icu4c@77"
+brew "imagemagick"
+brew "libgccjit"
+brew "libpq"
+brew "libressl"
+brew "llvm"
+brew "mermaid-cli"
+brew "morantron/tmux-fingers/tmux-fingers"
+brew "sst/tap/opencode"
+brew "tio"
+brew "tmux"
+brew "tmuxp"
+brew "zlib"
+brew "xmlstarlet"
+{{ end }}
+
+{{- if eq .chezmoi.hostname "joulie" }}
+brew "cairo"
+brew "coreutils"
+brew "exiftool"
+brew "fwup"
+brew "gtk+3"
+brew "openjdk@17"
+brew "pkg-config"
+brew "squashfs"
+brew "xz"
+{{ end }}
+
+# ==========================================================
 # Casks
+# ----------------------------------------------------------
+{{- if eq .chezmoi.hostname "darwin" }}
 cask "1password"
 cask "1password-cli"
 cask "aerospace"
@@ -120,13 +140,9 @@ cask "raycast"
 cask "utm"
 cask "vlc"
 cask "zed"
+{{ end }}
 
-mas "Kagi for Safari", id: 1622835804
-mas "Klack", id: 6446206067
-mas "Looking Glass - Music Remote", id: 1602004436
-mas "Tailscale", id: 1475387142
-
-{{- if eq .chezmoi.hostname "bienjensu" }}
+{{- if eq .chezmoi.hostname "weatherwax" }}
 cask "affinity-designer"
 cask "affinity-photo"
 cask "affinity-publisher"
@@ -138,21 +154,24 @@ cask "magicavoxel"
 cask "obs"
 cask "playdate-simulator"
 cask "steam"
+{{ end }}
+
+{{- if eq .chezmoi.hostname "bienjensu" }}
+cask "microsoft-office"
+{{ end }}
+
+# ==========================================================
+# Mac App Store
+# ----------------------------------------------------------
+{{- if eq .chezmoi.hostname "weatherwax" }}
+mas "Kagi for Safari", id: 1622835804
+mas "Klack", id: 6446206067
+mas "Looking Glass - Music Remote", id: 1602004436
+mas "Tailscale", id: 1475387142
 mas "Logic Pro", id: 634148309
 {{ end }}
 
 {{- if eq .chezmoi.hostname "joulie" }}
-brew "cairo"
-brew "coreutils"
-brew "exiftool"
-brew "fwup"
-brew "gtk+3"
-brew "openjdk@17"
-brew "pkg-config"
-brew "pkg-config"
-brew "squashfs"
-brew "xz"
-cask "microsoft-office"
 mas "Transporter", id: 1450874784
 {{ end }}
 
