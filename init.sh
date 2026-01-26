@@ -15,6 +15,9 @@ case "$(uname)" in
 Darwin)
   GUM_PLATFORM="Darwin_arm64"
   ;;
+Linux)
+  GUM_PLATFORM="Linux_amd64"
+  ;;
 *)
   echo "[fatal] Unsupported platform: $(uname)"
   exit 1
