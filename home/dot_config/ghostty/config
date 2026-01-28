@@ -10,15 +10,15 @@ keybind = cmd+left=text:\x13h
 keybind = cmd+down=text:\x13j
 keybind = cmd+up=text:\x13k
 keybind = cmd+right=text:\x13l
-keybind = cmd+1=text:\x131
-keybind = cmd+2=text:\x132
-keybind = cmd+3=text:\x133
-keybind = cmd+4=text:\x134
-keybind = cmd+5=text:\x135
-keybind = cmd+6=text:\x136
-keybind = cmd+7=text:\x137
-keybind = cmd+8=text:\x138
-keybind = cmd+9=text:\x139
+keybind = cmd+digit_1=text:\x131
+keybind = cmd+digit_2=text:\x132
+keybind = cmd+digit_3=text:\x133
+keybind = cmd+digit_4=text:\x134
+keybind = cmd+digit_5=text:\x135
+keybind = cmd+digit_6=text:\x136
+keybind = cmd+digit_7=text:\x137
+keybind = cmd+digit_8=text:\x138
+keybind = cmd+digit_9=text:\x139
 
 window-padding-x = 12
 window-padding-y = 12
