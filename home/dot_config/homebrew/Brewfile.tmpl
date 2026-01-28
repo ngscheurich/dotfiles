@@ -4,7 +4,7 @@
 tap "charmbracelet/tap"
 tap "sst/tap"
 
-{{- if eq .chezmoi.hostname "darwin" }}
+{{- if eq .chezmoi.os "darwin" }}
 tap "d12frosted/emacs-plus"
 tap "morantron/tmux-fingers"
 {{ end }}
@@ -62,7 +62,7 @@ brew "websocat"
 brew "yazi"
 brew "zoxide"
 
-{{- if eq .chezmoi.hostname "darwin" }}
+{{- if eq .chezmoi.os "darwin" }}
 brew "colima"
 brew "curl"
 brew "docker"
@@ -111,7 +111,7 @@ brew "frps"
 # ==========================================================
 # Casks
 # ----------------------------------------------------------
-{{- if eq .chezmoi.hostname "darwin" }}
+{{- if eq .chezmoi.os "darwin" }}
 cask "1password"
 cask "1password-cli"
 cask "aerospace"
@@ -161,7 +161,7 @@ cask "playdate-simulator"
 cask "steam"
 {{ end }}
 
-{{- if eq .chezmoi.hostname "bienjensu" }}
+{{- if eq .chezmoi.hostname "joulie" }}
 cask "microsoft-office"
 {{ end }}
 
