@@ -349,6 +349,7 @@ local filetype = function()
       provider = function()
         return vim.bo.filetype
       end,
+      hl = { fg = colors.fg_alt, bg = colors.bg },
     }
   end
 end
