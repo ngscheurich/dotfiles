@@ -1,13 +1,5 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "lsp": {
-    "elixir-ls": { "disabled": false },
-    "expert": {
-      "disabled": true,
-      "command": ["expert"],
-      "extensions": [".ex", ".exs", ".eex", ".heex"]
-    }
-  },
   "mcp": {
     "tidewave": {
       "type": "remote",
