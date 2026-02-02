@@ -69,16 +69,13 @@ MiniDeps.later(function()
 end)
 
 -- ┌──────────────────────────────────────────────────┬──────────────────────┐
--- │  mini.pairs                                     │  editing            │
+-- │  nvim-autopairs                                 │  editing            │
 -- ├──────────────────────────────────────────────────┴──────────────────────┤
--- │  Automatically inserts the other half of a character pair              │
+-- │  Automatically insert the other half of a character pair               │
 -- └─────────────────────────────────────────────────────────────────────────┘
 MiniDeps.later(function()
-  MiniDeps.add({
-    source = "https://github.com/echasnovski/mini.pairs",
-    checkout = "stable",
-  })
-  require("mini.pairs").setup()
+  MiniDeps.add("https://github.com/windwp/nvim-autopairs")
+  require("nvim-autopairs").setup()
 end)
 
 -- ┌──────────────────────────────────────────────────┬──────────────────────┐
