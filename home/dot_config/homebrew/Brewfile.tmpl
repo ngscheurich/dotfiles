@@ -9,6 +9,10 @@ tap "d12frosted/emacs-plus"
 tap "morantron/tmux-fingers"
 {{ end }}
 
+{{- if eq .chezmoi.hostname "joulie" }}
+tap "timescale/tap"
+{{- end }}
+
 # ==========================================================
 # Formulae
 # ----------------------------------------------------------
@@ -83,7 +87,6 @@ brew "gomplate"
 brew "icu4c@77"
 brew "imagemagick"
 brew "libgccjit"
-brew "libpq"
 brew "libressl"
 brew "llvm"
 brew "mermaid-cli"
@@ -95,6 +98,10 @@ brew "zlib"
 brew "xmlstarlet"
 {{ end }}
 
+{{- if eq .chezmoi.hostname "weatherwax" }}
+brew "libpq"
+{{ end }}
+
 {{- if eq .chezmoi.hostname "joulie" }}
 brew "cairo"
 brew "coreutils"
@@ -103,7 +110,10 @@ brew "fwup"
 brew "gtk+3"
 brew "openjdk@17"
 brew "pkg-config"
+brew "postgresql@17"
 brew "squashfs"
+brew "timescaledb"
+brew "timescaledb-toolkit"
 brew "xz"
 {{ end }}
 
