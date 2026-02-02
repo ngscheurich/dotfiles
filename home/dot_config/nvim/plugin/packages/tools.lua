@@ -1,18 +1,10 @@
 -- ┌──────────────────────────────────────────────────┬──────────────────────┐
--- │  vim-dadbod-ui                                  │  apps               │
+-- │  ccc.nvim                                       │  apps               │
 -- ├──────────────────────────────────────────────────┴──────────────────────┤
--- │  Relational database client                                            │
+-- │  Color picker                                                          │
 -- └─────────────────────────────────────────────────────────────────────────┘
 MiniDeps.later(function()
-  MiniDeps.add({
-    source = "kristijanhusak/vim-dadbod-ui",
-    depends = {
-      "tpope/vim-dadbod",
-      "kristijanhusak/vim-dadbod-completion",
-    },
-  })
-
-  vim.g.db_ui_use_nerd_fonts = 1
+  MiniDeps.add("uga-rosa/ccc.nvim")
 end)
 
 -- ┌──────────────────────────────────────────────────┬──────────────────────┐
@@ -36,4 +28,21 @@ MiniDeps.later(function()
       end
     end,
   })
+end)
+
+-- ┌──────────────────────────────────────────────────┬──────────────────────┐
+-- │  vim-dadbod-ui                                  │  apps               │
+-- ├──────────────────────────────────────────────────┴──────────────────────┤
+-- │  Relational database client                                            │
+-- └─────────────────────────────────────────────────────────────────────────┘
+MiniDeps.later(function()
+  MiniDeps.add({
+    source = "kristijanhusak/vim-dadbod-ui",
+    depends = {
+      "tpope/vim-dadbod",
+      "kristijanhusak/vim-dadbod-completion",
+    },
+  })
+
+  vim.g.db_ui_use_nerd_fonts = 1
 end)
