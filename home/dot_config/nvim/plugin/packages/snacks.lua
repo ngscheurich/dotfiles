@@ -126,5 +126,9 @@ MiniDeps.now(function()
     else
       Snacks.indent.enable()
     end
-  end, { desc = "Indent Guides" })
+  end, { desc = "Indent guides" })
+
+  vim.keymap.set("n", "<Leader>tz", function()
+    Snacks.zen()
+  end, { desc = "Zen mode" })
 end)
