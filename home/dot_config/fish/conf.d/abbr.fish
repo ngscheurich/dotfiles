@@ -28,3 +28,4 @@ abbr -a vimdiff nvim -d
 abbr -a weather curl wttr.in
 abbr -a tx tmux
 abbr -a ta tmux attach -t
+abbr -a zj zellij
