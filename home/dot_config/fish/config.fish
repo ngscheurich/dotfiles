@@ -14,8 +14,8 @@ atuin init fish --disable-up-arrow | source
 zoxide init fish | source
 starship init fish | source
 
-# Customize fzf binds
+# Customize key binds
+bind --erase --mode insert ctrl-f
+bind --erase --mode insert ctrl-b
 bind --erase --mode insert ctrl-t
-bind --erase --mode insert ctrl-r
-bind --mode insert alt-t fzf-file-widget
-bind --mode insert alt-r fzf-history-widget
+bind --mode insert ctrl-f fzf-file-widget
