@@ -70,23 +70,23 @@ MiniDeps.now(function()
     end, opts)
   end
 
-  -- Picker Quick
+  -- Picker: Quick
   pick("<C-f>", "files", { layout = "ivy", desc = "Files" })
-  pick("<C-g>", "grep", { layout = "ivy", desc = "Grep" })
-  pick("<C-_>", "lines", { desc = "Lines" })
+  pick("<C-/>", "grep", { layout = "ivy", desc = "Grep" })
+  pick("<C-.>", "lines", { desc = "Lines" })
   pick("<C-Space>", "buffers", { layout = "select", desc = "Buffers" })
 
-  -- Picker General
+  -- Picker: General
   pick("<Leader><Leader>", "smart", { layout = "ivy", desc = "Smart files" })
   pick("<Leader>r", "resume", { desc = "Resume picker" })
 
-  -- Picker Find
+  -- Picker: Find
   pick("<Leader>ff", "files", { desc = "Files" })
   pick("<Leader>fg", "git_files", { desc = "Git files" })
   pick("<Leader>fp", "projects", { desc = "Projects" })
   pick("<Leader>fr", "recent", { desc = "Recent files" })
 
-  -- Picker Search
+  -- Picker: Search
   pick("<Leader>sa", "autocmds", { desc = "Autocommands" })
   pick("<Leader>sB", "grep_buffers", { desc = "Grep buffers" })
   pick("<Leader>s:", "command_history", { desc = "Command history" })
@@ -108,7 +108,7 @@ MiniDeps.now(function()
   pick("<Leader>su", "undo", { desc = "Undo history" })
   pick("<Leader>sw", "grep_word", { desc = "Words" })
 
-  -- Picker Replacements
+  -- Picker: Replacements
   pick("grr", "lsp_references", { desc = "References" })
 
   -- Other
