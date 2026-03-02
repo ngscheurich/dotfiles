@@ -1,11 +1,9 @@
 local M = {}
-local colors = require("lib.colors")
+local colors = require("vendor.colors")
 
 ---Unload a Lua module
 ---@param module string
-M.unload = function(module)
-  package.loaded[module] = nil
-end
+M.unload = function(module) package.loaded[module] = nil end
 
 ---Reload a Lua module
 ---@param module string
@@ -16,7 +14,7 @@ end
 
 ---Toggle a Neovim option
 ---@param name string
-M.toggle_opt = function(name)
+M.toggle = function(name)
   local on, off
 
   if name == "signcolumn" then
@@ -48,20 +46,20 @@ M.load_theme = function()
   M.unload("ngs.theme")
   local theme_ok, theme = pcall(require, "ngs.theme")
   if theme_ok then
-    local ngs = vim.g.ngs
-    ngs.theme = theme
-    vim.g.ngs = ngs
+    Config.theme = theme
   else
     vim.notify("Could not load theme")
   end
 end
 
----Reconfigure plugins that rely on `vim.g.ngs.theme`
-M.reload_theme = function()
+---Load and set up local theme plugin; reload reliant plugins
+M.setup_theme = function()
   M.load_theme()
-  vim.g.ngs.theme.apply(require("mini.base16").setup)
-  package.loaded["ngs.statusline"] = nil
-  require("ngs.statusline").build()
+
+  Config.theme.setup()
+
+  M.unload("ngs.statusline")
+  require("ngs.statusline").setup()
 end
 
 ---Adjust the lightness of a hexidecimal color
@@ -71,6 +69,20 @@ end
 M.lighten_to = function(hex, amount)
   local color = colors.new(hex)
   return color:lighten_to(amount):to_rgb()
+end
+
+---Set a normal mode keymap
+---@param lhs string
+---@param rhs string|function
+---@param desc string?
+M.nmap = function(lhs, rhs, desc) vim.keymap.set("n", lhs, rhs, { desc = desc }) end
+
+---Set a normal mode `<Leader>` keymap
+---@param lhs string
+---@param rhs string|function
+---@param desc string?
+M.nmap_leader = function(lhs, rhs, desc)
+  M.nmap("<Leader>" .. lhs, rhs, desc or "")
 end
 
 return M
