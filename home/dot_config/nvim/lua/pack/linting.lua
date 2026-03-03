@@ -3,8 +3,8 @@
 -- ┠──────────────────────────────────────────────────┴────────────────────────┤
 -- ┃  Asynchronous linter                                                     │
 -- ┖───────────────────────────────────────────────────────────────────────────┘
-Config.on_filetype("shell,sql", function()
-  vim.pack.add({ "mfussenegger/nvim-lint" })
+Config.on_filetype("sh,sql", function()
+  vim.pack.add({ "https://github.com/mfussenegger/nvim-lint" })
 
   require("lint").linters_by_ft = {
     sh = { "shellcheck" },
