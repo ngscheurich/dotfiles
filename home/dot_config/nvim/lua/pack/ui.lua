@@ -3,6 +3,25 @@ local later, nmap, nmap_leader, now, on_event =
   Config.later, Config.nmap, Config.nmap_leader, Config.now, Config.on_event
 
 -- ┎──────────────────────────────────────────────────┬────────────────────────┐
+-- ┃  Aerial                                         │  ui                   │
+-- ┠──────────────────────────────────────────────────┴────────────────────────┤
+-- ┃  Code outline window                                                     │
+-- ┖───────────────────────────────────────────────────────────────────────────┘
+later(function()
+  add({ "https://github.com/stevearc/aerial.nvim" })
+
+  local aerial = require("aerial")
+  aerial.setup({
+    on_attach = function(buffer)
+      vim.keymap.set("n", "}", "<Cmd>AerialNext<CR>", { buffer = buffer })
+      vim.keymap.set("n", "{", "<Cmd>AerialPrev<CR>", { buffer = buffer })
+    end,
+  })
+
+  nmap_leader("o", "<Cmd>AerialToggle!<CR>", "Outline")
+end)
+
+-- ┎──────────────────────────────────────────────────┬────────────────────────┐
 -- ┃  bufferline.nvim                                │  ui                   │
 -- ┠──────────────────────────────────────────────────┴────────────────────────┤
 -- ┃  A bufferline to display tabs                                            │
@@ -124,7 +143,7 @@ later(function()
 end)
 
 -- ┎──────────────────────────────────────────────────┬────────────────────────┐
--- ┃  tint-glimmer.nvim                              │  ui                   │
+-- ┃  tiny-glimmer.nvim                              │  ui                   │
 -- ┠──────────────────────────────────────────────────┴────────────────────────┤
 -- ┃  Adds a subtle animation to various editing operations                   │
 -- ┖───────────────────────────────────────────────────────────────────────────┘
@@ -146,23 +165,4 @@ later(function()
       redo = { enabled = true },
     },
   })
-end)
-
--- ┎──────────────────────────────────────────────────┬────────────────────────┐
--- ┃  Aerial                                         │  ui                   │
--- ┠──────────────────────────────────────────────────┴────────────────────────┤
--- ┃  Code outline window                                                     │
--- ┖───────────────────────────────────────────────────────────────────────────┘
-later(function()
-  add({ "https://github.com/stevearc/aerial.nvim" })
-
-  local aerial = require("aerial")
-  aerial.setup({
-    on_attach = function(buffer)
-      vim.keymap.set("n", "}", "<Cmd>AerialNext<CR>", { buffer = buffer })
-      vim.keymap.set("n", "{", "<Cmd>AerialPrev<CR>", { buffer = buffer })
-    end,
-  })
-
-  nmap_leader("o", "<Cmd>AerialToggle!<CR>", "Outline")
 end)
