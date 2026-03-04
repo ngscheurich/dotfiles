@@ -15,6 +15,7 @@ Config.now_if_args(function()
     "erlang",
     "fennel",
     "gdscript",
+    "gleam",
     "go",
     "graphql",
     "heex",
