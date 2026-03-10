@@ -1,5 +1,5 @@
 local add = vim.pack.add
-local later, on_filetype = Config.later, Config.on_filetype
+local later, now_if_args = Config.later, Config.now_if_args
 
 -- ┎──────────────────────────────────────────────────┬────────────────────────┐
 -- ┃  Minty                                          │  tools                │
@@ -13,11 +13,11 @@ later(function() add({ "https://github.com/nvzone/minty" }) end)
 -- ┠──────────────────────────────────────────────────┴────────────────────────┤
 -- ┃  Query relational databases with dadbod.vim                              │
 -- ┖───────────────────────────────────────────────────────────────────────────┘
-on_filetype("sql", function()
+now_if_args(function()
   add({
-    "tpope/vim-dadbod",
-    "kristijanhusak/vim-dadbod-ui",
-    "kristijanhusak/vim-dadbod-completion",
+    "https://github.com/kristijanhusak/vim-dadbod-ui",
+    "https://github.com/kristijanhusak/vim-dadbod-completion",
+    "https://github.com/tpope/vim-dadbod",
   })
 
   vim.g.db_ui_use_nerd_fonts = 1
