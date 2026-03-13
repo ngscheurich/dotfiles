@@ -5,5 +5,5 @@
 -- ┖───────────────────────────────────────────────────────────────────────────┘
 Config.later(function()
   vim.pack.add({ "https://github.com/neovim/nvim-lspconfig" })
-  vim.lsp.enable({ "expert", "gleam", "lua_ls" })
+  vim.lsp.enable({ "expert", "gleam", "lua_ls", "ts_ls" })
 end)
