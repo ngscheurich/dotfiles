@@ -1,8 +1,8 @@
 # ==========================================================
 # Taps
 # ----------------------------------------------------------
+tap "anomalyco/tap"
 tap "charmbracelet/tap"
-tap "sst/tap"
 
 {{- if eq .chezmoi.os "darwin" }}
 tap "d12frosted/emacs-plus"
@@ -73,6 +73,7 @@ brew "zellij"
 brew "zoxide"
 
 {{- if eq .chezmoi.os "darwin" }}
+brew "anomalyco/tap/opencode"
 brew "colima"
 brew "curl"
 brew "docker"
@@ -96,7 +97,6 @@ brew "mermaid-cli"
 brew "morantron/tmux-fingers/tmux-fingers"
 brew "pngpaste"
 brew "soft-serve"
-brew "sst/tap/opencode"
 brew "tio"
 brew "zlib"
 brew "xmlstarlet"
