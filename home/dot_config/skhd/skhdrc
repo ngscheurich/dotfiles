@@ -1,0 +1,41 @@
+# Use custom shell (skips interactive shell overhead)
+.shell "/bin/dash"
+
+# Basic format: modifier - key : command
+cmd - a : echo "Command+A pressed"
+
+# Multiple modifiers
+cmd + shift - t : open -a Terminal
+
+# Different modifier combinations
+ctrl - h : echo "Control+H"
+alt - space : echo "Alt+Space"
+shift - f1 : echo "Shift+F1"
+
+# Focus windows
+alt + shift - h                 : komorebic focus left
+alt + shift - j                 : komorebic focus down
+alt + shift - k                 : komorebic focus up
+alt + shift - l                 : komorebic focus right
+alt + shift - 0x21              : komorebic cycle-focus previous # 0x21 is [
+alt + shift - 0x1E              : komorebic cycle-focus next # 0x1E is ]
+
+# Move windows
+ctrl + alt + shift - h          : komorebic move left
+ctrl + alt + shift - j          : komorebic move down
+ctrl + alt + shift - k          : komorebic move up
+ctrl + alt + shift - l          : komorebic move right
+ctrl + alt + shift - return     : komorebic promote
+
+# Resize
+alt + shift - 0x18              : komorebic resize-axis horizontal increase # 0x18 is +
+alt + shift - 0x1B              : komorebic resize-axis horizontal decrease # 0x1B is -
+alt + shift - 0x18              : komorebic resize-axis vertical increase
+alt + shift - 0x1B              : komorebic resize-axis vertical decrease
+
+# Manipulate windows
+alt + shift - t                 : komorebic toggle-float
+alt + shift - f                 : komorebic toggle-monocle
+
+# Window manager options
+alt + shift - r                 : komorebic retile
