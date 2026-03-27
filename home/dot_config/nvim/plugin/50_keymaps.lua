@@ -2,8 +2,7 @@
 --  Keymaps
 -- -----------------------------------------------------------------------------
 
-local util = require("ngs.util")
-local nmap, nmap_leader, toggle = util.nmap, util.nmap_leader, util.toggle
+local nmap, nmap_leader, toggle = Config.nmap, Config.nmap_leader, Config.toggle
 
 nmap("<Left>", "<C-w>h")
 nmap("<Down>", "<C-w>j")

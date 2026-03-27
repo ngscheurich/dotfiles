@@ -1,43 +1,51 @@
 local conds = require("heirline.conditions")
-local util = require("ngs.util")
-local base16 = require("mini.base16")
+local colorlib = require("vendor.colors")
 
-local palette = base16.config.palette
+local palette = require("catppuccin.palettes").get_palette("mocha")
 
-local theme = Config.theme
-local colors = theme.statusline or {}
-colors = vim.tbl_extend("keep", colors, {
-  fg = palette.base05,
-  fg_alt = palette.base04,
-  bg = palette.base01,
-  bg_alt = palette.base02,
+local colors = {
+  fg = palette.subtext1,
+  fg_alt = palette.subtext0,
+  bg = palette.surface0,
+  bg_alt = palette.surface1,
 
-  mode_name_fg = palette.base00,
-  mode_icon_fg = palette.base00,
-  mode_normal = palette.base04,
-  mode_visual = palette.base0E,
-  mode_select = palette.base0C,
-  mode_insert = palette.base0B,
-  mode_replace = palette.base08,
-  mode_command = palette.base0A,
-  mode_ex = palette.base0A,
-  mode_wait = palette.base09,
-  mode_terminal = palette.base04,
+  mode_name_fg = palette.base,
+  mode_icon_fg = palette.base,
+  mode_normal = palette.overlay1,
+  mode_visual = palette.lavender,
+  mode_select = palette.teal,
+  mode_insert = palette.green,
+  mode_replace = palette.red,
+  mode_command = palette.yellow,
+  mode_ex = palette.yellow,
+  mode_wait = palette.peach,
+  mode_terminal = palette.blue,
 
-  readonly = palette.base08,
+  readonly = palette.red,
 
-  vcs_branch = palette.base0E,
-  vcs_added = palette.base0B,
-  vcs_removed = palette.base08,
-  vcs_changed = palette.base0D,
+  vcs_branch = palette.mauve,
+  vcs_added = palette.green,
+  vcs_removed = palette.red,
+  vcs_changed = palette.blue,
 
-  diag_error = palette.base08,
-  diag_warning = palette.base0A,
-  diag_info = palette.base0D,
-  diag_hint = palette.base0C,
+  diag_error = palette.red,
+  diag_warning = palette.yellow,
+  diag_info = palette.sapphire,
+  diag_hint = palette.lavender,
 
-  lsp = palette.base0D,
-})
+  lsp = palette.blue,
+}
+
+local function get_hl_attr(name, attr)
+  local id = vim.fn.hlID(name)
+  local resolved_id = vim.fn.synIDtrans(id)
+  return vim.fn.synIDattr(resolved_id, attr)
+end
+
+local function lighten_to(hex, amount)
+  local color = colorlib.new(hex)
+  return color:lighten_to(amount):to_rgb()
+end
 
 local function get_mode_opts(mode)
   local mode_opts = {
@@ -170,16 +178,6 @@ local function lsp_provider(self)
   if #clients > 0 then return " " .. table.concat(clients, " ") end
 end
 
-local function get_diagnostic_sign(severity)
-  local signs = vim.diagnostic.config().signs
-
-  if type(signs) == "table" then
-    return signs.text[severity]
-  else
-    return ""
-  end
-end
-
 local function get_diagnostic_count(severity)
   return #vim.diagnostic.get(0, { severity = severity })
 end
@@ -192,10 +190,13 @@ local mode_bar = {
       return string.format(" %s  ", get_mode_opts(self.mode).icon)
     end,
     hl = function(self)
+      local bg_color = get_mode_opts(self.mode).color
+
+      if bg_color == nil then return end
+
       return {
         fg = colors.mode_icon_fg,
-        bg = colors.mode_icon_bg
-          or util.lighten_to(get_mode_opts(self.mode).color, 0.49),
+        bg = colors.mode_icon_bg or lighten_to(bg_color, 0.49),
       }
     end,
   },
@@ -331,7 +332,7 @@ local filetype = function()
           if colors.ft_icon then
             return { fg = colors.ft_icon, bg = colors.bg }
           end
-          return { fg = util.get_hl_attr(self.hl_group, "fg"), bg = colors.bg }
+          return { fg = get_hl_attr(self.hl_group, "fg"), bg = colors.bg }
         end,
       },
       {
@@ -370,24 +371,20 @@ local function gap(width)
   }
 end
 
-return {
-  setup = function()
-    require("heirline").setup({
-      statusline = {
-        mode_bar,
-        gap(2),
-        file,
-        gap(2),
-        git(),
-        span,
-        diagnostics,
-        gap(2),
-        lsp,
-        gap(2),
-        filetype(),
-        gap(2),
-        ruler,
-      },
-    })
-  end,
-}
+require("heirline").setup({
+  statusline = {
+    mode_bar,
+    gap(2),
+    file,
+    gap(2),
+    git(),
+    span,
+    diagnostics,
+    gap(2),
+    lsp,
+    gap(2),
+    filetype(),
+    gap(2),
+    ruler,
+  },
+})

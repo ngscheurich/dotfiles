@@ -6,6 +6,7 @@ local autocmd = Config.autocmd
 local command = vim.api.nvim_create_user_command
 
 -- Autocommands ----------------------------------------------------------------
+
 autocmd(
   "TermOpen",
   "*",
@@ -14,10 +15,11 @@ autocmd(
 )
 
 -- User commands ---------------------------------------------------------------
+
 command("Theme", function(opts)
   local theme = opts.args
   vim.system({ "grim", "theme", "--", theme }):wait()
-  require("ngs.util").setup_theme()
+  require("barista").setup()
 end, {
   desc = "Change the system theme",
   nargs = 1,

@@ -1,13 +1,6 @@
 local later, nmap_leader, now = Config.later, Config.nmap_leader, Config.now
-local util = require("ngs.util")
 
-now(function()
-  require("mini.icons").setup()
-
-  -- Load theme
-  util.load_theme()
-  Config.theme.setup()
-end)
+now(function() require("mini.icons").setup() end)
 
 later(function()
   require("mini.align").setup()

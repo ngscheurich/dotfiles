@@ -30,5 +30,5 @@ vim.pack.add({ "https://github.com/nvim-mini/mini.nvim" })
 -- Load configuration helpers
 require("ngs.config")
 
--- Default theme setup (overriden by `ngs.theme` plugin if available)
+-- Default theme setup (overriden by Barista plugin if available)
 Config.theme = { apply = function(_) vim.cmd.colorscheme("minicyan") end }

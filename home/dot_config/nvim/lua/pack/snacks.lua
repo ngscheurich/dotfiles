@@ -1,9 +1,16 @@
 _G.Snacks = {}
-local util = require("ngs.util")
-local nmap, nmap_leader = util.nmap, util.nmap_leader
+local nmap, nmap_leader = Config.nmap, Config.nmap_leader
 
-Config.now(function()
-  vim.pack.add({ "https://github.com/folke/snacks.nvim" })
+local setup = function()
+  local ok, palettes = pcall(require, "catppuccin.palettes")
+  local zen_backdrop
+
+  if ok then
+    zen_backdrop = palettes.get_palette("mocha").base
+  else
+    local id = vim.fn.synIDtrans(vim.fn.hlID("Normal"))
+    zen_backdrop = vim.fn.synIDattr(id, "bg")
+  end
 
   require("snacks").setup({
     bigfile = { enabled = true },
@@ -16,20 +23,18 @@ Config.now(function()
     picker = { enabled = true },
     quickfile = { enabled = true },
     statuscolumn = { left = { "git", "sign" }, right = { "fold", "mark" } },
-
-    -- Distraction-free editing
-    -- zen = {
-    --   enabled = true,
-    --   toggles = {
-    --     dim = false,
-    --     line_number = false,
-    --   },
-    --   on_open = function() vim.cmd("PencilSoft") end,
-    --   win = {
-    --     backdrop = { transparent = false },
-    --   },
-    -- },
+    zen = {
+      enabled = true,
+      toggles = { dim = false, line_number = false },
+      win = { backdrop = { bg = zen_backdrop, blend = 0 } },
+    },
   })
+end
+
+Config.now(function()
+  vim.pack.add({ "https://github.com/folke/snacks.nvim" })
+
+  setup()
 
   -- Keymaps -------------------------------------------------------------------
 
@@ -96,3 +101,5 @@ Config.now(function()
     end
   end, "Indent guides")
 end)
+
+return { setup = setup }

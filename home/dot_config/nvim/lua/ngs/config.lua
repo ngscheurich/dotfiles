@@ -55,6 +55,24 @@ Config.on_packchanged = function(plugin_name, kinds, callback, desc)
   Config.autocmd("PackChanged", "*", f, desc)
 end
 
+---Toggle a Neovim option
+---@param name string
+Config.toggle = function(name)
+  local on, off
+
+  if name == "signcolumn" then
+    on, off = "yes", "no"
+  else
+    on, off = true, false
+  end
+
+  if vim.o[name] == on then
+    vim.o[name] = off
+  else
+    vim.o[name] = on
+  end
+end
+
 ---Set a Normal mode keymap
 ---@param lhs string
 ---@param rhs string|function
