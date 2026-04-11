@@ -44,7 +44,7 @@ end
 ---@param callback function
 ---@param desc string
 Config.on_packchanged = function(plugin_name, kinds, callback, desc)
-  local f = function(ev)
+  local cb_wrapper = function(ev)
     local name, kind = ev.data.spec.name, ev.data.kind
     if not (name == plugin_name and vim.tbl_contains(kinds, kind)) then
       return
@@ -52,7 +52,7 @@ Config.on_packchanged = function(plugin_name, kinds, callback, desc)
     if not ev.data.active then vim.cmd.packadd(plugin_name) end
     callback()
   end
-  Config.autocmd("PackChanged", "*", f, desc)
+  Config.autocmd("PackChanged", "*", cb_wrapper, desc)
 end
 
 ---Toggle a Neovim option

@@ -25,8 +25,12 @@ local setup = function()
     statuscolumn = { left = { "git", "sign" }, right = { "fold", "mark" } },
     zen = {
       enabled = true,
-      toggles = { dim = false, line_number = false },
-      win = { backdrop = { bg = zen_backdrop, blend = 0 } },
+      toggles = { dim = true, line_number = false },
+      show = { statusline = true },
+      win = {
+        width = 100,
+        backdrop = { bg = zen_backdrop, blend = 0 },
+      },
     },
   })
 end
