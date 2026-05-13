@@ -9,7 +9,7 @@ tap "d12frosted/emacs-plus"
 tap "morantron/tmux-fingers"
 {{ end }}
 
-{{- if eq .chezmoi.hostname "joulie" }}
+{{- if eq .chezmoi.hostname "Joulie" }}
 tap "timescale/tap"
 {{- end }}
 
@@ -104,11 +104,11 @@ brew "zlib"
 brew "xmlstarlet"
 {{ end }}
 
-{{- if eq .chezmoi.hostname "weatherwax" }}
+{{- if eq .chezmoi.hostname "Weatherwax" }}
 brew "libpq"
 {{ end }}
 
-{{- if eq .chezmoi.hostname "joulie" }}
+{{- if eq .chezmoi.hostname "Joulie" }}
 brew "cairo"
 brew "coreutils"
 brew "exiftool"
@@ -164,7 +164,7 @@ cask "vlc"
 cask "zed"
 {{ end }}
 
-{{- if eq .chezmoi.hostname "weatherwax" }}
+{{- if eq .chezmoi.hostname "Weatherwax" }}
 cask "affinity"
 cask "blender"
 cask "epic-games"
@@ -175,14 +175,14 @@ cask "playdate-simulator"
 cask "steam"
 {{ end }}
 
-{{- if eq .chezmoi.hostname "joulie" }}
+{{- if eq .chezmoi.hostname "Joulie" }}
 cask "microsoft-office"
 {{ end }}
 
 # ==========================================================
 # Mac App Store
 # ----------------------------------------------------------
-{{- if eq .chezmoi.hostname "weatherwax" }}
+{{- if eq .chezmoi.hostname "Weatherwax" }}
 mas "1Blocker", id: 1365531024
 mas "1Password for Safari", id: 1569813296
 mas "iA Writer", id: 775737590
@@ -193,7 +193,7 @@ mas "Logic Pro", id: 634148309
 mas "Save to Reader", id: 1640236961
 {{ end }}
 
-{{- if eq .chezmoi.hostname "joulie" }}
+{{- if eq .chezmoi.hostname "Joulie" }}
 mas "Transporter", id: 1450874784
 {{ end }}
 
