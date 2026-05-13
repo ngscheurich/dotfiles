@@ -94,6 +94,7 @@ brew "lgug2z/tap/komorebi-for-mac"
 brew "libgccjit"
 brew "libressl"
 brew "llvm"
+brew "mas"
 brew "mermaid-cli"
 brew "morantron/tmux-fingers/tmux-fingers"
 brew "pngpaste"
@@ -185,11 +186,14 @@ cask "microsoft-office"
 # Mac App Store
 # ----------------------------------------------------------
 {{- if eq .chezmoi.hostname "weatherwax" }}
+mas "1Blocker", id: 1365531024
+mas "1Password for Safari", id: 1569813296
+mas "iA Writer", id: 775737590
 mas "Kagi for Safari", id: 1622835804
+mas "keymapp", id: 6472865291
 mas "Klack", id: 6446206067
-mas "Looking Glass - Music Remote", id: 1602004436
-mas "Tailscale", id: 1475387142
 mas "Logic Pro", id: 634148309
+mas "Save to Reader", id: 1640236961
 {{ end }}
 
 {{- if eq .chezmoi.hostname "joulie" }}
