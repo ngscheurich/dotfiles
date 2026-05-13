@@ -6,4 +6,5 @@ keymap_mode = "vim-insert"
 show_help = false
 show_tabs = false
 style = "full"
+sync_address = "https://atuin.bienjensu.net"
 enter_accept = true
