@@ -55,6 +55,9 @@ symbol = "󰦥 "
 [golang]
 symbol = " "
 
+[hostname]
+ssh_symbol = " "
+
 [haxe]
 symbol = ""
 
