@@ -32,6 +32,7 @@
   ds = show --ext-diff
   fix = commit --fixup
   fu = !~/.local/share/grimoire/git_fuckup.sh
+  prov = !~/.local/share/grimoire/git_provenance.sh
   pub = push --set-upstream origin HEAD
   rb = rebase
   rba = rebase --abort
