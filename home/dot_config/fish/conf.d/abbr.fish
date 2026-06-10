@@ -24,6 +24,11 @@ abbr -a lt eza --tree
 abbr -a n nvim
 abbr -a ns nvim -S
 abbr -a serve python -m http.server
+abbr -a sp spirit
+abbr -a spa spirit agent
+abbr -a spb spirit brief
+abbr -a sps spirit server
+abbr -a spw spirit workspace
 abbr -a vimdiff nvim -d
 abbr -a weather curl wttr.in
 abbr -a tx tmux
