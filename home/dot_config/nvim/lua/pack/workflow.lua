@@ -1,5 +1,16 @@
 local add = vim.pack.add
-local now_if_args, on_filetype = Config.now_if_args, Config.on_filetype
+local later, now_if_args, on_filetype =
+  Config.later, Config.now_if_args, Config.on_filetype
+
+-- ┎──────────────────────────────────────────────────┬────────────────────────┐
+-- ┃  copy-reference.nvim                            │  workflow             │
+-- ┠──────────────────────────────────────────────────┴────────────────────────┤
+-- ┃  Copy file references with line numbers                                  │
+-- ┖───────────────────────────────────────────────────────────────────────────┘
+later(function()
+  add({ "http://github.com/cajames/copy-reference.nvim" })
+  require("copy-reference").setup()
+end)
 
 -- ┎──────────────────────────────────────────────────┬────────────────────────┐
 -- ┃  oil.nvim                                       │  workflow             │
