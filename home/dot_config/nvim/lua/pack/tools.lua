@@ -2,6 +2,16 @@ local add = vim.pack.add
 local later, now_if_args = Config.later, Config.now_if_args
 
 -- ┎──────────────────────────────────────────────────┬────────────────────────┐
+-- ┃  hotreload.nvim                                 │  tools                │
+-- ┠──────────────────────────────────────────────────┴────────────────────────┤
+-- ┃  Reload buffers when files change on disk                                │
+-- ┖───────────────────────────────────────────────────────────────────────────┘
+later(function()
+  add({ "https://github.com/diogo464/hotreload.nvim" })
+  require("hotreload").setup()
+end)
+
+-- ┎──────────────────────────────────────────────────┬────────────────────────┐
 -- ┃  Minty                                          │  tools                │
 -- ┠──────────────────────────────────────────────────┴────────────────────────┤
 -- ┃  Preview and manipulate colors                                           │
@@ -9,7 +19,7 @@ local later, now_if_args = Config.later, Config.now_if_args
 later(function() add({ "https://github.com/nvzone/minty" }) end)
 
 -- ┎──────────────────────────────────────────────────┬────────────────────────┐
--- ┃  vim-dadbod-ui                                  │  tools                │
+-- ┃  vim-dadbod-ui                                  │  tools, ui            │
 -- ┠──────────────────────────────────────────────────┴────────────────────────┤
 -- ┃  Query relational databases with dadbod.vim                              │
 -- ┖───────────────────────────────────────────────────────────────────────────┘

@@ -49,6 +49,10 @@
       "rev": "fae936abb5e0345b85c3a03ecf38525b0828b992",
       "src": "https://github.com/rebelot/heirline.nvim"
     },
+    "hotreload.nvim": {
+      "rev": "76f1c8bd1afaa13a22756c736478144fa38f75f8",
+      "src": "https://github.com/diogo464/hotreload.nvim"
+    },
     "incline.nvim": {
       "rev": "8b54c59bcb23366645ae10edca6edfb9d3a0853e",
       "src": "https://github.com/b0o/incline.nvim"
