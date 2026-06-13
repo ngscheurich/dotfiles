@@ -6,9 +6,9 @@ local on_filetype = Config.on_filetype
 -- ┠──────────────────────────────────────────────────┴────────────────────────┤
 -- ┃   Tools that improve the prose writing experience                        │
 -- ┖───────────────────────────────────────────────────────────────────────────┘
-on_filetype("markdown", function()
+on_filetype("markdown,text", function()
   add({ "https://github.com/preservim/vim-pencil" })
-  vim.cmd("PencilToggle")
+  vim.fn["pencil#init"]()
 end)
 
 -- ┎──────────────────────────────────────────────────┬────────────────────────┐
