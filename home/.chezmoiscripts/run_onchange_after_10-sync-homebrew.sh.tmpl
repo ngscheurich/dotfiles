@@ -4,19 +4,7 @@
 
 BUNDLE_FILE="$HOME/.config/homebrew/Brewfile"
 
-if ! command -v gum >/dev/null 2>&1 || [ "$VERBOSE_SCRIPTS" = "1" ]; then
-  brew bundle install --file $BUNDLE_FILE
-  brew bundle cleanup --file $BUNDLE_FILE --force
-else
-  gum spin \
-    --title "Homebrew install..." \
-    --show-error \
-    --spinner.foreground="2" \
-    -- brew bundle install --file $BUNDLE_FILE
+brew bundle install --file $BUNDLE_FILE
+brew bundle cleanup --file $BUNDLE_FILE --force
 
-  gum spin \
-    --title "Homebrew cleanup..." \
-    --show-error \
-    --spinner.foreground="3" \
-    -- brew bundle cleanup --file $BUNDLE_FILE --force
-fi
+# vim:ft=sh
