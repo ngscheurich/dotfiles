@@ -1,20 +1,4 @@
 # ==========================================================
-# Taps
-# ----------------------------------------------------------
-tap "anomalyco/tap"
-tap "charmbracelet/tap"
-tap "superhq-ai/tap"
-
-{{- if eq .chezmoi.os "darwin" }}
-tap "d12frosted/emacs-plus"
-tap "morantron/tmux-fingers"
-{{ end }}
-
-{{- if eq .chezmoi.hostname "Joulie" }}
-tap "timescale/tap"
-{{- end }}
-
-# ==========================================================
 # Formulae
 # ----------------------------------------------------------
 brew "atuin"
@@ -44,6 +28,7 @@ brew "gs"
 brew "gum"
 brew "htop"
 brew "httpie"
+brew "imagemagick"
 brew "jq"
 brew "lazygit"
 brew "luajit"
@@ -56,12 +41,12 @@ brew "pyright"
 brew "readline"
 brew "rg"
 brew "sd"
-brew "shuru"
 brew "sleek"
 brew "sqlfluff"
 brew "starship"
 brew "stylelint"
 brew "superfile"
+brew "superhq-ai/tap/shuru"
 brew "tldr"
 brew "tmux"
 brew "tmuxp"
@@ -92,9 +77,7 @@ brew "frpc"
 brew "gcc"
 brew "gomplate"
 brew "icu4c@77"
-brew "imagemagick"
 brew "jackielii/tap/skhd-zig"
-brew "lgug2z/tap/komorebi-for-mac"
 brew "libgccjit"
 brew "libressl"
 brew "llvm"
@@ -125,8 +108,8 @@ brew "openjdk@17"
 brew "pkg-config"
 brew "postgresql@17"
 brew "squashfs"
-brew "timescaledb"
-brew "timescaledb-toolkit"
+brew "timescale/tap/timescaledb"
+brew "timescale/tap/timescaledb-toolkit"
 brew "xz"
 {{ end }}
 
@@ -147,7 +130,7 @@ cask "cleanshot"
 cask "daisydisk"
 cask "discord"
 cask "dropbox"
-cask "emacs-plus-app"
+cask "d12frosted/emacs-plus/emacs-plus-app"
 cask "fantastical"
 cask "figma"
 cask "firefox"
