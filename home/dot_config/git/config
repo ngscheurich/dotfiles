@@ -23,14 +23,16 @@
   tool = vimdiff
   prompt = false
 [alias]
-  amend = commit --amend --message
+  am = commit --amend --message
   br = branch
-  ci = commit
+  cm = commit
+  cma = commit --all
+  cmf = commit --fixup
+  cmp = commit --patch
   co = checkout
   d = diff
   dl = log -p --ext-diff
   ds = show --ext-diff
-  fix = commit --fixup
   fu = !~/.local/share/grimoire/git_fuckup.sh
   prov = !~/.local/share/grimoire/git_provenance.sh
   pub = push --set-upstream origin HEAD
@@ -39,3 +41,5 @@
   rbc = rebase --continue
   st = status
   unstage = reset --soft HEAD^
+
+# vim:ft=gitconfig
