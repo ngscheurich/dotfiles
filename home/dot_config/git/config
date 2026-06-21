@@ -5,6 +5,7 @@
 [core]
   editor = nvim
 	excludesfile = ~/.config/git/ignore
+  pager = hunk pager
 [init]
 	defaultBranch = main
 [gpg]
@@ -15,9 +16,6 @@
 	gpgsign = true
 [commit]
 	gpgsign = true
-[diff]
-	external = difft
-  tool = vimdiff
 [merge]
   conflictstyle = diff3
   tool = vimdiff
