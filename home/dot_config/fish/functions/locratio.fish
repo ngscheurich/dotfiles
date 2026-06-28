@@ -1,4 +1,4 @@
-function loc_ratio --description "Show comment vs. code LOC percentages using tokei"
+function locratio --description "Show comment vs. code LOC percentages using tokei"
     # ANSI styles
     set -l cyan    (printf '\033[36m')
     set -l white   (printf '\033[97m')
