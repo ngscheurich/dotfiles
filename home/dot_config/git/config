@@ -29,7 +29,8 @@
   ff = only
 [rebase]
   autosquash = true
-  autostash = true
+[help]
+  autocorrect = prompt
 [alias]
   am = commit --amend --message
   br = branch
