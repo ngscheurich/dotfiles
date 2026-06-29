@@ -20,6 +20,8 @@
   conflictstyle = diff3
   tool = vimdiff
   prompt = false
+[pull]
+  ff = only
 [alias]
   am = commit --amend --message
   br = branch
