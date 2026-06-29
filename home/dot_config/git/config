@@ -2,12 +2,6 @@
 	name = N. G. Scheurich
 	email = nick@scheurich.me
 	signingKey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBzHyqJW+HIsWjMesMW/i6QPHaaQ9UsUIoONMH9yqPjN
-[core]
-  editor = nvim
-	excludesfile = ~/.config/git/ignore
-  pager = hunk pager
-[init]
-	defaultBranch = main
 [gpg]
 	format = ssh
 [gpg "ssh"]
@@ -16,8 +10,14 @@
 	gpgsign = true
 [commit]
 	gpgsign = true
+[core]
+  editor = nvim
+	excludesfile = ~/.config/git/ignore
+  pager = hunk pager
+[init]
+	defaultBranch = main
 [merge]
-  conflictstyle = diff3
+  conflictstyle = zdiff3
   tool = vimdiff
 [fetch]
   prune = true
