@@ -19,9 +19,17 @@
 [merge]
   conflictstyle = diff3
   tool = vimdiff
-  prompt = false
+[fetch]
+  prune = true
+  prunetags = true
+[push]
+  default = current
+  autoSetupRemote = true
 [pull]
   ff = only
+[rebase]
+  autosquash = true
+  autostash = true
 [alias]
   am = commit --amend --message
   br = branch
