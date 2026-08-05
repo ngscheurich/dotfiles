@@ -1,44 +1,58 @@
 "$schema" = "https://starship.rs/config-schema.json"
 
+# NOTE: This is an explicit allowlist, not "$all". Modules absent from this
+# string never execute at all, so their file reads never happen either.
+# Adding a module here is a security decision, not just a cosmetic one.
 format = """
 $username\
 $hostname\
-$localip\
-$shlvl\
 $directory\
 $git_branch\
 $git_commit\
 $git_state\
-$git_metrics\
 $git_status\
-$hg_branch\
-$hg_state\
-$custom\
-$sudo\
 $cmd_duration\
 $line_break\
 $jobs\
 $battery\
-$time\
-$status\
-$os\
 $container\
 $netns\
-$shell\
 $character"""
 
+# Unix directory names may contain raw control characters, and git checks such
+# names out faithfully, so `cd` into a cloned repo can feed escape sequences
+# straight to the terminal. This range is exactly the Unicode Control (Cc)
+# category: C0, DEL, and the C1 range that doubles as an 8-bit CSI/OSC
+# introducer.
+#
+# Written as hex rather than \p{Cc} on purpose. Starship builds the regex
+# crate with default-features = false and without `unicode-gencat`, so the
+# general-category tables are absent and \p{Cc} fails at runtime with
+# "Unicode property not found". [[:cntrl:]] does compile, but is ASCII-only
+# and would miss the C1 range. Hex escapes need no Unicode tables.
+#
+# This protects $path. Do not set `repo_root_style` or
+# `fish_style_pwd_dir_length` without revisiting it.
+[[directory.substitutions]]
+from = '[\x00-\x1f\x7f-\x9f]'
+to = "?"
+regex = true
+
+# Everything below is inert under the format above: none of these modules are
+# referenced, so none of them run. They are staged for a format that includes
+# them.
 [bun]
-symbol = ""
+symbol = ""
 
 [deno]
 symbol = "󱍢"
 
 [docker_context]
-format = "[$symbol$context]($style) "
-symbol = " "
+format = "[$symbol$context]($style)"
+symbol = ""
 
 [elixir]
-symbol = " "
+symbol = ""
 
 [elm]
 symbol = ""
@@ -50,13 +64,13 @@ symbol = ""
 symbol = ""
 
 [gleam]
-symbol = "󰦥 "
+symbol = "󰦥"
 
 [golang]
-symbol = " "
+symbol = ""
 
 [hostname]
-ssh_symbol = " "
+ssh_symbol = ""
 
 [haxe]
 symbol = ""
@@ -65,7 +79,7 @@ symbol = ""
 symbol = ""
 
 [lua]
-symbol = " "
+symbol = ""
 
 [nodejs]
 symbol = ""
