@@ -42,74 +42,74 @@ regex = true
 # referenced, so none of them run. They are staged for a format that includes
 # them.
 [bun]
-symbol = ""
+symbol = " "
 
 [deno]
-symbol = "󱍢"
+symbol = "󱍢 "
 
 [docker_context]
 format = "[$symbol$context]($style)"
-symbol = ""
+symbol = " "
 
 [elixir]
-symbol = ""
+symbol = " "
 
 [elm]
-symbol = ""
+symbol = " "
 
 [erlang]
-symbol = ""
+symbol = " "
 
 [fennel]
-symbol = ""
+symbol = " "
 
 [gleam]
-symbol = "󰦥"
+symbol = "󰦥 "
 
 [golang]
-symbol = ""
+symbol = " "
 
 [hostname]
-ssh_symbol = ""
+ssh_symbol = " "
 
 [haxe]
-symbol = ""
+symbol = " "
 
 [kotlin]
-symbol = ""
+symbol = " "
 
 [lua]
-symbol = ""
+symbol = " "
 
 [nodejs]
-symbol = ""
+symbol = " "
 
 [ocaml]
-symbol = ""
+symbol = " "
 
 [perl]
-symbol = ""
+symbol = " "
 
 [php]
-symbol = ""
+symbol = " "
 
 [purescript]
-symbol = ""
+symbol = " "
 
 [python]
-symbol = ""
+symbol = " "
 
 [ruby]
-symbol = ""
+symbol = " "
 
 [rust]
-symbol = ""
+symbol = " "
 
 [typst]
-symbol = ""
+symbol = " "
 
 [swift]
-symbol = ""
+symbol = " "
 
 [zig]
-symbol = ""
+symbol = " "
