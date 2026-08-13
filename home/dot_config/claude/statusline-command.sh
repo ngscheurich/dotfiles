@@ -4,37 +4,36 @@ input=$(cat)
 cwd=$(echo "$input" | jq -r '.workspace.current_dir // .cwd')
 model=$(echo "$input" | jq -r '.model.display_name // empty')
 used=$(echo "$input" | jq -r '.context_window.used_percentage // empty')
-transcript=$(echo "$input" | jq -r '.transcript_path // empty')
+ctx_in=$(echo "$input" | jq -r '.context_window.total_input_tokens // empty')
+ctx_size=$(echo "$input" | jq -r '.context_window.context_window_size // empty')
+cost=$(echo "$input" | jq -r '.cost.total_cost_usd // empty')
 # Share of the current 5-hour session limit consumed (subscriber-only; absent
 # until the first API response of a session).
 session_used=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')
 
-# 45231 -> "45.2k", 1900000 -> "1.9M", 850 -> "850"
+# 45231 -> "45.2k", 1900000 -> "1.9M", 850 -> "850". A zero tenths digit is
+# dropped rather than printed, so round values read "340k" and "1M" instead of
+# "340.0k" and "1.0M" — which also makes this usable for window sizes.
 fmt_tokens() {
+  local whole frac unit
   if [ "$1" -ge 1000000 ]; then
-    printf '%d.%dM' $(($1 / 1000000)) $((($1 % 1000000) / 100000))
+    whole=$(($1 / 1000000))
+    frac=$((($1 % 1000000) / 100000))
+    unit="M"
   elif [ "$1" -ge 1000 ]; then
-    printf '%d.%dk' $(($1 / 1000)) $((($1 % 1000) / 100))
+    whole=$(($1 / 1000))
+    frac=$((($1 % 1000) / 100))
+    unit="k"
   else
     printf '%d' "$1"
+    return
+  fi
+  if [ "$frac" -eq 0 ]; then
+    printf '%d%s' "$whole" "$unit"
+  else
+    printf '%d.%d%s' "$whole" "$frac" "$unit"
   fi
 }
-
-# Cumulative session tokens: sum input + cache (create/read) + output across
-# every assistant turn in the transcript, deduped by message id (lines can
-# repeat). This is the running total — it only grows, unlike the context gauge.
-sess_tokens=0
-if [ -n "$transcript" ] && [ -f "$transcript" ]; then
-  sess_tokens=$(jq -n '
-        [ inputs | select(.message.usage != null) | {id: .message.id, u: .message.usage} ]
-        | unique_by(.id)
-        | reduce .[] as $e (0;
-            . + ($e.u.input_tokens // 0)
-              + ($e.u.cache_creation_input_tokens // 0)
-              + ($e.u.cache_read_input_tokens // 0)
-              + ($e.u.output_tokens // 0))
-    ' "$transcript" 2>/dev/null || echo 0)
-fi
 
 # Show the full path (home shortened to ~). Once it grows past max_cwd_len,
 # abbreviate every directory except the current one to its first letter
@@ -78,16 +77,27 @@ if git -C "$cwd" rev-parse --is-inside-work-tree --no-optional-locks >/dev/null 
   fi
 fi
 
-# Context usage indicator
+# Context usage: absolute tokens against the window, plus the percentage.
+# The denominator matters — 34% is ~68k on a 200k model and ~340k on a 1m one,
+# and the meaning shifts silently if the session changes model. Absolute
+# tokens also answer "will this file fit", which a bare percentage does not.
+# Falls back to percentage alone if the token fields haven't populated yet.
 ctx_part=""
-if [ -n "$used" ]; then
+if [ -n "$ctx_in" ] && [ -n "$ctx_size" ] && [ "$ctx_in" -gt 0 ]; then
+  ctx_part=" ctx:$(fmt_tokens "$ctx_in")/$(fmt_tokens "$ctx_size")"
+  [ -n "$used" ] && ctx_part="${ctx_part} $(printf '%.0f' "$used")%"
+elif [ -n "$used" ]; then
   ctx_part=" ctx:$(printf '%.0f' "$used")%"
 fi
 
-# Cumulative session token indicator
-sess_part=""
-if [ "$sess_tokens" -gt 0 ]; then
-  sess_part=" tok:$(fmt_tokens "$sess_tokens")"
+# Estimated session cost, client-side. This replaces the old cumulative token
+# counter: it carries the same "how much work has this session done" signal,
+# survives /compact the same way, applies cache pricing correctly, and costs
+# no I/O — the old version rescanned the whole transcript on every assistant
+# message, which is slowest exactly when transcripts are largest.
+cost_part=""
+if [ -n "$cost" ]; then
+  cost_part=$(printf ' $%.2f' "$cost")
 fi
 
 # Session-remaining progress bar, shown just left of the model. Filled cells
@@ -124,7 +134,7 @@ fi
 # model sits at the terminal's right edge. Claude Code sets $COLUMNS (it
 # captures stdout, so tput can't read the width). Padding is computed from the
 # plain text lengths, excluding ANSI escapes.
-left_plain="${short_cwd}${git_branch}${ctx_part}${sess_part}"
+left_plain="${short_cwd}${git_branch}${ctx_part}${cost_part}"
 # Claude Code reserves built-in spacing on both sides, so the usable width is
 # less than $COLUMNS. It indents the left edge by 2 and truncates at COLUMNS-2.
 # Using a margin of 4 leaves a matching 2-column gap before the model, so both
@@ -132,13 +142,19 @@ left_plain="${short_cwd}${git_branch}${ctx_part}${sess_part}"
 right_margin=4
 cols=$((${COLUMNS:-80} - right_margin))
 
-# Try to fit the bar; if the viewport is too narrow to leave a gap before it,
-# drop the bar entirely and reclaim its width for padding.
+# Fit segments to the viewport, dropping the least load-bearing first: the bar
+# goes before the cost, and the cost before anything else. Context usage and
+# the model always survive.
 pad=$((cols - ${#left_plain} - bar_w - ${#model}))
 if [ "$bar_w" -gt 0 ] && [ "$pad" -lt 1 ]; then
   bar=""
   bar_w=0
   pad=$((cols - ${#left_plain} - ${#model}))
+fi
+if [ -n "$cost_part" ] && [ "$pad" -lt 1 ]; then
+  cost_part=""
+  left_plain="${short_cwd}${git_branch}${ctx_part}"
+  pad=$((cols - ${#left_plain} - bar_w - ${#model}))
 fi
 [ "$pad" -lt 1 ] && pad=1
 
@@ -147,7 +163,7 @@ printf "\033[34m%s\033[0m\033[32m%s\033[0m\033[33m%s\033[0m\033[90m%s\033[0m%*s%
   "$short_cwd" \
   "$git_branch" \
   "$ctx_part" \
-  "$sess_part" \
+  "$cost_part" \
   "$pad" "" \
   "$bar" \
   "$model"
