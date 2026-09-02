@@ -91,6 +91,7 @@ brew "xmlstarlet"
 
 {{- if eq .chezmoi.hostname "Weatherwax" }}
 brew "libpq"
+brew "postgresql@18"
 {{ end }}
 
 {{- if eq .chezmoi.hostname "Joulie" }}
