@@ -74,3 +74,6 @@ requests.http
 
 # Aider
 .aider*
+
+# Local project setup
+mise.local.toml
