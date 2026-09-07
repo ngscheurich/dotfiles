@@ -183,6 +183,13 @@ mas "iA Writer", id: 775737590
 mas "keymapp", id: 6472865291
 {{ end }}
 
+{{- if eq .chezmoi.hostname "Weatherwax" }}
+mas "Keynote", id: 361285480
+mas "Logic Pro", id: 634148309
+mas "Numbers", id: 361304891
+mas "Pages", id: 361309726
+{{ end }}
+
 {{- if eq .chezmoi.hostname "Joulie" }}
 mas "Transporter", id: 1450874784
 {{ end }}
