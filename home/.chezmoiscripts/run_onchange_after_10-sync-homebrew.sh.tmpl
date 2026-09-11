@@ -6,6 +6,9 @@ BUNDLE_FILE="$HOME/.config/homebrew/Brewfile"
 
 brew trust --formula anomalyco/tap/opencode
 brew trust --formula modem-dev/tap/hunk
+brew trust --formula timescale/tap/timescaledb
+brew trust --formula timescale/tap/timescaledb-toolkit
+brew trust --formula timescale/tap/timescaledb-tools
 
 brew bundle install --file $BUNDLE_FILE
 brew bundle cleanup --file $BUNDLE_FILE --force
