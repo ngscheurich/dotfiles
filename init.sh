@@ -1,5 +1,5 @@
-#!/bin/bash
-#
+#!/usr/bin/env bash
+
 # Initializes my dotfiles
 #
 # Typically, this script is downloaded and executed on a new computer:
@@ -7,53 +7,66 @@
 #
 # Usage:
 #   init.sh
-#
 
 set -euo pipefail
 
-case "$(uname)" in
-Darwin)
-  GUM_PLATFORM="Darwin_arm64"
+case "$(uname)-$(uname -m)" in
+Darwin-arm64)
+  gum_platform="Darwin_arm64"
+  homebrew_prefix="/opt/homebrew"
   ;;
-Linux)
-  GUM_PLATFORM="Linux_amd64"
+Darwin-x86_64)
+  gum_platform="Darwin_x86_64"
+  homebrew_prefix="/usr/local"
+  ;;
+Linux-x86_64)
+  gum_platform="Linux_amd64"
+  homebrew_prefix="/home/linuxbrew/.linuxbrew"
+  ;;
+Linux-aarch64)
+  gum_platform="Linux_arm64"
+  homebrew_prefix="/home/linuxbrew/.linuxbrew"
   ;;
 *)
-  echo "[fatal] Unsupported platform: $(uname)"
-  exit 1
+  raise "Unsupported platform: $(uname) $(uname -m)"
   ;;
 esac
 
-VERSION="1.0.0"
-GUM_VERSION="0.16.2"
-GUM_RELEASE="gum_${GUM_VERSION}_${GUM_PLATFORM}"
-GUM_ARCHIVE="${GUM_RELEASE}.tar.gz"
-GUM_SBOM="${GUM_ARCHIVE}.sbom.json"
-HOMEBREW_BIN="/opt/homebrew/bin"
-SCRIPT_DEPS="fish"
-LOCAL_BIN="${HOME}/.local/bin"
-CHEZMOI_STATE="${HOME}/.local/share/chezmoi"
+version="1.0.0"
+gum_version="0.16.2"
+gum_release="gum_${gum_version}_${gum_platform}"
+gum_archive="${gum_release}.tar.gz"
+gum_sbom="${gum_archive}.sbom.json"
+homebrew_bin="${homebrew_prefix}/bin"
+script_deps="fish"
+local_bin="${HOME}/.local/bin"
+chezmoi_state="${HOME}/.local/share/chezmoi"
 
 if [ -n "${TMPDIR:-}" ]; then
-  WORKDIR="${TMPDIR%/}/dotfiles"
+  workdir="${TMPDIR%/}/dotfiles"
 else
-  WORKDIR="/tmp/dotfiles"
+  workdir="/tmp/dotfiles"
 fi
 
+# Clean up the working directory no matter how the script exits
+trap 'rm -rf "$workdir"' EXIT
+
 if command -v gum >/dev/null 2>&1; then
-  GUM="$(command -v gum)"
+  gum="$(command -v gum)"
 else
-  GUM="${WORKDIR}/${GUM_RELEASE}/gum"
+  gum="${workdir}/${gum_release}/gum"
 fi
+
+echo $gum
 
 # Helpers ------------------------------------------------------------------ {{{
 log() {
-  if [ -x "$GUM" ]; then
-    level="$1"
-    shift
-    "$GUM" log --structured --time timeonly -l "$level" "$@"
+  level="$1"
+  shift
+  if [ -x "$gum" ]; then
+    "$gum" log --structured --time timeonly -l "$level" "$@"
   else
-    echo "[$1]" "$@"
+    echo "[$level]" "$@"
   fi
 }
 
@@ -66,15 +79,20 @@ is_darwin() {
   test "$(uname)" = "Darwin"
 }
 
+check_prereqs() {
+  command -v curl >/dev/null 2>&1 || raise "curl is required but was not found"
+  command -v git >/dev/null 2>&1 || raise "git is required but was not found"
+}
+
 if is_darwin; then
-  CONTINUE_KEY="Return"
+  continue_key="Return"
 else
-  CONTINUE_KEY="Enter"
+  continue_key="Enter"
 fi
 
 wait_user() {
-  if [ -x "$GUM" ]; then
-    "$GUM" spin --spinner pulse --title "$1" -- read -r _
+  if [ -x "$gum" ]; then
+    "$gum" spin --spinner pulse --title "$1" -- read -r _
   else
     echo "$1"
     read -r _
@@ -82,30 +100,23 @@ wait_user() {
 }
 
 greeting() {
-  title="$($GUM style --bold "🎒 ngscheurich/dotfiles")"
-  version="$($GUM style --foreground 212 "v$VERSION")"
-
-  "$GUM" style \
-    --border-foreground 238 --border double --align center \
-    --width 40 --margin "1 1" --padding "1 1" \
-    "$title" "$version"
-
-  "$GUM" format <<EOF
+  intro=$(
+    cat <<EOF
 # Greetings, wanderer.
 
 You’ve stumbled upon my dotfiles setup script.
 
 ## What this script does
 
-This is an automation script that helps me install and configure the programs I
-rely on. Namely, it:
+This is an automation script that helps me install and configure the
+programs I rely on. Namely, it:
 
 1. Installs dependencies for this script to run
 2. Installs [chezmoi](https://www.chezmoi.io/)
 3. Initializes and applies my current chezmoi state
 
-Additionally, if the platform is Darwin, the macOS command line developer tools
-are installed.
+Additionally, if the platform is Darwin, the macOS command line developer
+tools are installed.
 
 ## Idempotency
 
@@ -114,48 +125,82 @@ completed, so don't be (too) wary about running it multiple times.
 
 ## Cleanup
 
-The script will make a temporary directory for any files it needs to create or
-download, and it will try to clean it up.
+The script will make a temporary directory for any files it needs to create
+or download, and it will try to clean it up.
 EOF
+  )
 
-  echo ""
-  "$GUM" confirm "Shall we proceed?" || exit 0
+  if [ -x "$gum" ]; then
+    title="$($gum style --bold "🎒 ngscheurich/dotfiles")"
+    version_label="$($gum style --foreground 212 "v$version")"
+
+    "$gum" style \
+      --border-foreground 238 --border double --align center \
+      --width 40 --margin "1 1" --padding "1 1" \
+      "$title" "$version_label"
+
+    echo "$intro" | "$gum" format
+
+    echo ""
+    "$gum" confirm "Shall we proceed?" || exit 0
+  else
+    echo "🎒 ngscheurich/dotfiles v$version"
+    echo ""
+    echo "$intro"
+
+    echo ""
+    printf "Shall we proceed? [y/N] "
+    read -r answer
+    case "$answer" in
+    [yY]*) ;;
+    *) exit 0 ;;
+    esac
+  fi
 }
 
 farewell() {
   echo ""
-  "$GUM" confirm "All done! Show system info?" && fastfetch || exit 0
+  if [ -x "$gum" ]; then
+    "$gum" confirm "All done! Show system info?" || return 0
+    fastfetch
+  else
+    printf "All done! Show system info? [y/N] "
+    read -r answer
+    case "$answer" in
+    [yY]*) fastfetch ;;
+    esac
+  fi
 }
 # }}}
 
 # Gum ------------------------------------------------------------- {{{
 download_gum() {
-  for file in "$GUM_ARCHIVE" "$GUM_SBOM" "checksums.txt"; do
-    url="https://github.com/charmbracelet/gum/releases/download/v${GUM_VERSION}/${file}"
+  for file in "$gum_archive" "$gum_sbom" "checksums.txt"; do
+    url="https://github.com/charmbracelet/gum/releases/download/v${gum_version}/${file}"
     curl -fsLSO "$url"
   done
 }
 
 verify_gum() {
   result=$(sha256sum --check checksums.txt 2>/dev/null)
-  echo "$result" | grep -q "$GUM_ARCHIVE" && echo "$result" | grep -q "$GUM_SBOM"
+  echo "$result" | grep -q "$gum_archive" && echo "$result" | grep -q "$gum_sbom"
 }
 
 install_gum() {
   icon="🎀"
-  # If "$GUM" is not an executable file, install gum
-  if [ -x "$GUM" ]; then
-    log info "${icon} Gum detected." path "$GUM"
+  # If "$gum" is not an executable file, install gum
+  if [ -x "$gum" ]; then
+    log info "${icon} Gum detected" path "$gum"
   else
-    log info "${icon} Installing gum."
+    log info "${icon} Installing gum..."
 
     download_gum
 
     if verify_gum; then
       # This makes the gum binary available in the working directory
-      tar xzf "$GUM_ARCHIVE"
+      tar xzf "$gum_archive"
     else
-      raise "Gum artifacts could not be verified."
+      raise "Gum artifacts could not be verified"
     fi
   fi
 }
@@ -166,13 +211,13 @@ install_macos_dev_tools() {
   icon="🛠️"
   # If the tools path isn't found, install the tools
   if xcode-select --print-path >/dev/null 2>&1; then
-    log info "${icon}  macOS command line developer tools detected." path "$(xcode-select -p)"
+    log info "${icon}  macOS command line developer tools detected" path "$(xcode-select -p)"
   else
     log info "${icon}  Requesting macOS command line developer tools install..."
 
     # Pause until the tools are installed
     xcode-select --install >/dev/null 2>&1
-    wait_user "Requested macOS command line developer tools install. Press ${CONTINUE_KEY} when complete..."
+    wait_user "Requested macOS command line developer tools install. Press ${continue_key} when complete..."
   fi
 }
 # }}}
@@ -181,8 +226,8 @@ install_macos_dev_tools() {
 install_homebrew() {
   icon="🍺"
   # If the Homebrew bin directory doesn't exist, install Homebrew
-  if [ -d "$HOMEBREW_BIN" ]; then
-    log info "${icon} Homebrew detected." path "$HOMEBREW_BIN"
+  if [ -d "$homebrew_bin/brew" ]; then
+    log info "${icon} Homebrew detected" path "$homebrew_bin"
   else
     log info "${icon} Installing Homebrew..."
 
@@ -190,43 +235,60 @@ install_homebrew() {
       "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
 
-  zprofile="${ZDOTDIR-$HOME}/.zprofile"
-  echo >>"$zprofile"
+  if is_darwin; then
+    profile="${ZDOTDIR:-$HOME}/.zprofile"
+  else
+    profile="${HOME}/.profile"
+  fi
+
   # shellcheck disable=SC2016
-  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >>"$zprofile"
-  eval "$(/opt/homebrew/bin/brew shellenv)"
+  brew_shellenv="eval \"\$(${homebrew_bin}/brew shellenv)\""
+  if ! grep -Fxq "$brew_shellenv" "$profile"; then
+    echo >>"$profile"
+    echo "$brew_shellenv" >>"$profile"
+  fi
+  eval "$brew_shellenv"
+}
+# }}}
+
+# mise-en-place ------------------------------------------------------------ {{{
+install_mise() {
+  icon="🔪"
+  path="${local_bin}/mise"
+
+  # If mise doesn't exist at the expected path, install it
+  if [ -x "$path" ]; then
+    log info "${icon} mise-en-place detected" path "$path"
+  else
+    log info "${icon} Installing mise-en-place..."
+    curl https://mise.run | sh
+  fi
 }
 # }}}
 
 # Script dependencies ------------------------------------------------------ {{{
-dep_installed() {
-  brew_ls=$(brew list)
-  echo "$brew_ls" | grep -Fxq "$1"
-}
-
 dep_install() {
   brew install --force "$1"
 }
 
 install_script_deps() {
   icon="📦"
-  deps_missing=0
+  command -v brew >/dev/null 2>&1 || raise "Homebrew is not available"
+  brew_ls=$(brew list)
 
   # Check for any missing deps
-  for dep in $SCRIPT_DEPS; do
-    if ! dep_installed "$dep"; then deps_missing=1; fi
+  missing=""
+  for dep in $script_deps; do
+    echo "$brew_ls" | grep -Fxq "$dep" || missing="$missing $dep"
   done
 
-  # If any deps are missing, install them
-  if [ "$deps_missing" -eq 0 ]; then
-    log info "${icon} Script dependencies detected." deps "$SCRIPT_DEPS"
+  if [ -z "$missing" ]; then
+    log info "${icon} Script dependencies detected" deps "$script_deps"
   else
-    log info "${icon} Installing script dependencies..." deps "$SCRIPT_DEPS"
+    log info "${icon} Installing script dependencies..." deps "$script_deps"
 
-    for dep in $SCRIPT_DEPS; do
-      if ! dep_installed "$dep"; then
-        dep_install "$dep"
-      fi
+    for dep in $missing; do
+      dep_install "$dep"
     done
   fi
 }
@@ -235,25 +297,25 @@ install_script_deps() {
 # chezmoi ------------------------------------------------------------------ {{{
 install_chezmoi() {
   icon="🏠"
-  path="${LOCAL_BIN}/chezmoi"
+  path="${local_bin}/chezmoi"
 
   # If chezmoi doesn't exist at the expected path, install it
   if [ -f "$path" ]; then
-    log info "${icon} Chezmoi detected." path "$path"
+    log info "${icon} Chezmoi detected" path "$path"
   else
     log info "${icon} Installing chezmoi..."
-    sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$LOCAL_BIN"
+    sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$local_bin"
   fi
 }
 
 initialize_chezmoi() {
   icon="🎒"
   # If chezmoi state doesn't exist, initialize and apply it
-  if test -d "$CHEZMOI_STATE"; then
-    log info "${icon} Dotfiles initialized." path "$CHEZMOI_STATE"
+  if test -d "$chezmoi_state"; then
+    log info "${icon} Dotfiles initialized" path "$chezmoi_state"
   else
     log info "${icon} Initializing dotfiles..."
-    "${LOCAL_BIN}/chezmoi" init --apply ngscheurich
+    "PATH=${local_bin}:${PATH} chezmoi" init --apply ngscheurich
   fi
 }
 # }}}
@@ -271,7 +333,7 @@ change_shell_to_fish() {
 
   # If the current shell is not Fish, set it using chsh
   if [ "$shell" = "$fish" ]; then
-    log info "${icon} User shell is Fish." path "$fish"
+    log info "${icon} User shell is Fish" path "$fish"
   else
     log info "${icon} Changing user shell to Fish..."
 
@@ -289,30 +351,27 @@ change_shell_to_fish() {
 # ------------------------------------------------------------------------------
 main() {
   # Create working directory
-  if [ ! -d "$WORKDIR" ]; then mkdir -p "$WORKDIR"; fi
-  cd "$WORKDIR" || raise "Could not change directory"
+  if [ ! -d "$workdir" ]; then mkdir -p "$workdir"; fi
+  cd "$workdir" || raise "Could not change directory"
 
+  check_prereqs
   install_gum
 
-  # Display greeting
   greeting
 
-  # macOS setup
+  # macOS command line developer tools
   if is_darwin; then
     install_macos_dev_tools
-    install_homebrew
   fi
 
+  install_homebrew
+  install_mise
   install_script_deps
   install_chezmoi
   change_shell_to_fish
   initialize_chezmoi
 
-  # Display farewell
   farewell
-
-  # Clean up working directory
-  rm -rf "$WORKDIR"
 }
 
 main
