@@ -90,12 +90,12 @@ brew "zlib"
 brew "xmlstarlet"
 {{ end }}
 
-{{- if eq .chezmoi.hostname "Weatherwax" }}
+{{- if eq .chezmoi.hostname "weatherwax" }}
 brew "libpq"
 brew "postgresql@18"
 {{ end }}
 
-{{- if eq .chezmoi.hostname "Joulie" }}
+{{- if eq .chezmoi.hostname "joulie" }}
 brew "cairo"
 brew "coreutils"
 brew "exiftool"
@@ -155,7 +155,7 @@ cask "vlc"
 cask "zed"
 {{ end }}
 
-{{- if eq .chezmoi.hostname "Weatherwax" }}
+{{- if eq .chezmoi.hostname "weatherwax" }}
 cask "affinity"
 cask "blender"
 cask "epic-games"
@@ -166,7 +166,7 @@ cask "playdate-simulator"
 cask "steam"
 {{ end }}
 
-{{- if eq .chezmoi.hostname "Joulie" }}
+{{- if eq .chezmoi.hostname "joulie" }}
 cask "microsoft-office"
 {{ end }}
 
@@ -185,14 +185,14 @@ mas "iA Writer", id: 775737590
 mas "keymapp", id: 6472865291
 {{ end }}
 
-{{- if eq .chezmoi.hostname "Weatherwax" }}
+{{- if eq .chezmoi.hostname "weatherwax" }}
 mas "Keynote", id: 361285480
 mas "Logic Pro", id: 634148309
 mas "Numbers", id: 361304891
 mas "Pages", id: 361309726
 {{ end }}
 
-{{- if eq .chezmoi.hostname "Joulie" }}
+{{- if eq .chezmoi.hostname "joulie" }}
 mas "Transporter", id: 1450874784
 {{ end }}
 
