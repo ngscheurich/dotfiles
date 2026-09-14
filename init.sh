@@ -25,7 +25,7 @@ Darwin-x86_64)
   homebrew_prefix="/usr/local"
   ;;
 Linux-x86_64)
-  gum_platform="Linux_amd64"
+  gum_platform="Linux_x86_64"
   homebrew_prefix="/home/linuxbrew/.linuxbrew"
   ;;
 Linux-aarch64)
