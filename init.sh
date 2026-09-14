@@ -38,7 +38,7 @@ Linux-aarch64)
 esac
 
 version="1.0.0"
-gum_version="0.16.2"
+gum_version="2.0.1"
 gum_release="gum_${gum_version}_${gum_platform}"
 gum_archive="${gum_release}.tar.gz"
 gum_sbom="${gum_archive}.sbom.json"
