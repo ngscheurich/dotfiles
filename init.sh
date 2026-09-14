@@ -10,6 +10,11 @@
 
 set -euo pipefail
 
+raise() {
+  log fatal "$1"
+  exit 1
+}
+
 case "$(uname)-$(uname -m)" in
 Darwin-arm64)
   gum_platform="Darwin_arm64"
@@ -53,11 +58,11 @@ trap 'rm -rf "$workdir"' EXIT
 
 if command -v gum >/dev/null 2>&1; then
   gum="$(command -v gum)"
+elif [ -x "${homebrew_bin}/gum" ]; then
+  gum="${homebrew_bin}/gum"
 else
   gum="${workdir}/${gum_release}/gum"
 fi
-
-echo $gum
 
 # Helpers ------------------------------------------------------------------ {{{
 log() {
@@ -68,11 +73,6 @@ log() {
   else
     echo "[$level]" "$@"
   fi
-}
-
-raise() {
-  log fatal "$1"
-  exit 1
 }
 
 is_darwin() {
@@ -177,7 +177,7 @@ farewell() {
 download_gum() {
   for file in "$gum_archive" "$gum_sbom" "checksums.txt"; do
     url="https://github.com/charmbracelet/gum/releases/download/v${gum_version}/${file}"
-    curl -fsLSO "$url"
+    curl -fsSLO "$url"
   done
 }
 
@@ -225,8 +225,8 @@ install_macos_dev_tools() {
 # Homebrew ----------------------------------------------------------------- {{{
 install_homebrew() {
   icon="🍺"
-  # If the Homebrew bin directory doesn't exist, install Homebrew
-  if [ -d "$homebrew_bin/brew" ]; then
+  # If the brew executable doesn't exist, install Homebrew
+  if [ -x "$homebrew_bin/brew" ]; then
     log info "${icon} Homebrew detected" path "$homebrew_bin"
   else
     log info "${icon} Installing Homebrew..."
@@ -261,7 +261,7 @@ install_mise() {
     log info "${icon} mise-en-place detected" path "$path"
   else
     log info "${icon} Installing mise-en-place..."
-    curl https://mise.run | sh
+    curl -fsSL https://mise.run | sh
   fi
 }
 # }}}
@@ -304,7 +304,7 @@ install_chezmoi() {
     log info "${icon} Chezmoi detected" path "$path"
   else
     log info "${icon} Installing chezmoi..."
-    sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$local_bin"
+    sh -c "$(curl -fsSL https://get.chezmoi.io)" -- -b "$local_bin"
   fi
 }
 
@@ -315,7 +315,7 @@ initialize_chezmoi() {
     log info "${icon} Dotfiles initialized" path "$chezmoi_state"
   else
     log info "${icon} Initializing dotfiles..."
-    "PATH=${local_bin}:${PATH} chezmoi" init --apply ngscheurich
+    PATH="${local_bin}:${PATH}" "${local_bin}/chezmoi" init --apply ngscheurich
   fi
 }
 # }}}
