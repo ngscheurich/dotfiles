@@ -341,7 +341,7 @@ change_shell_to_fish() {
       echo "$fish" | sudo tee -a /etc/shells
     fi
 
-    chsh -s "$fish"
+    sudo chsh -s "$fish" "$USER"
   fi
 }
 # }}}
