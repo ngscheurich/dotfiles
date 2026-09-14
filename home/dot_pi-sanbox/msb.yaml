@@ -1,0 +1,19 @@
+# Pi coding agent sandbox
+
+image: "pi-sandbox:latest"
+workdir: "/workspace"
+shell: "/bin/bash"
+scripts:
+  start: "pi"
+secrets:
+  OPENROUTER_API_KEY:
+    allow: ["openrouter.ai"]
+mounts:
+  - "${HOME}/AGENTS.md:/root/AGENTS.md:ro"
+  - "${HOME}/.agents:/root/.agents:ro"
+  - "${HOME}/.pi:/root/.pi"
+  - "${PWD}:/workspace"
+network:
+  allow: ["openrouter.ai"]
+  dns:
+    nameservers: ["1.1.1.1", "1.0.0.1"]
