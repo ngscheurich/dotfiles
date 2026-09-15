@@ -2,11 +2,8 @@
 
 # Initializes my dotfiles
 #
-# Typically, this script is downloaded and executed on a new computer:
-#   sh -c "$(curl -fsLS https://raw.githubusercontent.com/ngscheurich/dotfiles/main/init.sh)"
-#
 # Usage:
-#   init.sh
+#   bash -c "$(curl -fsLS https://raw.githubusercontent.com/ngscheurich/dotfiles/main/init.sh)"
 
 set -euo pipefail
 
@@ -24,12 +21,12 @@ Darwin-x86_64)
   gum_platform="Darwin_x86_64"
   homebrew_prefix="/usr/local"
   ;;
-Linux-x86_64)
-  gum_platform="Linux_x86_64"
-  homebrew_prefix="/home/linuxbrew/.linuxbrew"
-  ;;
 Linux-aarch64)
   gum_platform="Linux_arm64"
+  homebrew_prefix="/home/linuxbrew/.linuxbrew"
+  ;;
+Linux-x86_64)
+  gum_platform="Linux_x86_64"
   homebrew_prefix="/home/linuxbrew/.linuxbrew"
   ;;
 *)
@@ -37,7 +34,7 @@ Linux-aarch64)
   ;;
 esac
 
-version="1.0.0"
+version="1.1.0"
 gum_version="2.0.1"
 gum_release="gum_${gum_version}_${gum_platform}"
 gum_archive="${gum_release}.tar.gz"
@@ -115,18 +112,23 @@ programs I rely on. Namely, it:
 2. Installs [chezmoi](https://www.chezmoi.io/)
 3. Initializes and applies my current chezmoi state
 
-Additionally, if the platform is Darwin, the macOS command line developer
-tools are installed.
+Additionally, if the platform is Darwin, the macOS command line
+developer tools are installed.
+
+## Prerequisites
+
+If you’re on Linux, be sure your system meets the Homebrew requirements:
+  https://docs.brew.sh/Homebrew-on-Linux#requirements).
 
 ## Idempotency
 
-The script attempts to check for and skip any steps that have already been
-completed, so don't be (too) wary about running it multiple times.
+The script attempts to check for and skip any steps that have already
+been completed, so don't be (too) wary about running it multiple times.
 
 ## Cleanup
 
-The script will make a temporary directory for any files it needs to create
-or download, and it will try to clean it up.
+The script will make a temporary directory for any files it needs to
+create or download, and it will try to clean it up.
 EOF
   )
 
@@ -139,7 +141,7 @@ EOF
       --width 40 --margin "1 1" --padding "1 1" \
       "$title" "$version_label"
 
-    echo "$intro" | "$gum" format
+    "$gum" format <<<"$intro"
 
     echo ""
     "$gum" confirm "Shall we proceed?" || exit 0
