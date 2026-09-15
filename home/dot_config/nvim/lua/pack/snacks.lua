@@ -49,19 +49,18 @@ Config.now(function()
 
   -- Picker: Quick
   pick("<C-f>", "files", "Files", "bottom")
+  pick("<C-.>", "lines", "Lines", "bottom")
   pick("<C-/>", "grep", "Grep", "bottom")
-  pick("<C-.>", "lines", "Lines")
   pick("<C-Space>", "buffers", "Buffers", "select")
 
   -- Picker: General
   pick("<Leader><Leader>", "smart", "Smart files", "bottom")
-  pick("<Leader>pr", "resume", "Resume picker")
+  pick("<Leader>P", "resume", "Resume picker")
 
   -- Picker: Find
-  pick("<Leader>pf", "files", "Files")
-  pick("<Leader>pg", "git_files", "Git files")
+  pick("<Leader>pf", "git_files", "Git files", "bottom")
   pick("<Leader>pp", "projects", "Projects")
-  pick("<Leader>pr", "recent", "Recent files")
+  pick("<Leader>pr", "recent", "Recent files", "bottom")
 
   -- Picker: Search
   pick("<Leader>pa", "autocmds", "Autocommands")
@@ -69,21 +68,21 @@ Config.now(function()
   pick("<Leader>p:", "command_history", "Command history")
   pick("<Leader>pc", "commands", "Commands")
   pick("<Leader>pD", "diagnostics", "Diagnostics")
-  pick("<Leader>pd", "diagnostics_buffer", "Diagnostics (buffer)")
+  pick("<Leader>pd", "diagnostics_buffer", "Diagnostics (buffer)", "bottom")
   pick("<Leader>ph", "help", "Help pages")
   pick("<Leader>pH", "highlights", "Highlights")
   pick("<Leader>pi", "icons", "Icons")
   pick("<Leader>pj", "jumps", "Jumps")
   pick("<Leader>pk", "keymaps", "Keymaps")
-  pick("<Leader>pl", "loclist", "Location list")
+  pick("<Leader>pl", "loclist", "Location list", "bottom")
   pick("<Leader>pM", "man", "Man pages")
   pick("<Leader>pm", "marks", "Marks")
-  pick("<Leader>pn", "notifications", "Notification history", "bottom")
-  pick("<Leader>pq", "qflist", "Quickfix list")
+  pick("<Leader>pn", "notifications", "Notification history")
+  pick("<Leader>pq", "qflist", "Quickfix list", "bottom")
   pick("<Leader>p\\", "registers", "Registers")
   pick("<Leader>p/", "search_history", "Search history")
   pick("<Leader>pu", "undo", "Undo history")
-  pick("<Leader>pw", "grep_word", "Words")
+  pick("<Leader>pw", "grep_word", "Words", "bottom")
 
   -- Picker: Replacements
   pick("grr", "lsp_references", "References")
