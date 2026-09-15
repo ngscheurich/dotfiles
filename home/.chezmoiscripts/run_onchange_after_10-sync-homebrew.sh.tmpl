@@ -4,6 +4,10 @@
 
 BUNDLE_FILE="$HOME/.config/homebrew/Brewfile"
 
+{{- if eq .chezmoi.hostname "bienjensu" }}
+chmod -R 755 "$HOME/.config/homebrew"
+{{ end }}
+
 brew trust --formula showwin/speedtest/speedtest
 
 {{- if eq .chezmoi.hostname "joulie" }}
