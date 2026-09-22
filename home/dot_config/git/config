@@ -10,6 +10,7 @@
 	gpgsign = true
 [commit]
 	gpgsign = true
+  verbose = true
 [core]
   editor = nvim
 	excludesfile = ~/.config/git/ignore
