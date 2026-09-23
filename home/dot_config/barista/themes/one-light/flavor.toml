@@ -1,0 +1,37 @@
+# Based on Zed's One Light implementation
+#
+# One Light released under the MIT License and
+# Copyright (c) 2014 GitHub Inc.
+#
+# Zed released under the Apache License, Version 2.0 and
+# Copyright 2022 - 2025 Zed Industries, Inc.
+
+name = "One Light"
+
+[palette]
+rosewater = "#3f953a"
+flamingo = "#a00095"
+pink = "#950095"
+mauve = "#6a006a"
+red = "#de3e35"
+maroon = "#9c2b26"
+peach = "#a48c5a"
+yellow = "#d2b67c"
+green = "#3f953a"
+teal = "#0997b3"
+sky = "#0bbcd6"
+sapphire = "#2f5af3"
+blue = "#2f5af3"
+lavender = "#5c78e2"
+text = "#2a2c33"
+subtext_1 = "#383a41"
+subtext_0 = "#44454b"
+overlay_2 = "#61616b"
+overlay_1 = "#888888"
+overlay_0 = "#a3a3a4"
+surface_2 = "#cacaca"
+surface_1 = "#dcdcdd"
+surface_0 = "#ebebec"
+base = "#fafafa"
+mantle = "#f6f6f6"
+crust = "#ebebec"
