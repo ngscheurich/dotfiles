@@ -17,7 +17,12 @@ local setup = function()
     explorer = { enabled = true },
     gitbrowse = { enabled = true },
     image = { enabled = true },
-    indent = { enabled = false, animate = { enabled = false } },
+    indent = {
+      enabled = true,
+      indent = { enabled = false },
+      scope = { enabled = true, only_current = true },
+      animate = { enabled = false },
+    },
     input = { enabled = true },
     notifier = { enabled = true },
     picker = { enabled = true },
