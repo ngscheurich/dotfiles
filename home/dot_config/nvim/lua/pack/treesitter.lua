@@ -39,8 +39,14 @@ Config.now_if_args(function()
     "yaml",
   }
 
+  -- A language needs both a parser and its queries; installs can leave one
+  -- behind, so check for each rather than assuming a parser implies queries.
   local isnt_installed = function(lang)
-    return #vim.api.nvim_get_runtime_file("parser/" .. lang .. ".*", false) == 0
+    local has = function(pat)
+      return #vim.api.nvim_get_runtime_file(pat, false) > 0
+    end
+    return not has("parser/" .. lang .. ".*")
+      or not has("queries/" .. lang .. "/highlights.scm")
   end
 
   local to_install = vim.tbl_filter(isnt_installed, languages)
