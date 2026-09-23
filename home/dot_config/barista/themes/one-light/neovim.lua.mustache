@@ -32,7 +32,7 @@ local style = {
   editor = {
     line_number = "#b4b4bb",
     active_line_number = "{{palette.subtext_0}}",
-    active_line = { background = "#ebebec" },
+    active_line = { background = "{{palette.mantle}}" },
   },
   version_control = {
     added = "#27a657",
@@ -43,7 +43,7 @@ local style = {
   hint = "#788ca6",
   info = "{{palette.lavender}}",
   warning = "#dec184",
-  syntax = { comment = { doc = "#5d636f" }, operator = "#6eb4bf" },
+  syntax = { comment = "{{palette.overlay_2}}", enum = "{{palette.blue}}", operator = "#6eb4bf" },
 }
 
 return {
@@ -66,7 +66,7 @@ return {
     vim.cmd.colorscheme("catppuccin")
 
     local groups = {
-      Comment = { fg = style.syntax.comment.doc, st = "italic" },
+      Comment = { fg = style.syntax.comment, st = "NONE" },
       CursorLine = { bg = style.editor.active_line.background },
       CursorLineNr = { fg = style.editor.active_line_number, bg = style.editor.active_line.background },
       DiagnosticError = { fg = style.error },
@@ -83,6 +83,7 @@ return {
       SnacksIndent = { fg = "NONE" },
       SnacksIndentScope = { fg = "{{palette.surface_0}}" },
       Visual = { bg = "{{palette.surface_0}}" },
+      ["@module"] = { fg = "{{palette.blue}}" },
       ["@property"] = { fg = "{{palette.red}}" },
       ["@punctuation.bracket"] = { fg = "{{palette.subtext_1}}" },
     }
