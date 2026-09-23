@@ -10,6 +10,7 @@ vim.opt.clipboard = "unnamedplus"
 
 -- Interface -------------------------------------------------------------------
 vim.opt.cursorline = true
+vim.opt.guicursor:append("a:blinkon500-blinkoff500")
 vim.opt.laststatus = 3
 vim.opt.linebreak = true
 vim.opt.listchars =
