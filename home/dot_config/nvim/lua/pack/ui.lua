@@ -49,7 +49,7 @@ later(function()
   require("dropbar").setup({ bar = { enable = false } })
 
   nmap_leader("tb", function()
-    if vim.o.winbar == "" then
+    if vim.opt.winbar == "" then
       vim.opt.winbar = "%{%v:lua.dropbar()%}"
     else
       vim.opt.winbar = ""
@@ -120,11 +120,11 @@ later(function()
 
   local ufo = require("ufo")
 
-  vim.o.foldmethod = "manual"
-  vim.o.foldcolumn = "1"
-  vim.o.foldlevel = 99
-  vim.o.foldlevelstart = 99
-  vim.o.foldenable = true
+  vim.opt.foldmethod = "manual"
+  vim.opt.foldcolumn = "1"
+  vim.opt.foldlevel = 99
+  vim.opt.foldlevelstart = 99
+  vim.opt.foldenable = true
 
   ufo.setup()
 

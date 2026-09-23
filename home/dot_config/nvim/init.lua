@@ -10,7 +10,7 @@
 -- -----------------------------------------------------------------------------
 
 -- Enable experimental UI
-vim.o.cmdheight = 0
+vim.opt.cmdheight = 0
 require("vim._core.ui2").enable({
   enable = true,
   msg = { target = "msg", timeout = 2000 },
