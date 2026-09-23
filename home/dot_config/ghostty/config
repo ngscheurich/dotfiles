@@ -9,4 +9,6 @@ window-padding-y = 12
 
 macos-option-as-alt = true
 
+keybind = global:cmd+backquote=toggle_quick_terminal
+
 config-file = ?~/.local/share/barista/ghostty
