@@ -1,0 +1,37 @@
+# Based on Zed's One Dark implementation
+#
+# One Dark released under the MIT License and
+# Copyright (c) 2014 GitHub Inc.
+#
+# Zed released under the Apache License, Version 2.0 and
+# Copyright 2022 - 2025 Zed Industries, Inc.
+
+name = "One Dark"
+
+[palette]
+rosewater = "#a1c181"
+flamingo = "#d398eb"
+pink = "#c678dd"
+mauve = "#c678dd"
+red = "#e06c75"
+maroon = "#ea858b"
+peach = "#b8985b"
+yellow = "#e5c07b"
+green = "#98c379"
+teal = "#56b6c2"
+sky = "#3c818a"
+sapphire = "#85c1ff"
+blue = "#61afef"
+lavender = "#74ade8"
+text = "#abb2bf"
+subtext_1 = "#dbdde3"
+subtext_0 = "#d0d4da"
+overlay_2 = "#c3c7d0"
+overlay_1 = "#acb1be"
+overlay_0 = "#878a98"
+surface_2 = "#5d636f"
+surface_1 = "#464b57"
+surface_0 = "#3b414d"
+base = "#282c34"
+mantle = "#2f343e"
+crust = "#3b414d"
