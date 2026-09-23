@@ -1,7 +1,7 @@
 -- =============================================================================
 --  Packages
 -- -----------------------------------------------------------------------------
---
+
 local add = vim.pack.add
 local now = Config.now
 
@@ -20,21 +20,26 @@ require("pack.vcs")
 require("pack.workflow")
 
 -- Editor theme ----------------------------------------------------------------
-
 now(function()
   add({
     { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
     "https://github.com/rebelot/heirline.nvim",
-    "file://" .. vim.env.HOME .. "/Developer/barista-nvim",
   })
 
-  vim.g.barista = {
+  vim.opt.runtimepath:prepend(vim.env.XDG_DATA_HOME .. "/barista/nvim")
+  local ok, theme = pcall(require, "barista.theme")
+  if ok then theme.setup() end
+
+  local load_statusline = function()
+    package.loaded["ngs.statusline"] = nil
+    require("ngs.statusline").setup()
+  end
+
+  vim.g.barista_reload = {
     notify = true,
-    callback = function()
-      package.loaded["ngs.statusline"] = nil
-      require("ngs.statusline")
-    end,
+    icon = "󰅶 ",
+    callback = load_statusline,
   }
 
-  require("barista")
+  load_statusline()
 end)

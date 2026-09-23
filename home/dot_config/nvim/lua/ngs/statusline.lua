@@ -371,20 +371,24 @@ local function gap(width)
   }
 end
 
-require("heirline").setup({
-  statusline = {
-    mode_bar,
-    gap(2),
-    file,
-    gap(2),
-    git(),
-    span,
-    diagnostics,
-    gap(2),
-    lsp,
-    gap(2),
-    filetype(),
-    gap(2),
-    ruler,
-  },
-})
+return {
+  setup = function()
+    require("heirline").setup({
+      statusline = {
+        mode_bar,
+        gap(2),
+        file,
+        gap(2),
+        git(),
+        span,
+        diagnostics,
+        gap(2),
+        lsp,
+        gap(2),
+        filetype(),
+        gap(2),
+        ruler,
+      },
+    })
+  end,
+}
