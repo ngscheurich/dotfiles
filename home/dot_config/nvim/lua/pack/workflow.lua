@@ -55,3 +55,5 @@ on_filetype("qf", function()
   add({ "https://github.com/stevearc/quicker.nvim" })
   require("quicker").setup()
 end)
+
+later(function() add({ "https://github.com/tpope/vim-projectionist" }) end)
