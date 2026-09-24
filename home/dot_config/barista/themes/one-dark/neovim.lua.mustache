@@ -27,7 +27,7 @@ local palette = {
   crust = "{{palette.crust}}",
 }
 
-local style = {
+local one = {
   panel = { background = "{{palette.mantle}}" },
   editor = {
     line_number = "#4e5a5f",
@@ -66,26 +66,26 @@ return {
     vim.cmd.colorscheme("catppuccin")
 
     local groups = {
-      Comment = { fg = style.syntax.comment.doc, st = "italic" },
-      CursorLine = { bg = style.editor.active_line.background },
-      CursorLineNr = { fg = style.editor.active_line_number, bg = style.editor.active_line.background },
-      DiagnosticError = { fg = style.error },
-      DiagnosticHint = { fg = style.hint },
-      DiagnosticInfo = { fg = style.info },
-      DiagnosticWarn = { fg = style.warning },
-      FloatBorder = { fg = "{{palette.surface_2}}", bg = "{{palette.mantle}}" },
-      GitSignsAdd = { fg = style.version_control.added },
-      GitSignsChange = { fg = style.version_control.modified },
-      GitSignsDelete = { fg = style.version_control.deleted },
-      LineNr = { fg = style.editor.line_number },
-      Operator = { fg = style.syntax.operator },
-      Pmenu = { bg = style.panel.background },
+      Comment = { fg = one.syntax.comment.doc, st = "italic" },
+      CursorLine = { bg = one.editor.active_line.background },
+      CursorLineNr = { fg = one.editor.active_line_number, bg = one.editor.active_line.background },
+      DiagnosticError = { fg = one.error },
+      DiagnosticHint = { fg = one.hint },
+      DiagnosticInfo = { fg = one.info },
+      DiagnosticWarn = { fg = one.warning },
+      FloatBorder = { fg = palette.surface2, bg = palette.mantle },
+      GitSignsAdd = { fg = one.version_control.added },
+      GitSignsChange = { fg = one.version_control.modified },
+      GitSignsDelete = { fg = one.version_control.deleted },
+      LineNr = { fg = one.editor.line_number },
+      Operator = { fg = one.syntax.operator },
+      Pmenu = { bg = one.panel.background },
       SnacksIndent = { fg = "NONE" },
-      SnacksIndentScope = { fg = "{{palette.surface_0}}" },
-      SnacksPicker = { bg = style.panel.background },
-      Visual = { bg = "{{palette.surface_0}}" },
-      ["@property"] = { fg = "{{palette.red}}" },
-      ["@punctuation.bracket"] = { fg = "{{palette.subtext_1}}" },
+      SnacksIndentScope = { fg = palette.surface0 },
+      SnacksPicker = { bg = one.panel.background },
+      Visual = { bg = palette.surface0 },
+      ["@property"] = { fg = palette.red },
+      ["@punctuation.bracket"] = { fg = palette.subtext1 },
     }
 
     for name, opts in pairs(groups) do
@@ -95,6 +95,8 @@ return {
       local highlight = string.format("%s guifg=%s guibg=%s gui=%s", name, fg, bg, st)
       vim.cmd.highlight(highlight)
     end
+
+    vim.g.ngs_statusline = { mode_normal = "#9fa1ad" }
   end,
 }
 
