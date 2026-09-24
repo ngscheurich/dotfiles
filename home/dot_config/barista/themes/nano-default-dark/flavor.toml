@@ -1,0 +1,34 @@
+# Based on Neovim N Λ N O Theme by @ronisbr
+# <https://github.com/ronisbr/nano-theme.nvim>
+#
+# Original theme released under the GNU General Public License v3.0
+
+name = "Nano Default (Dark)"
+
+[palette]
+rosewater = "#66bb6a"
+flamingo = "#b455c8"
+pink = "#b455c8"
+mauve = "#b455c8"
+red = "#e84040"
+maroon = "#e84040"
+peach = "#e2c12f"
+yellow = "#e2c12f"
+green = "#66bb6a"
+teal = "#26c6da"
+sky = "#26c6da"
+sapphire = "#42a5f5"
+blue = "#42a5f5"
+lavender = "#3b95dd"
+text = "#d4d0ca"
+subtext_1 = "#c9c9c8"
+subtext_0 = "#bebebd"
+overlay_2 = "#a8a8a7"
+overlay_1 = "#939392"
+overlay_0 = "#7d7d7c"
+surface_2 = "#676766"
+surface_1 = "#515150"
+surface_0 = "#3c3c3a"
+base = "#262624"
+mantle = "#31312f"
+crust = "#5c5c5b"
